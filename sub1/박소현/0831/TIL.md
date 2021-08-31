@@ -79,3 +79,5 @@ $ hdfs dfs -cat wordcount_test_out/part-r-00001|more
 ```
 
 <img src = "/uploads/243d6195abd9508d56d71342822db9df/image.png" width="60%" height="60%">
+
+   

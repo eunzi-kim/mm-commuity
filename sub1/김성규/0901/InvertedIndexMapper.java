@@ -1,4 +1,4 @@
-package invertexindex;
+package ssafy;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -48,7 +48,7 @@ public class InvertedIndexMapper extends Mapper<Object, Text, Text, Text> {
     }
 
     private final String extractWordWithoutSpecialCharacters(String word) {
-        while (true) {
+        while (word.length() > 0) {
             final char lastCharacter = word.charAt(word.length() - 1);
 
             if (!(('a' <= lastCharacter && lastCharacter <= 'z') || ('A' <= lastCharacter && lastCharacter <= 'Z'))) {

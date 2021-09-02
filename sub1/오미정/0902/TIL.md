@@ -14,7 +14,7 @@
   public static class TokenizerMapper extends Mapper<Object,Text,Text,Text> 
   ```
 
-  Mapper<Object,Text,Text,Text>
+  Mapper<Object,Text,Text,Text> => <입력 key 타입, 입력 value 타입, 출력 key 타입, 출력 value 타입>
 
 - 파일이름
 
@@ -104,7 +104,7 @@ if (hdfs.exists(output))
 
 ## MatrixAdd
 
-<img src="../img/MatrixAdd.jpg" alt="MatrixAdd" style="zoom: 33%;" />
+![MatrixAdd](../img/MatrixAdd.jpg)
 
 두 행렬의 데이터가 `Map`함수를 통해 `(key, value) => ((행,열), value)` 형태로 바뀌게 되고,
 
@@ -142,3 +142,15 @@ if (hdfs.exists(output))
   ```
 
   
+
+
+
+## Result
+
+- InvertedIndex![inverted_00001](../img/inverted_00001.PNG)
+
+  ![matadd_result](../img/matadd_result.PNG)
+
+
+
+- MatAdd![inverted_00000](../img/inverted_00000.PNG)

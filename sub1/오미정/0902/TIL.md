@@ -147,10 +147,16 @@ if (hdfs.exists(output))
 
 ## Result
 
-- InvertedIndex![inverted_00001](../img/inverted_00001.PNG)
+- InvertedIndex
+
+  ![inverted_00001](../img/inverted_00001.PNG)
+
+  
 
   ![matadd_result](../img/matadd_result.PNG)
 
 
 
-- MatAdd![inverted_00000](../img/inverted_00000.PNG)
+- MatAdd
+
+  ![inverted_00000](../img/inverted_00000.PNG)

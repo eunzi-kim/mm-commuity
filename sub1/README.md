@@ -25,11 +25,11 @@
 
     황성안 - sjd0051
 
-![Untitled](https://lab.ssafy.com/s05-bigdata-dist/S05P21C103/-/blob/develop/sub1/images/%EB%B8%8C%EB%9E%9C%EC%B9%98_%EB%B0%8F_%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC_%EC%9D%B4%EB%8F%99.png)
+![브랜치_및_디렉토리_이동](images/%EB%B8%8C%EB%9E%9C%EC%B9%98_%EB%B0%8F_%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC_%EC%9D%B4%EB%8F%99.png)
 
 ### 3. 우분투에 java 파일 다운로드 후 ssafy에서 제공한 Project의 src 폴더로 이동
 
-![Untitled](https://lab.ssafy.com/s05-bigdata-dist/S05P21C103/-/blob/develop/sub1/images/%ED%8C%8C%EC%9D%BC_%ED%99%95%EC%9D%B8.png)
+![파일_확인](images/%ED%8C%8C%EC%9D%BC_%ED%99%95%EC%9D%B8.png)
 
 ---
 
@@ -53,7 +53,7 @@ $ hdfs dfs -put data/matadd-data-2x2.txt matadd_test
 
 터미널에서 `vi Driver.java`혹은 파일 탐색기에서 Driver.java를 더블클릭하여 `addClass`메서드의 첫번째 파라미터 확인 (이후 CLI에서 사용)
 
-![Untitled](https://lab.ssafy.com/s05-bigdata-dist/S05P21C103/-/blob/develop/sub1/images/Driver_java.png)
+![Driver_java](images/Driver_java.png)
 
 ---
 

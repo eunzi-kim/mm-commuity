@@ -159,4 +159,4 @@ if (hdfs.exists(output))
 
 - MatAdd
 
-  ![inverted_00000](../img/inverted_00000.PNG) 
+  ![inverted_00000](../img/inverted_00000.PNG)  

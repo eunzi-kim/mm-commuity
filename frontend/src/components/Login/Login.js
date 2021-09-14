@@ -11,7 +11,7 @@ class Login extends React.Component {
 
   // state 직접 변경 불가능
   // this.setState 이용하여 state 데이터 변경
-
+ 
   alertClassName() {
     var alert  = this.state.alert
     // console.log(alert)

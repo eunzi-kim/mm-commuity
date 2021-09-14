@@ -19,6 +19,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'net.bis5.mattermost4j:mattermost4j-core:0.22.1'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'

@@ -4,7 +4,9 @@ import "./Login.css";
 
 class Login extends React.Component {
   state = {
-    alert: false
+    alert: false, 
+    id: "",
+    password: "",
   };
 
   // state 직접 변경 불가능
@@ -12,12 +14,21 @@ class Login extends React.Component {
 
   alertClassName() {
     var alert  = this.state.alert
-    console.log(alert)
+    // console.log(alert)
     return alert === false ? 'login-alert' : 'login-alert-view' // 삼항연산
   }
 
   onClickLogin = () => {
-    this.setState({alert: true})
+    // this.setState({alert: true})
+    console.log(this.state)
+  }
+
+  onChangeId = (e) => {
+    this.setState({id:e.target.value})
+  } 
+
+  onChangePassword = (e) => {
+    this.setState({password:e.target.value})
   }
 
   render() {
@@ -43,12 +54,12 @@ class Login extends React.Component {
             <Form className="login-form">
               <Form.Group className="mb-4 login-id" controlId="formBasicEmail">
                 <Form.Label>전자우편 또는 사용자 이름</Form.Label>
-                <Form.Control className="login-box" type="email" placeholder="Enter email or username" />
+                <Form.Control className="login-box" type="email" onChange={this.onChangeId} placeholder="Enter email or username" />
               </Form.Group>
 
               <Form.Group className="mb-5 login-password" controlId="formBasicPassword">
                 <Form.Label>패스워드</Form.Label>
-                <Form.Control className="login-box" type="password" placeholder="Password" />
+                <Form.Control className="login-box" type="password" onChange={this.onChangePassword} placeholder="Password" />
               </Form.Group>
 
               <div className={this.alertClassName()}>

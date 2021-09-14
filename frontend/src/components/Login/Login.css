@@ -1,0 +1,98 @@
+.login-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.login-left {
+  background-color: rgba(20, 93, 191, 0.75);
+  width: 50vw;
+}
+
+.login-left-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  height: 90%;
+}
+
+.login-left-text {
+  font-weight: 600;
+}
+
+.login-left-footer {
+  display: flex;
+  justify-content: center;
+  height: 10%;
+  align-items: flex-end;
+}
+
+.login-left-footer h5 {
+  margin-bottom: 1rem;
+}
+
+.login-logo {
+  width: 80%;
+}
+
+.login-right {
+  width: 50vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-right-all {
+  width: 50%;
+}
+
+.login-right-header {
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.login-right-header p {
+  font-size: 4.2rem;
+  font-weight: 900;
+  margin: 0;
+}
+
+.login-form {
+  font-weight: bold;
+  letter-spacing: -0.9px;
+}
+
+.login-box {
+  height: 2.7rem;
+  background-color: #D0DFF2;
+}
+
+.form-label {
+  margin: 0;
+}
+
+.signin-btn {
+  background-color: #0E4289;
+  width: 100%;
+  height: 3rem;
+  color: #fff;
+}
+
+.signin-btn h4 {
+  font-weight: 550;
+}
+
+.login-alert {
+  visibility: hidden;
+}
+
+.login-alert-view {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  color: tomato;
+}

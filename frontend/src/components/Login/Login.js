@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { Form, Button } from "react-bootstrap";
 import "./Login.css";
 
@@ -14,13 +15,39 @@ class Login extends React.Component {
  
   alertClassName() {
     var alert  = this.state.alert
-    // console.log(alert)
     return alert === false ? 'login-alert' : 'login-alert-view' // 삼항연산
   }
 
+  // 로그인 실행 함수
+  fetchLogin = async ( data ) => {
+    const url = "/api/v4/users/login"
+
+    await axios.post(url, data)
+    .then(res => {
+      // console.log(res.data)
+      const userInfo = {
+        "id": res.data.id,
+        "username": res.data.username,
+        "nickname": res.data.nickname,
+        "email": res.data.nickname        
+      }
+
+      sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
+      window.location.replace("/");
+
+    })
+    .catch(err => {
+      this.setState({alert: true})
+    })
+  }
+
+  // 로그인 버튼 클릭
   onClickLogin = () => {
-    // this.setState({alert: true})
-    console.log(this.state)
+    const data = {
+      "login_id": this.state.id,
+      "password": this.state.password
+    }
+    this.fetchLogin(data)
   }
 
   onChangeId = (e) => {
@@ -29,6 +56,15 @@ class Login extends React.Component {
 
   onChangePassword = (e) => {
     this.setState({password:e.target.value})
+  }
+
+  componentDidMount() {
+    // 엔터키 눌렀을 때, 로그인
+    document.addEventListener("keyup", (e) => {
+      if (e.keyCode === 13) {
+        this.onClickLogin()
+      }
+    })
   }
 
   render() {
@@ -75,8 +111,6 @@ class Login extends React.Component {
       </div>
     )
   }
-
-
 }
 
 export default Login

@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-@Builder
 @NoArgsConstructor
 public class Token {
 
@@ -16,20 +15,18 @@ public class Token {
     @Id
     @Column(name = "user_id", length = 30)
     private String userId;
-
     @Column(name = "token", unique = true, nullable = false, length = 30)
     private String token;
-
     @Column(name = "is_active")
     private Boolean isActive;
 
-//    // 파라미터가 있는 "생성자"
-//    // Setters 대안책
-//    public Token(final String userId, final String token, final Boolean isActive) {
-//        this.userId = userId;
-//        this.token = token;
-//        this.isActive = isActive;
-//    }
+    //builder는 파라미터가 있는 생성자를 대체할 수 있다.
+    @Builder
+    public Token(final String userId, final String token, final Boolean isActive) {
+        this.userId = userId;
+        this.token = token;
+        this.isActive = isActive;
+    }
 
     // "Getters"
     public String userId() {
@@ -40,7 +37,7 @@ public class Token {
         return token;
     }
 
-    public Boolean active() {
+    public Boolean isActive() {
         return isActive;
     }
 }

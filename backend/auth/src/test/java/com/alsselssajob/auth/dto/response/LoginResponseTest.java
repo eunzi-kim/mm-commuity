@@ -28,10 +28,10 @@ class LoginResponseTest {
         );
 
     }
-    
+
     @DisplayName("LoginResponse 클래스 / Getters 테스트")
     @Test
-    void getters_test(){
+    void getters_test() {
         assertAll(
                 () -> assertThat(loginResponse.userId()).isEqualTo("adklhglhergk33"),
                 () -> assertThat(loginResponse.nickName()).isEqualTo("dfdfgg"),

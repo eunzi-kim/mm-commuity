@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class LoginResponse {
-    @JsonProperty("user_id")
+    @JsonProperty("userId")
     private String userId;
     @JsonProperty("nickName")
     private String nickName;

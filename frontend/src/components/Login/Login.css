@@ -96,3 +96,51 @@
   margin-bottom: 0.5rem;
   color: tomato;
 }
+
+@media (max-width: 992px) {
+  .login-right-all {
+    width: 70%;
+  }
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    padding-bottom: 2rem;
+  }
+
+  .login-left {
+    width: 100vw;
+    background-color: #fff;
+  }
+
+  .login-logo {
+    width: 45%;
+  }
+
+  .login-left-text,
+  .login-left-footer {
+    display: none;
+  }
+
+  .login-right {
+    width: 100vw;
+    height: auto;
+  }
+
+  .login-right-all {
+    height: 100%;
+    width: 50%;
+  }
+
+  .login-right-header {
+    margin-bottom: 2rem;
+  }
+  
+  .login-right-header p {
+    font-size: 3.5rem;
+  }
+}

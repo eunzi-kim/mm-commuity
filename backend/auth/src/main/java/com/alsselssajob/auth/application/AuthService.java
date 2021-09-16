@@ -10,6 +10,7 @@ import net.bis5.mattermost.client4.MattermostClient;
 import net.bis5.mattermost.model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.logging.Level;
 
@@ -24,6 +25,7 @@ public class AuthService {
     @Value("${mattermost.url}")
     private String mattermostUrl;
 
+    @Transactional
     public LoginResponse login(final LoginRequest loginRequest) {
 
         final MattermostClient client = MattermostClient.builder()

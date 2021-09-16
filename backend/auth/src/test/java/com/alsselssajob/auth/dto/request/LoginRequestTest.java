@@ -14,8 +14,8 @@ class LoginRequestTest {
     @BeforeEach
     void setup() {
         loginRequest = LoginRequest.builder()
-                .id("dfhh")
-                .password("adfasdn")
+                .id("testId")
+                .password("testPassword")
                 .build();
     }
 
@@ -26,6 +26,16 @@ class LoginRequestTest {
                 () -> assertThat(loginRequest).isNotNull(),
                 () -> assertThat(loginRequest).isExactlyInstanceOf(LoginRequest.class)
         );
+    }
+
+    @DisplayName("LoginRequest 클래스 / Getters 테스트")
+    @Test
+    void getters_test() {
+        assertAll(
+                () -> assertThat(loginRequest.id()).isEqualTo("testId"),
+                () -> assertThat(loginRequest.password()).isEqualTo("testPassword")
+        );
+
     }
 
 

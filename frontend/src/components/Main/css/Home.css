@@ -4,48 +4,61 @@
 
 .main-header {
   height: 20%;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
 
 .main-search {
+  display: flex;
   background-color: #0E4289;
   border-radius: 5px;
+  width: 31rem;
 }
 
 .search-input {
   margin: 0.4rem;
-  width: 40%;
+  width: 27rem;
   height: 3rem;
   border-radius: 5px;
 }
 
 .search-btn {
-  margin-right: 0.3rem;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   background-color: #0E4289;  
+  border: 0;
 }
 
 .main-profile {
   display: flex;
-  margin: 0 2rem;
 }
 
 .mp-image {
   background-color: darkgray;
-  width: 4rem;
-  height: 4rem;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
 }
 
 .mp-info {
-  margin: 0 1rem;
+  margin-left: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+
+.mp-nn,
+.mp-un {
+  font-size: 0.9rem;
+}
+
+.mp-point {
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
 }
 
 .main-btns {

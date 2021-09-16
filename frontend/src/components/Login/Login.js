@@ -34,7 +34,6 @@ class Login extends React.Component {
 
       sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
       window.location.replace("/");
-
     })
     .catch(err => {
       this.setState({alert: true})

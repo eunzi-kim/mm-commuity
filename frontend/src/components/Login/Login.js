@@ -73,7 +73,7 @@ class Login extends React.Component {
       <div className="login-container">
         <div className="login-left">
           <div className="login-left-body">
-            <img className="login-logo" src={logo} />
+            <img className="login-logo" src={logo} alt="알쓸싸잡" />
             <h1 className="login-left-text">Mattermost & SSAFY</h1>
           </div>
           <div className="login-left-footer">

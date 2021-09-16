@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom"; 
 import { Button } from "react-bootstrap";
 
 import "./css/Home.css"
 import Contents from "./Contents";
 import BestMember from "./BestMember";
 import Ssafycial from "./Ssafycial";
+import { Link } from "react-router-dom";
 
 class Home extends React.Component {
   state = {
@@ -36,23 +36,15 @@ class Home extends React.Component {
     const logo = "/image/logo_1.png"
 
     return (
-<<<<<<< HEAD
-      <div>
-        <h1>메인화면</h1>
-        <p>{nickname}</p>
-        <Link to="/login" className="login">로그인</Link>
-        <div></div>
-        <Link to="/" onClick={this.onLogout}>로그아웃</Link>
-        <div></div>
-        <Link to="/edupro" className="edupro">프로님들만</Link>
-=======
       <div className="main">
         <div className="main-header">
-          <div className="main-logo">
-            <img width="250rem" src={logo} />
-          </div>
+          <Link to="/">
+            <div className="main-logo">
+              <img width="180rem" src={logo} alt="알쓸싸잡" />
+            </div>
+          </Link>
           <div className="main-search">
-            <input className="search-input" />
+            <input className="search-input" autoFocus />
             <button className="search-btn"><h4>🔍</h4></button>
           </div>
           <div className="main-profile">
@@ -60,14 +52,16 @@ class Home extends React.Component {
               이미지
             </div>
             <div className="mp-info">
-              <div>{ nickname }</div>
-              <div>@{ username }</div>
-              <div>150 point</div>
+              <div className="mp-nn"><b>{ nickname }</b></div>
+              <div className="mp-un">@{ username }</div>
+              <div className="mp-point">150 point</div>
             </div>
           </div>
           <div className="main-btns">
             <Button variant="outline-primary" className="main-btn" size="sm">즐겨찾기</Button>{' '}
-            <Button variant="outline-primary" className="main-btn" size="sm">설  정</Button>{' '}
+            <Link to="/edupro">
+              <Button variant="outline-primary" className="main-btn" size="sm">PRO설정</Button>{' '}
+            </Link>
             <Button variant="outline-danger" className="main-btn" size="sm" onClick={this.onLogout}>로그아웃</Button>{' '}
           </div>
         </div>
@@ -86,7 +80,6 @@ class Home extends React.Component {
             </div>
           </div>
         </div>
->>>>>>> 0f14fcd ([S05P21C103-105] [FE-rladmswlek] feat: 메인페이지 구현)
       </div>
     )
   }

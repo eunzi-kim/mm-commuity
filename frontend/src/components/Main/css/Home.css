@@ -1,0 +1,75 @@
+.main {
+  height: 100vh;
+}
+
+.main-header {
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.main-search {
+  background-color: #0E4289;
+  border-radius: 5px;
+}
+
+.search-input {
+  margin: 0.4rem;
+  width: 40%;
+  height: 3rem;
+  border-radius: 5px;
+}
+
+.search-btn {
+  margin-right: 0.3rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #0E4289;  
+}
+
+.main-profile {
+  display: flex;
+  margin: 0 2rem;
+}
+
+.mp-image {
+  background-color: darkgray;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+
+.mp-info {
+  margin: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.main-btn {
+  border-radius: 9px;
+  border-width: 2px;
+  padding: 0.2rem 1rem;
+  margin: 0.2rem ;
+}
+
+.main-body {
+  display: flex;
+  height: 70vh;
+}
+
+.main-left {
+  width: 70%;
+}
+
+.best-member {
+  height: 45%;
+}

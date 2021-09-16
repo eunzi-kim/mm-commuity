@@ -1,0 +1,19 @@
+.pro-head {
+    width: 50vw;
+}
+
+.pro-title-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90%;
+}
+
+.pro-title-right {
+    width: 50vw;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

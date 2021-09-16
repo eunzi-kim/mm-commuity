@@ -33,6 +33,8 @@ class Home extends React.Component {
         <Link to="/login" className="login">로그인</Link>
         <div></div>
         <Link to="/" onClick={this.onLogout}>로그아웃</Link>
+        <div></div>
+        <Link to="/edupro" className="edupro">프로님들만</Link>
       </div>
     )
   }

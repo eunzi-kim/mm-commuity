@@ -1,6 +1,6 @@
 import React from "react";
-// import axios from "axios";
-// import { Form, Button } from "react-bootstrap";
+import axios from "axios";
+import { Form, Button } from "react-bootstrap";
 import "./EduPro.css";
 
 class EduPro extends React.Component {
@@ -8,7 +8,7 @@ class EduPro extends React.Component {
     };
 
     render() {
-        // const logo = '/image/logo_2.png'
+        const logo = '/image/logo_2.png'
 
         return (
             <div className="pro-container">

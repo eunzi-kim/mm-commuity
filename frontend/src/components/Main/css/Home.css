@@ -10,6 +10,10 @@
   justify-content: space-around;
 }
 
+.main-header-responsive {
+  display: none;
+}
+
 .main-search {
   display: flex;
   background-color: #0E4289;
@@ -30,10 +34,12 @@
   appearance: none;
   background-color: #0E4289;  
   border: 0;
+  margin-right: 0.4rem;
 }
 
 .main-profile {
   display: flex;
+  align-items: center;
 }
 
 .mp-image {
@@ -85,4 +91,81 @@
 
 .best-member {
   height: 45%;
+}
+
+/* 반응형 */
+@media (max-width: 992px) {
+  .main-header-responsive {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-header {
+    display: none;
+  }
+
+  .main-logo {
+    margin: 2rem 0;
+  }
+
+  .hamburger {
+    position: absolute;
+    top: 1vh;
+    right: 1vw;
+  }
+
+  .dropdown-item-text {
+    width: max-content;
+    display: flex;
+    justify-content: center;
+  }
+
+  .mp-image {
+    margin: 1rem 0;
+  }
+
+  .mr-mp {
+    display: flex;
+    align-items: center;
+    margin: 0 1rem;
+  }
+
+  .line {
+    background-color: gray;
+    height: 1px;
+    width: 18.5rem;
+  }
+
+  .dropdwon-item {
+    margin: 1rem 0;
+  }
+
+  .main-search {
+    margin-bottom: 3rem;
+  }
+
+  .link {
+    text-decoration: none;
+    color: #000;
+  }
+
+  .logout-text {
+    color: tomato;
+  }
+
+  .main-body {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .main-search {
+    width: 85vw;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .search-input {
+    width: 70vw;
+  }
 }

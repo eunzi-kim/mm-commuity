@@ -5,9 +5,31 @@ import "./EduPro.css";
 
 class EduPro extends React.Component {
     state = {
-    };
+        nickname: "",
+        username: ""
+      };
+
+    onClickPost = () => {
+        const data = {
+
+        }
+    }
+    onClickEmo = () => {
+        const data = {
+
+        }
+    }
+    onClickComm = () => {
+        const data = {
+
+        }
+    }
 
     render() {
+<<<<<<< HEAD
+=======
+        const { nickname, username } = this.state;
+>>>>>>> 72a2811 ([S05P21C103-117][FE-sjd0051] feat:프로페이지 교육생 조회)
         const logo = '/image/logo_2.png'
 
         return (
@@ -25,9 +47,9 @@ class EduPro extends React.Component {
                 <div className="pro-body-container">
                 <hr />
                     <div className="pro-body-head">
-                    <Button className="category-btn" onClick={this.onClickLogin}>게시글</Button>
-                    <Button className="category-btn" onClick={this.onClickLogin}>이모지</Button>
-                    <Button className="category-btn" onClick={this.onClickLogin}>댓  글</Button>
+                    <Button className="category-btn" onClick={this.onClickPost}>게시글</Button>
+                    <Button className="category-btn" onClick={this.onClickEmo}>이모지</Button>
+                    <Button className="category-btn" onClick={this.onClickComm}>댓  글</Button>
                     </div>
                     <div className="pro-body-body">
                         <div className="pro-body-bodylist">

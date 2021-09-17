@@ -1,0 +1,171 @@
+.main {
+  height: 100vh;
+}
+
+.main-header {
+  height: 20%;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.main-header-responsive {
+  display: none;
+}
+
+.main-search {
+  display: flex;
+  background-color: #0E4289;
+  border-radius: 5px;
+  width: 31rem;
+}
+
+.search-input {
+  margin: 0.4rem;
+  width: 27rem;
+  height: 3rem;
+  border-radius: 5px;
+}
+
+.search-btn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #0E4289;  
+  border: 0;
+  margin-right: 0.4rem;
+}
+
+.main-profile {
+  display: flex;
+  align-items: center;
+}
+
+.mp-image {
+  background-color: darkgray;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.mp-info {
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mp-nn,
+.mp-un {
+  font-size: 0.9rem;
+}
+
+.mp-point {
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+}
+
+.main-btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.main-btn {
+  border-radius: 9px;
+  border-width: 2px;
+  padding: 0.2rem 1rem;
+  margin: 0.2rem ;
+}
+
+.main-body {
+  display: flex;
+  height: 70vh;
+}
+
+.main-left {
+  width: 70%;
+}
+
+.best-member {
+  height: 45%;
+}
+
+/* 반응형 */
+@media (max-width: 992px) {
+  .main-header-responsive {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-header {
+    display: none;
+  }
+
+  .main-logo {
+    margin: 2rem 0;
+  }
+
+  .hamburger {
+    position: absolute;
+    top: 1vh;
+    right: 1vw;
+  }
+
+  .dropdown-item-text {
+    width: max-content;
+    display: flex;
+    justify-content: center;
+  }
+
+  .mp-image {
+    margin: 1rem 0;
+  }
+
+  .mr-mp {
+    display: flex;
+    align-items: center;
+    margin: 0 1rem;
+  }
+
+  .line {
+    background-color: gray;
+    height: 1px;
+    width: 18.5rem;
+  }
+
+  .dropdwon-item {
+    margin: 1rem 0;
+  }
+
+  .main-search {
+    margin-bottom: 3rem;
+  }
+
+  .link {
+    text-decoration: none;
+    color: #000;
+  }
+
+  .logout-text {
+    color: tomato;
+  }
+
+  .main-body {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .main-search {
+    width: 85vw;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .search-input {
+    width: 70vw;
+  }
+}

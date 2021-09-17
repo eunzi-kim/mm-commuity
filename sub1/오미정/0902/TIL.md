@@ -1,6 +1,6 @@
 ## 특화PJT - 광주 1반 3팀 빅데이터#2(분산처리)
 
-## InvertedIndex
+## InvertedIndex 
 
 > 각 문서 안에 있는 단어가 어는 문서에 몇 번째에 있는지 위치를 표현되어야 한다.
 
@@ -159,4 +159,4 @@ if (hdfs.exists(output))
 
 - MatAdd
 
-  ![inverted_00000](../img/inverted_00000.PNG)
+  ![inverted_00000](../img/inverted_00000.PNG)  

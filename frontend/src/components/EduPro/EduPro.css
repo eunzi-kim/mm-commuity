@@ -1,0 +1,51 @@
+.pro-head {
+    display: flex;
+    width: 45vw;
+    height: 10vh;
+}
+
+.pro-head-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 120%;
+}
+
+.pro-head-right {
+    width: 50vw;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pro-logo {
+    /* height: ; */
+    width: 100%;
+
+}
+.pro-body-head {
+    display: flex;
+    width: 80vw;
+    height: 10vh;
+}
+
+.pro-body-body {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.category-btn {
+    width: 100px;
+    height: 45px;
+    margin-left: 1ch;
+}
+
+
+.pro-body-bodylist {
+
+}

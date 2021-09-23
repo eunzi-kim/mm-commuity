@@ -86,11 +86,15 @@
 }
 
 .main-left {
-  width: 70%;
+  width: 65%;
+}
+
+.main-right {
+  width: 35%;
 }
 
 .best-member {
-  height: 45%;
+  height: 50%;
 }
 
 /* 반응형 */
@@ -167,5 +171,11 @@
   
   .search-input {
     width: 70vw;
+  }
+
+  .main-right {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 }

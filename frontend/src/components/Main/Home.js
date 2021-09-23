@@ -48,8 +48,7 @@ class Home extends React.Component {
     const logo = "/image/logo_1.png"
 
     return (
-      <div className="main">
-        
+      <div className="main">        
         <div className="main-header">
           <Link to="/">
             <div className="main-logo">

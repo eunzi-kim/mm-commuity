@@ -40,3 +40,18 @@
 
 
 1
+
+#### 2021-09-23
+
+- 컴파일 에러
+- 
+
+Failed to compile
+
+```
+./src/components/Main/Home.js
+Module not found: Can't resolve 'react-icons/gi' in 'C:\Users\multicampus\Desktop\성규는 못말려\S05P21C103\frontend\src\components\Main'
+```
+
+This error occurred during the build time and cannot be dismissed.
+

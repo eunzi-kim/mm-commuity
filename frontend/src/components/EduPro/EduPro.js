@@ -26,10 +26,7 @@ class EduPro extends React.Component {
     }
 
     render() {
-<<<<<<< HEAD
-=======
         const { nickname, username } = this.state;
->>>>>>> 72a2811 ([S05P21C103-117][FE-sjd0051] feat:프로페이지 교육생 조회)
         const logo = '/image/logo_2.png'
 
         return (

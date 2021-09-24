@@ -42,6 +42,5 @@ class TokenTest {
                 () -> assertThat(token.isActive()).isTrue()
         );
 
-
     }
 }

@@ -36,7 +36,7 @@ class PostControllerTest {
     @DisplayName("PostController 클래스 / 로그인 테스트")
     @Test
     void login_test() {
-        final User user = postController.login();
+        final User user = ReflectionTestUtils.invokeMethod(postController, "login");
 
         assertThat(user.getId().length()).isEqualTo(26);
     }

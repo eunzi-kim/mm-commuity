@@ -36,7 +36,7 @@ public class PostController {
                 .build();
     }
 
-    public User login() {
+    private User login() {
         return client.login(id, password).readEntity();
     }
 

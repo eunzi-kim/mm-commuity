@@ -5,6 +5,10 @@ import net.bis5.mattermost.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.List;
@@ -13,7 +17,18 @@ import java.util.logging.Level;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+@ExtendWith(SpringExtension.class)
+@TestPropertySource("classpath:/application-local.properties")
 class PostServiceTest {
+
+    @Value("${mattermost.url}")
+    private String url;
+
+    @Value("${user.id}")
+    private String id;
+
+    @Value("${user.password}")
+    private String password;
 
     private PostService postService;
     private MattermostClient client;
@@ -22,11 +37,11 @@ class PostServiceTest {
     @BeforeEach
     void setUp() {
         client = MattermostClient.builder()
-                .url("https://meeting.ssafy.com")
+                .url(url)
                 .logLevel(Level.INFO)
                 .ignoreUnknownProperties()
                 .build();
-        user = client.login("kskyu610@gmail.com", "Skskyu610@gmail.com5").readEntity();
+        user = client.login(id, password).readEntity();
         postService = PostService.builder()
                 .client(client)
                 .user(user)

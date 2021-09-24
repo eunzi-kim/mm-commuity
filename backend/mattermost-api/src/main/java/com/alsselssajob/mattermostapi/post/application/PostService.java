@@ -18,11 +18,11 @@ public class PostService {
         this.user = user;
     }
 
-    private TeamList getTeams() {
+    private TeamList getTeamsForUser() {
         return client.getTeamsForUser(user.getId()).readEntity();
     }
 
-    private ChannelList getChannels(final Team team) {
+    private ChannelList getPublicChannelsForTeam(final Team team) {
         return client.getPublicChannelsForTeam(team.getId()).readEntity();
     }
 }

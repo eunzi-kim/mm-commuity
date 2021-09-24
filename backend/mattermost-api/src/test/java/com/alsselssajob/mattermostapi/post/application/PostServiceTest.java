@@ -43,20 +43,21 @@ class PostServiceTest {
         );
     }
 
-    @DisplayName("PostService 클래스 / 팀 리스트 조회 테스트")
+    @DisplayName("PostService 클래스 / 사용자가 속한 팀 리스트 조회 테스트")
     @Test
-    void get_teams_test() {
-        final TeamList teams = ReflectionTestUtils.invokeMethod(postService, "getTeams");
+    void get_teams_for_user_test() {
+        final TeamList teams = ReflectionTestUtils.invokeMethod(postService, "getTeamsForUser");
 
         assertThat(teams.size()).isGreaterThanOrEqualTo(0);
     }
 
-    @DisplayName("PostService 클래스 / 팀 내 채널 리스트 조회 테스트")
+    @DisplayName("PostService 클래스 / 팀 내 공개 채널 리스트 조회 테스트")
     @Test
-    void get_channels_test() {
-        final TeamList teams = ReflectionTestUtils.invokeMethod(postService, "getTeams");
-        final ChannelList channels = ReflectionTestUtils.invokeMethod(postService, "getChannels", teams.get(0));
+    void get_public_channels_for_team_test() {
+        final TeamList teams = ReflectionTestUtils.invokeMethod(postService, "getTeamsForUser");
+        final ChannelList channels = ReflectionTestUtils.invokeMethod(postService, "getPublicChannelsForTeam", teams.get(0));
 
         assertThat(channels.size()).isGreaterThanOrEqualTo(0);
     }
+
 }

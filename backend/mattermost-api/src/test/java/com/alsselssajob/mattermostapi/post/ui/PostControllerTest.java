@@ -1,5 +1,6 @@
 package com.alsselssajob.mattermostapi.post.ui;
 
+import net.bis5.mattermost.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,5 +24,13 @@ class PostControllerTest {
                 () -> assertThat(postController).isNotNull(),
                 () -> assertThat(postController).isExactlyInstanceOf(PostController.class)
         );
+    }
+
+    @DisplayName("PostController 클래스 / 로그인 테스트")
+    @Test
+    void login_test() {
+        final User user = postController.login();
+
+        assertThat(user.getId().length()).isEqualTo(26);
     }
 }

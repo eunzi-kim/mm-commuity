@@ -3,10 +3,13 @@ package com.alsselssajob.mattermostapi.post.application;
 import net.bis5.mattermost.client4.MattermostClient;
 import net.bis5.mattermost.model.ChannelList;
 import net.bis5.mattermost.model.TeamList;
+import net.bis5.mattermost.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
+
+import java.util.logging.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -15,18 +18,19 @@ class PostServiceTest {
 
     private PostService postService;
     private MattermostClient client;
-    private String etag;
+    private User user;
 
     @BeforeEach
     void setUp() {
         client = MattermostClient.builder()
                 .url("https://meeting.ssafy.com")
+                .logLevel(Level.INFO)
                 .ignoreUnknownProperties()
                 .build();
-        etag = client.login("kskyu610@gmail.com", "Skskyu610@gmail.com5").getEtag();
+        user = client.login("kskyu610@gmail.com", "Skskyu610@gmail.com5").readEntity();
         postService = PostService.builder()
                 .client(client)
-                .etag(etag)
+                .user(user)
                 .build();
     }
 

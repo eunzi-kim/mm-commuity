@@ -6,6 +6,12 @@ import net.bis5.mattermost.model.*;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+import static java.util.stream.Collectors.toList;
 
 public class PostService {
 
@@ -20,11 +26,11 @@ public class PostService {
         this.user = user;
     }
 
-    private TeamList getTeamsForUser() {
+    private List<Team> getTeamsForUser() {
         return client.getTeamsForUser(user.getId()).readEntity();
     }
 
-    private ChannelList getPublicChannelsForTeam(final Team team) {
+    private List<Channel> getPublicChannelsForTeam(final Team team) {
         return client.getPublicChannelsForTeam(team.getId()).readEntity();
     }
 
@@ -33,5 +39,17 @@ public class PostService {
                 .minusDays(ONE_DAY)
                 .atZone(ZoneId.systemDefault()))
                 .readEntity();
+    }
+
+    public List<Post> getPostsForToday() {
+        return getTeamsForUser().stream()
+                .map(this::getPublicChannelsForTeam)
+                .flatMap(List::stream)
+                .map(this::getPostsForChannelSinceYesterday)
+                .map(PostList::getPosts)
+                .filter(Objects::nonNull)
+                .map(Map::values)
+                .flatMap(Collection::stream)
+                .collect(toList());
     }
 }

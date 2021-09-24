@@ -1,9 +1,11 @@
 package com.alsselssajob.mattermostapi.post.application;
 
 import net.bis5.mattermost.client4.MattermostClient;
+import net.bis5.mattermost.model.TeamList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -34,5 +36,12 @@ class PostServiceTest {
                 () -> assertThat(postService).isNotNull(),
                 () -> assertThat(postService).isExactlyInstanceOf(PostService.class)
         );
+    }
+
+    @DisplayName("PostService 클래스 / 팀 리스트 조회 테스트")
+    @Test
+    void get_teams_test() {
+        final TeamList teams = ReflectionTestUtils.invokeMethod(postService, "getTeams");
+        assertThat(teams.size()).isGreaterThanOrEqualTo(0);
     }
 }

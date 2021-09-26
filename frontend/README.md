@@ -1,5 +1,10 @@
 [toc]
 
+- 메인 - 반응형 화면 캡쳐
+- 게시글 탐색 - 2중 Navigation바 스크롤바 커스텀 캡쳐
+
+
+
 # 시작하기
 
 ## 프로토타입
@@ -70,7 +75,10 @@
   }
   ```
 
-  
+
+
+
+
 
 # 메인
 
@@ -114,6 +122,8 @@
 
 
 
+
+
 # 베스트 멤버
 
 ## Slider
@@ -152,7 +162,7 @@
           ...
           const settings = {  
               // 슬라이드 옵션들
-              arrows: true,
+              arrows: false,
               dots: true,
               infinite: true,
               speed: 500,
@@ -177,5 +187,185 @@
   }
   ```
   
+
+
+
+
+
+# 게시글 탐색
+
+## 큰 그룹 Slider
+
+😂 `react-slick` 이용하여 `carousel` 구현 중, 각 `item`들이 붙어있는 현상 발생!!
+
+`.slick-slider`와 `.slick-slide`에 `margin`을 주어서 해결하려고 했더니,
+
+아이템들이 정돈되지 않은 상태로 나타남..
+
+![image-20210925000302524](README.assets/image-20210925000302524.png)
+
+
+
+💡 slide 아이템 안에 `div`를 만들어서 `가운데로 정렬`을 해보는 생각을 함!
+
+![image-20210925000901251](README.assets/image-20210925000901251.png)
+
+
+
+- 코드
+
+  ```react
+  // Contents.js
   
+  class Contents extends React.Component {
+      state = {
+          "Group": [],
+          ...
+      }
+          
+      render() {
+          const { Group } = this.state
+          
+          const settings = {
+            infinite: false,
+            arrows: true,
+            speed: 500,
+            slidesToShow: 4,
+            slidesToScroll : 1,
+            draggable: false,
+          }
+          
+        	// 그룹 이름
+        	const groupName = Group.map((name) => 
+            <div className="c-group">
+              <div className="group-title" onClick={this.onClickGroup}>{ name }</div>
+            </div>
+          );
+                                      
+          return (
+            <div className="c-nav">
+                <Slider className="c-slider" {...settings}>
+                  { groupName }
+                </Slider>
+            </div>
+          )
+      }
+  }
+  ```
+
+  ```css
+  /* Contents.css */
+  
+  .c-group {
+    width: 100%;
+  }
+  
+  .group-title {
+    width: 80%;
+    border-radius: 5px;
+    border: 2px solid #A1BEE5;
+    color: #A1BEE5;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4rem;
+    margin-left: 10%;  /* 가운데 정렬을 위한 margin */
+    padding: 0 1rem;
+    overflow-y: hidden;
+  }
+  ```
+
+![image-20210925001802618](README.assets/image-20210925001802618.png)
+
+
+
+## 2중 Navigation바
+
+- 그룹을 클릭하면, 클릭된 그룹의 채널들 제시 
+
+  (+ 채널이 너무 많으면, 스크롤바 제공)
+
+  
+
+  - 버튼 클릭 함수
+
+  ```react
+  // Contents.js
+  
+  onClickGroup = (e) => {
+      // state에 선택한 그룹의 채널들 넣기
+      var v = e.target.innerText
+      this.setState({
+        "ChkChannel": this.state.Channel[v]
+      })
+  
+      // 버튼 취소
+      if (document.querySelector(".group-chk")) {
+        document.querySelector(".group-chk").classList.remove("group-chk")
+      }
+      // 버튼 체크
+      e.target.classList.add("group-chk")
+  
+      // 채널 nav바 보이기
+      document.querySelector(".nav-down").classList.add("nav-none")
+      document.querySelector(".sub-nav").classList.remove("nav-none")
+  }
+  ```
+
+  ```css
+  /* Contents.css */
+  
+  .group-chk {
+    background-color: #fff;
+    color: #0E4289;
+    opacity: 0.9;
+  }
+  
+  .nav-none {
+    display: none;
+  }
+  ```
+
+  ![image-20210925003712834](README.assets/image-20210925003712834.png)
+
+![image-20210925003724939](README.assets/image-20210925003724939.png)
+
+
+
+- 화살표를 클릭하면, 채널 Navigation바 숨김 & 보임
+
+  ```react
+  // Content.js
+  
+  onClickNavArrow = (e) => {    
+      if (e.target.className === "nav-down") {
+        document.querySelector(".nav-down").classList.add("nav-none")
+        document.querySelector(".sub-nav").classList.remove("nav-none")
+      }
+      if (e.target.className === "nav-up") {      
+        document.querySelector(".sub-nav").classList.add("nav-none")
+        document.querySelector(".nav-down").classList.remove("nav-none")
+      } 
+  }
+  ```
+
+  ```react
+  // Content.js => render
+  
+  <div className="c-nav">
+      ...
+      <div className="nav-down nav-none" onClick={this.onClickNavArrow}>
+          ▼
+      </div>
+  </div>
+  <div className="sub-nav nav-none">
+      ...
+      <div className="nav-up" onClick={this.onClickNavArrow}>
+          ▲
+      </div>
+  </div>
+  ```
+
+![image-20210925003930797](README.assets/image-20210925003930797.png)
 

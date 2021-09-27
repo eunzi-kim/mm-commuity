@@ -3,12 +3,14 @@ package com.alsselssajob.auth.application;
 import com.alsselssajob.auth.domain.Token;
 import com.alsselssajob.auth.domain.TokenRepository;
 import com.alsselssajob.auth.dto.request.LoginRequest;
+import com.alsselssajob.auth.dto.request.LogoutRequest;
 import com.alsselssajob.auth.dto.response.LoginResponse;
 import lombok.RequiredArgsConstructor;
 import net.bis5.mattermost.client4.ApiResponse;
 import net.bis5.mattermost.client4.MattermostClient;
 import net.bis5.mattermost.model.User;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,4 +60,15 @@ public class AuthService {
                 .userName(userName)
                 .build();
     }
+
+    @Transactional
+    public void logout(final LogoutRequest logoutRequest) {
+
+        Token currentToken = tokenRepository.findByUserIdAndIsActive(logoutRequest.userId(), true)
+                .orElseThrow(IllegalArgumentException::new);
+
+        currentToken = currentToken.switchIsActiveToFalse();
+
+    }
+
 }

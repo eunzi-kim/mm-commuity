@@ -1,8 +1,8 @@
 import React from "react";
 // import axios from "axios";
-import { Form, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
-import "./EduPro.css";
+import "./css/EduPro.css";
 import ProBestMember from "./ProBestMember";
 import { Link } from "react-router-dom";
 
@@ -26,24 +26,11 @@ class EduPro extends React.Component {
         this.takeUserInfo()
       }
 
-    onClickPost = (e) => {
-        // e.target.classList.add("btnchk");
-        if (document.querySelector(".btnchk")) {
-            document.querySelector(".btnchk").classList.remove(".btnchk")
-        }
-        const data = {
-
-        }
+    onClickPost = () => {
     }
     onClickEmo = () => {
-        const data = {
-
-        }
     }
     onClickComm = () => {
-        const data = {
-
-        }
     }
 
     render() {

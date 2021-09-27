@@ -1,3 +1,7 @@
+.pro-container {
+    height: 100vh;
+}
+
 .pro-head {
     /* display: flex;
     height: 10vh; */
@@ -33,6 +37,7 @@
     display: flex;
     width: 80vw;
     height: 10vh;
+    margin-left: 100px;
 }
 
 .pro-body-body {

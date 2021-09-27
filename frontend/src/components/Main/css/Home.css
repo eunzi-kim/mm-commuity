@@ -82,11 +82,16 @@
 
 .main-body {
   display: flex;
-  height: 70vh;
+  height: 80vh;
 }
 
 .main-left {
   width: 65%;
+  height: 100%;
+}
+
+.find-contents {
+  height: 100%;
 }
 
 .main-right {

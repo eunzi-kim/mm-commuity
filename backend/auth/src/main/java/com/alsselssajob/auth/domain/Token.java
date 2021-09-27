@@ -49,5 +49,16 @@ public class Token {
     public Boolean isActive() {
         return isActive;
     }
+
+    //isActive를 false로바꿀 메서드 구현
+
+//리턴타입이 token이고 메서드 내에서 isActive를 false로 만든다.
+    public void switchIsActiveToFalse(){
+        this.isActive = false;
+    }
+
 }
+
+
+
 

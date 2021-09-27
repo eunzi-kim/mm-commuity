@@ -38,18 +38,46 @@
 .pro-body-body {
     height: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    /* justify-content: center; */
     align-items: center;
 }
 
 
 .category-btn {
     width: 100px;
-    height: 45px;
-    margin-left: 1ch;
+    height: 35px;
+    margin-left: 3ch;
+    background-color: rgb(161, 190, 229);
+
+    border-radius: 9px;
+    border-width: 0px;
+    padding: 0.2rem 1rem;
+
+    font-weight:bolder;
+    
+}
+.btnchk {
+    background-color: rgb(14, 66, 137);
+}
+.category-btn:hover {
+    background-color: rgb(14, 66, 137);
 }
 
-
 .pro-body-bodylist {
+    padding: 0 120px;
+    height: 60vh;
+    overflow-y: auto;
+}
 
+.pro-body-bodylist::-webkit-scrollbar {
+    width: auto;
+    background-color: rgb(161, 190, 229);
+    border-radius: 9px;
+}
+
+.pro-body-bodylist::-webkit-scrollbar-thumb {
+    background-color: rgb(14, 66, 137);
+    border-radius: 9px;
+    
 }

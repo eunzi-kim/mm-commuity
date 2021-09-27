@@ -1,9 +1,11 @@
 import React from "react";
-import axios from "axios";
+// import axios from "axios";
 import { Form, Button } from "react-bootstrap";
 
 import "./EduPro.css";
+import ProBestMember from "./ProBestMember";
 import { Link } from "react-router-dom";
+
 
 
 class EduPro extends React.Component {
@@ -24,7 +26,11 @@ class EduPro extends React.Component {
         this.takeUserInfo()
       }
 
-    onClickPost = () => {
+    onClickPost = (e) => {
+        // e.target.classList.add("btnchk");
+        if (document.querySelector(".btnchk")) {
+            document.querySelector(".btnchk").classList.remove(".btnchk")
+        }
         const data = {
 
         }
@@ -65,26 +71,31 @@ class EduPro extends React.Component {
                             <div className="mp-point">150 point</div>
                         </div>
                     </div>
+                    <div className="main-btns">
+                        <Button variant="outline-primary" className="main-btn" size="sm">즐겨찾기</Button>{' '}
+                        <Link to="/edupro">
+                            <Button variant="outline-primary" className="main-btn" size="sm">교육생조회</Button>{' '}
+                        </Link>
+                        <Button variant="outline-danger" className="main-btn" size="sm" onClick={this.onLogout}>로그아웃</Button>{' '}
+                    </div>
                 </div>
                 
                 <div className="pro-body-container">
                 <hr />
                     <div className="pro-body-head">
-                    <Button className="category-btn" onClick={this.onClickPost}>게시글</Button>
-                    <Button className="category-btn" onClick={this.onClickEmo}>이모지</Button>
-                    <Button className="category-btn" onClick={this.onClickComm}>댓  글</Button>
+                        <Button className="category-btn" onClick={this.onClickPost}>게시글</Button>
+                        <Button className="category-btn" onClick={this.onClickEmo}>이모지</Button>
+                        <Button className="category-btn" onClick={this.onClickComm}>댓  글</Button>
                     </div>
                     <div className="pro-body-body">
                         <div className="pro-body-bodylist">
-                            <div>학생 1</div>
-                            <hr />
-                            <div>학생 2</div>
-                            <hr />
-                            <div>학생 3</div>
-                            <hr />
+                            
+                            <div><ProBestMember /></div>
+                            
                         </div>
                     </div>
                 </div>
+
             </div>
         )
     }

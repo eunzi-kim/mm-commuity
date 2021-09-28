@@ -151,7 +151,7 @@
   }
 
   .main-search {
-    margin-bottom: 3rem;
+    margin-bottom: 0.5rem;
   }
 
   .link {
@@ -182,5 +182,10 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+  }
+
+  .main-left {
+    width: 100%;
+    margin-bottom: 1rem;
   }
 }

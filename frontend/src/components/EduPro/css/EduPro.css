@@ -2,9 +2,17 @@
     height: 100vh;
 }
 
+.headtag {
+    margin: 0 5rem 0 2rem;
+}
+
+.pro-body-container h2 {
+    font-weight: bold;
+    margin: 0;
+    color: #D0DFF2;
+}
+
 .pro-head {
-    /* display: flex;
-    height: 10vh; */
     height: 20%;
     width: 100vw;
     display: flex;
@@ -13,41 +21,55 @@
 }
 
 .pro-head-left {
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 80%;
-    height: 120%; */
     margin: 2rem 0;
 }
 
 .pro-head-right {
-    width: 50vw;
+    width: 30vw;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.pro-head-right h1 {
+    
+}
+
+/* 프로 사용자 프로필  */
+.pro-head-profileall {
+    display: flex;
+}
+
+.main-profile {
+    display: flex;
+    align-items: center;
+    margin-right: 100px;
+    
 }
 
 .pro-logo {
     margin: 2rem 0;
 
 }
+
 .pro-body-head {
     display: flex;
     width: 80vw;
     height: 10vh;
-    margin-left: 100px;
+    margin-left: 50px;
 }
 
 .pro-body-body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
 }
-
+.main-btns {
+    justify-content: right;
+  }
+  
 
 .category-btn {
     width: 100px;

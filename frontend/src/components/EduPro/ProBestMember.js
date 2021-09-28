@@ -66,11 +66,13 @@ class ProBestMember extends Component {
     );
 
     return (
-      <div className="container">
-        <div className="list">
-          <div className="sorted_m_list">
-            { sort_m_lst }
-          </div>          
+      <div>
+        <div className="container">
+          <div className="list">
+            <div className="sorted_m_list">
+              { sort_m_lst }
+            </div>          
+          </div>
         </div>
       </div>
     )

@@ -48,27 +48,30 @@ class EduPro extends React.Component {
                     <div className="pro-head-right">
                         <h1>Pro 전용 교육생 조회</h1>
                     </div>
-                    <div className="main-profile">
-                        <div className="mp-image">
-                        이미지
+                    <div className="pro-head-profileall">
+                        <div className="main-profile">
+                            <div className="mp-image">
+                            이미지
+                            </div>
+                            <div className="mp-info">
+                                <div className="mp-nn"><b>{ nickname }</b></div>
+                                <div className="mp-un">@{ username }</div>
+                                <div className="mp-point">150 point</div>
+                            </div>
                         </div>
-                        <div className="mp-info">
-                            <div className="mp-nn"><b>{ nickname }</b></div>
-                            <div className="mp-un">@{ username }</div>
-                            <div className="mp-point">150 point</div>
+                        <div className="main-btns">
+                            <Button variant="outline-primary" className="main-btn" size="sm">즐겨찾기</Button>{' '}
+                            <Link to="/">
+                                <Button variant="outline-primary" className="main-btn" size="sm">알쓸싸잡</Button>{' '}
+                            </Link>
+                            <Button variant="outline-danger" className="main-btn" size="sm" onClick={this.onLogout}>로그아웃</Button>{' '}
                         </div>
-                    </div>
-                    <div className="main-btns">
-                        <Button variant="outline-primary" className="main-btn" size="sm">즐겨찾기</Button>{' '}
-                        <Link to="/edupro">
-                            <Button variant="outline-primary" className="main-btn" size="sm">교육생조회</Button>{' '}
-                        </Link>
-                        <Button variant="outline-danger" className="main-btn" size="sm" onClick={this.onLogout}>로그아웃</Button>{' '}
                     </div>
                 </div>
                 
                 <div className="pro-body-container">
-                <hr />
+                    <div className="headtag"><h2> 교육생 조회 </h2>
+                    <hr /></div>
                     <div className="pro-body-head">
                         <Button className="category-btn" onClick={this.onClickPost}>게시글</Button>
                         <Button className="category-btn" onClick={this.onClickEmo}>이모지</Button>

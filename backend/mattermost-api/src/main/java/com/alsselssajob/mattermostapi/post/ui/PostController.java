@@ -1,6 +1,6 @@
 package com.alsselssajob.mattermostapi.post.ui;
 
-import com.alsselssajob.mattermostapi.post.application.PostService;
+import com.alsselssajob.mattermostapi.mattermostuser.domain.MattermostUser;
 import lombok.NoArgsConstructor;
 import net.bis5.mattermost.client4.MattermostClient;
 import net.bis5.mattermost.model.Post;
@@ -41,11 +41,11 @@ public class PostController {
     }
 
     public List<Post> getPosts() {
-        final PostService postService = PostService.builder()
+        final MattermostUser mattermostUser = MattermostUser.builder()
                 .client(client)
                 .user(login())
                 .build();
 
-        return postService.getPostsForToday();
+        return mattermostUser.getPostsForToday();
     }
 }

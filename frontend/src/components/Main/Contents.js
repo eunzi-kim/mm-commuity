@@ -2,6 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 import DatePicker, { registerLocale } from "react-datepicker";
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
+import $ from "jquery";
 
 import "react-datepicker/dist/react-datepicker.css";
 import ko from 'date-fns/locale/ko';
@@ -78,6 +79,14 @@ class Contents extends React.Component {
         },
       ]
     })
+    
+    // 스크롤바 밑으로
+    $(document).ready(function () {
+      if ($(".c-contents").length) {
+        var scroll_h = $(".c-contents")[0].scrollHeight;
+        $(".c-contents").scrollTop(scroll_h);
+      }
+    });
   }
 
   // 그룹 버튼 클릭

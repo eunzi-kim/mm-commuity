@@ -1,12 +1,13 @@
 import React from "react";
 import { Button, Dropdown, DropdownButton } from "react-bootstrap";
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { Link } from "react-router-dom";
 
-import "./css/Home.css"
 import Contents from "./Contents";
 import BestMember from "./BestMember";
 import Ssafycial from "./Ssafycial";
-import { Link } from "react-router-dom";
+
+import "./css/Home.css"
 
 class Home extends React.Component {
   state = {

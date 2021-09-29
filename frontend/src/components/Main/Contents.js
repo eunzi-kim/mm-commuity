@@ -11,19 +11,19 @@ import "./css/Contents.css";
 
 class Contents extends React.Component {
   state = {
-    "Group": [],
-    "Channel": {},
-    "ChkChannel": [],
-    "selectedDate": new Date(),
-    "Content": []
+    Group: [],
+    Channel: {},
+    ChkChannel: [],
+    selectedDate: new Date(),
+    Content: []
   }
 
   componentDidMount() {
     // 서버에서 api 받아와서 데이터 정리!!
     this.setState({
-      "Group": ["그룹1", "그룹2", "그룹3", "그룹4", "그룹5", "개인 메시지"],
+      Group: ["그룹1", "그룹2", "그룹3", "그룹4", "그룹5", "개인 메시지"],
       // 채널 dict 정리할 때, 비공개 채널은 자물쇠 표시!!
-      "Channel": {
+      Channel: {
         "그룹1": ["공지사항", "잡담", "Q&A", "Q&A(자기주도 PJT)", "🔒광주 1반"],
         "그룹2": ["1. SW 스타트 캠프", "2. 온라인 코칭", "공지사항", "이벤트", "일타싸피", "잡담", "종강식 이벤트", "BGM", "🔒5미자차", "🔒광주1반 거북컴들"],
         "그룹3": ["공지사항", "Q&A"],
@@ -32,7 +32,7 @@ class Contents extends React.Component {
         // 개인 메시지 Group dict에 추가해주기
         "개인 메시지": ["곽동희(교육프로)", "곽온겸(광주실습코치)", "광주 1반 이민교(전임교수)", "광주_1반_김세희"]
       },
-      "Content": [
+      Content: [
         {
           "id": 1, 
           "group": "그룹1", 
@@ -179,15 +179,15 @@ class Contents extends React.Component {
     };
 
     // 그룹 이름
-    const groupName = Group.map((name) => 
-      <div className="c-group">
+    const groupName = Group.map((name, idx) => 
+      <div className="c-group" key={idx}>
         <div className="group-title" onClick={this.onClickGroup}>{ name }</div>
       </div>
     );
 
     // 채널 이름
-    const channelName = ChkChannel.map((name) => 
-      <div className="c-channel">
+    const channelName = ChkChannel.map((name, idx) => 
+      <div className="c-channel" key={idx}>
         { name }
       </div>
     );
@@ -195,8 +195,8 @@ class Contents extends React.Component {
     registerLocale("ko", ko);
 
     // 게시글
-    const contents = Content.map((item) =>
-      <div className="cc-container">
+    const contents = Content.map((item, idx) =>
+      <div className="cc-container" key={idx}>
         <div className="contents-header">
           <div className="ch-profile">
             <div className="ch-image">

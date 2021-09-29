@@ -1,15 +1,12 @@
 import React from "react";
 import { Button, Dropdown, DropdownButton } from "react-bootstrap";
 import { GiHamburgerMenu } from 'react-icons/gi';
+
+import "./css/Scrap.css"
+import MyScrap from "./MyScrap"
 import { Link } from "react-router-dom";
 
-import Contents from "./Contents";
-import BestMember from "./BestMember";
-import Ssafycial from "./Ssafycial";
-
-import "./css/Home.css"
-
-class Home extends React.Component {
+class Scrap extends React.Component {
   state = {
     nickname: "",
     username: ""
@@ -71,8 +68,8 @@ class Home extends React.Component {
             </div>
           </div>
           <div className="main-btns">
-            <Link to="/scrap">
-              <Button variant="outline-primary" className="main-btn" size="sm">즐겨찾기</Button>{' '}
+            <Link to="/">
+              <Button variant="outline-primary" className="main-btn" size="sm">알쓸싸잡</Button>{' '}
             </Link>
             <Link to="/edupro">
               <Button variant="outline-primary" className="main-btn" size="sm">PRO설정</Button>{' '}
@@ -93,7 +90,7 @@ class Home extends React.Component {
               </div>
             </Dropdown.ItemText>
             <Dropdown.ItemText><div className="line"></div></Dropdown.ItemText>
-            <Dropdown.Item as="button"><Link to="/Scrap" className="link">즐겨찾기</Link></Dropdown.Item>
+            <Dropdown.Item as="button">즐겨찾기</Dropdown.Item>
             <Dropdown.Item as="button"><Link to="/edupro" className="link">PRO설정</Link></Dropdown.Item>
             <Dropdown.Item as="button" onClick={this.onLogout} className="logout-text">로그아웃</Dropdown.Item>
           </DropdownButton> 
@@ -108,19 +105,9 @@ class Home extends React.Component {
           </div>          
         </div>
 
-        <div className="main-body">
-          <div className="main-left">
-            <div className="find-contents">
-              <Contents />
-            </div>
-          </div>
-          <div className="main-right">
-            <div className="best-member">
-              <BestMember />
-            </div>
-            <div className="ssafycial">
-              <Ssafycial />
-            </div>
+        <div>
+          <div>
+            <MyScrap />
           </div>
         </div>
       </div>
@@ -128,4 +115,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home
+export default Scrap

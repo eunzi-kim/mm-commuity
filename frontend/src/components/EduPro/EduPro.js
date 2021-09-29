@@ -60,7 +60,9 @@ class EduPro extends React.Component {
                             </div>
                         </div>
                         <div className="main-btns">
-                            <Button variant="outline-primary" className="main-btn" size="sm">즐겨찾기</Button>{' '}
+                            <Link to="/scrap">
+                              <Button variant="outline-primary" className="main-btn" size="sm">즐겨찾기</Button>{' '}
+                            </Link>
                             <Link to="/">
                                 <Button variant="outline-primary" className="main-btn" size="sm">알쓸싸잡</Button>{' '}
                             </Link>

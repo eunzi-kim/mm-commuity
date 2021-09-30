@@ -8,6 +8,7 @@ class Login extends React.Component {
     alert: false, 
     id: "",
     password: "",
+    darkmode: "",
   };
 
   // state 직접 변경 불가능
@@ -64,6 +65,12 @@ class Login extends React.Component {
         this.onClickLogin()
       }
     })
+
+    // 다크모드 확인
+    if (localStorage.getItem('darkmode')) {
+      document.querySelector(".login-left").classList.add("dark-left-bg")
+      document.querySelector(".login-right").classList.add("dark-right-bg")
+    }
   }
 
   render() {

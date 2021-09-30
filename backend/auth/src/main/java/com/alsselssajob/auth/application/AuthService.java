@@ -30,28 +30,38 @@ public class AuthService {
     @Transactional
     public LoginResponse login(final LoginRequest loginRequest) {
 
+        // MM에서의 로그인 정보를 가져와야하니 일단 MM을 불러오자.
         final MattermostClient client = MattermostClient.builder()
                 .url(mattermostUrl)
                 .logLevel(Level.INFO)
                 .ignoreUnknownProperties()
                 .build();
 
+        // MM에서 client.login을 하면 여기에 담아야한다고 적혀져있을 것.
+        // login인한 유저의 id와 password가져온다.
         final ApiResponse<User> apiResponse = client.login(loginRequest.id(), loginRequest.password());
+        // user정보가 들어있는 apiResponse에서 Token을 가져온 것.
         final String tokenValue = (String) apiResponse.getRawResponse()
                 .getHeaders()
                 .getFirst(TOKEN_KEY);
 
+        // 이것역시 MM의 api문서에 적혀있을 것.
+        // apiResponse.readEntity()를 하면 user정보를 가지고 올 수 있음.
         final User user = apiResponse.readEntity();
         final String userId = user.getId();
         final String userName = user.getUsername();
         final String nickName = user.getNickname();
 
+        // Token.java에서 가져온 것.
         final Token token = Token.builder()
                 .userId(userId)
                 .token(tokenValue)
                 .isActive(true)
                 .build();
 
+        // TokenRepository가 JpaRepository를 extends하는데,
+        // 이럴경우 바로 .save()만 하면 마법같이 저장이된다.
+        // 세부 내용은.. 너무 깊이 들어가야해서 생략.
         tokenRepository.save(token);
 
         return LoginResponse.builder()
@@ -67,7 +77,7 @@ public class AuthService {
         Token currentToken = tokenRepository.findByUserIdAndIsActive(logoutRequest.userId(), true)
                 .orElseThrow(IllegalArgumentException::new);
 
-        currentToken = currentToken.switchIsActiveToFalse();
+        currentToken.switchIsActiveToFalse();
 
     }
 

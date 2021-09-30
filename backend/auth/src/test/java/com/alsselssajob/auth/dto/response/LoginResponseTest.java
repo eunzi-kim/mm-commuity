@@ -13,9 +13,9 @@ class LoginResponseTest {
     @BeforeEach
     void setUp() {
         loginResponse = LoginResponse.builder()
-                .userId("adklhglhergk33")
-                .nickName("dfdfgg")
-                .userName("gjook")
+                .userId("test_userId")
+                .nickName("test_nickName")
+                .userName("test_userName")
                 .build();
     }
 
@@ -33,9 +33,9 @@ class LoginResponseTest {
     @Test
     void getters_test() {
         assertAll(
-                () -> assertThat(loginResponse.userId()).isEqualTo("adklhglhergk33"),
-                () -> assertThat(loginResponse.nickName()).isEqualTo("dfdfgg"),
-                () -> assertThat(loginResponse.userName()).isEqualTo("gjook")
+                () -> assertThat(loginResponse.userId()).isEqualTo("test_userId"),
+                () -> assertThat(loginResponse.nickName()).isEqualTo("test_nickName"),
+                () -> assertThat(loginResponse.userName()).isEqualTo("test_userName")
         );
     }
 

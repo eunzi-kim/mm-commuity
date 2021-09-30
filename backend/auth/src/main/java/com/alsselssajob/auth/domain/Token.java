@@ -1,5 +1,6 @@
 package com.alsselssajob.auth.domain;
 
+import com.sun.istack.NotNull;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
@@ -32,6 +33,7 @@ public class Token {
     //즉, 객체 생성 시 값 세팅
     @Builder
     public Token(final String userId, final String token, final Boolean isActive) {
+
         this.userId = userId;
         this.token = token;
         this.isActive = isActive;
@@ -50,9 +52,7 @@ public class Token {
         return isActive;
     }
 
-    //isActive를 false로바꿀 메서드 구현
-
-//리턴타입이 token이고 메서드 내에서 isActive를 false로 만든다.
+    //isActive를 false로바꿔주는 메서드
     public void switchIsActiveToFalse(){
         this.isActive = false;
     }

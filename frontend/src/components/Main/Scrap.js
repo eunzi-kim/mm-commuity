@@ -105,8 +105,9 @@ class Scrap extends React.Component {
           </div>          
         </div>
 
-        <div>
+        <div className="MyScrap-container">
           <div>
+            {/* <h1> 즐겨찾기 목록 </h1> */}
             <MyScrap />
           </div>
         </div>

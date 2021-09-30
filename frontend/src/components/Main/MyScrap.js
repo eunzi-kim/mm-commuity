@@ -1,38 +1,23 @@
 import React from "react";
-import Slider from "react-slick";
-import DatePicker, { registerLocale } from "react-datepicker";
+import { registerLocale } from "react-datepicker";
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import $ from "jquery";
 
 import "react-datepicker/dist/react-datepicker.css";
 import ko from 'date-fns/locale/ko';
 
-import "./css/Contents.css";
+import "./css/Myscrap.css";
 
-class Contents extends React.Component {
+class MyScrap extends React.Component {
   state = {
-    "Group": [],
-    "Channel": {},
-    "ChkChannel": [],
     "selectedDate": new Date(),
-    "Content": []
+    "Myscrap": []
   }
 
   componentDidMount() {
     // 서버에서 api 받아와서 데이터 정리!!
     this.setState({
-      "Group": ["그룹1", "그룹2", "그룹3", "그룹4", "그룹5", "개인 메시지"],
-      // 채널 dict 정리할 때, 비공개 채널은 자물쇠 표시!!
-      "Channel": {
-        "그룹1": ["공지사항", "잡담", "Q&A", "Q&A(자기주도 PJT)", "🔒광주 1반"],
-        "그룹2": ["1. SW 스타트 캠프", "2. 온라인 코칭", "공지사항", "이벤트", "일타싸피", "잡담", "종강식 이벤트", "BGM", "🔒5미자차", "🔒광주1반 거북컴들"],
-        "그룹3": ["공지사항", "Q&A"],
-        "그룹4": ["공지사항", "수다방", "팀구성:D", "QnA"],
-        "그룹5": ["공지사항", "수다방", "팀구성:D", "QnA"],
-        // 개인 메시지 Group dict에 추가해주기
-        "개인 메시지": ["곽동희(교육프로)", "곽온겸(광주실습코치)", "광주 1반 이민교(전임교수)", "광주_1반_김세희"]
-      },
-      "Content": [
+      "Myscrap": [
         {
           "id": 1, 
           "group": "그룹1", 
@@ -89,37 +74,7 @@ class Contents extends React.Component {
     });
   }
 
-  // 그룹 버튼 클릭
-  onClickGroup = (e) => {
-    // state에 선택한 그룹의 채널들 넣기
-    var v = e.target.innerText
-    this.setState({
-      "ChkChannel": this.state.Channel[v]
-    })
 
-    // 버튼 취소
-    if (document.querySelector(".group-chk")) {
-      document.querySelector(".group-chk").classList.remove("group-chk")
-    }
-    // 버튼 체크
-    e.target.classList.add("group-chk")
-
-    // 채널 nav바
-    document.querySelector(".nav-down").classList.add("nav-none")
-    document.querySelector(".sub-nav").classList.remove("nav-none")
-  }
-
-  // nav바의 화살표
-  onClickNavArrow = (e) => {    
-    if (e.target.className === "nav-down") {
-      document.querySelector(".nav-down").classList.add("nav-none")
-      document.querySelector(".sub-nav").classList.remove("nav-none")
-    }
-    if (e.target.className === "nav-up") {      
-      document.querySelector(".sub-nav").classList.add("nav-none")
-      document.querySelector(".nav-down").classList.remove("nav-none")
-    } 
-  }
 
   // 날짜 변경
   onChangeDate = (date) => {
@@ -150,11 +105,11 @@ class Contents extends React.Component {
   }
 
   onClickKeep = (id) => {
-    const idx = this.state.Content.findIndex(p => {
+    const idx = this.state.Myscrap.findIndex(p => {
       return p.id === id;
     })
 
-    const changeContent = this.state.Content
+    const changeContent = this.state.Myscrap
     if (changeContent[idx]["scrap"] === "n") {
       changeContent[idx]["scrap"] = "y"
     } else {
@@ -167,61 +122,46 @@ class Contents extends React.Component {
   }  
 
   render() {
-    const { Group, ChkChannel, selectedDate, Content } = this.state
-
-    const settings = {
-      infinite: false,
-      arrows: true,
-      speed: 500,
-      slidesToShow: 4,
-      slidesToScroll : 1,
-      draggable: false,
-    };
-
-    // 그룹 이름
-    const groupName = Group.map((name) => 
-      <div className="c-group">
-        <div className="group-title" onClick={this.onClickGroup}>{ name }</div>
-      </div>
-    );
-
-    // 채널 이름
-    const channelName = ChkChannel.map((name) => 
-      <div className="c-channel">
-        { name }
-      </div>
-    );
+    const { Myscrap } = this.state
 
     registerLocale("ko", ko);
 
-    // 게시글
-    const contents = Content.map((item) =>
-      <div className="cc-container">
-        <div className="contents-header">
-          <div className="ch-profile">
-            <div className="ch-image">
+    // 스크랩 된 게시글
+    const MyContents = Myscrap.map((item) =>
+        <div className="cc-container">
+          {/* <h1>확인용</h1> */}
+          <div className="ccc-container">
+            <div className="contents-header">
+              <div className="ch-profile">
+                <div className="ch-image">
+                </div>
+                <div>
+                  <h5><b>{item["username"]}</b></h5>
+                  <h6>@{item["nickname"]}</h6>
+                </div>
+              </div>
+              {/* 채널명 , 날짜 */}
+              <div>
+                <div className="contents-header-date"><h4>📌{item["channel"]}</h></div>
+                <div className="contents-header-date"><h3>{item["date"]}</h3></div>
+              </div>
+              <div 
+                className={this.noKeepChk(item["scrap"])} 
+                onClick={() => this.onClickKeep(item["id"])}
+              >
+                <h3><AiOutlineStar className={this.noKeepChk(item["scrap"])} /></h3>
+              </div>
+              <div 
+                className={this.keepChk(item["scrap"])} 
+                onClick={() => this.onClickKeep(item["id"])}
+              >
+                <h3><AiFillStar className={this.keepChk(item["scrap"])} /></h3>
+              </div>
             </div>
-            <div>
-              <h5><b>{item["username"]}</b></h5>
-              <h6>@{item["nickname"]}</h6>
+            <div className="c-hr"><hr /></div>
+            <div className="cc-body-content" dangerouslySetInnerHTML={{ __html: item["content"] }}>
             </div>
-          </div>
-          <div 
-            className={this.noKeepChk(item["scrap"])} 
-            onClick={() => this.onClickKeep(item["id"])}
-          >
-            <h3><AiOutlineStar className={this.noKeepChk(item["scrap"])} /></h3>
-          </div>
-          <div 
-            className={this.keepChk(item["scrap"])} 
-            onClick={() => this.onClickKeep(item["id"])}
-          >
-            <h3><AiFillStar className={this.keepChk(item["scrap"])} /></h3>
-          </div>
-        </div>
-        <div dangerouslySetInnerHTML={{ __html: item["content"] }}>
-        </div>
-        <hr/>
+         </div> 
       </div>
     );
 
@@ -231,37 +171,14 @@ class Contents extends React.Component {
           <div className="c-title">
             <h2>즐겨찾기</h2>
             <div className="c-title-right">
-              <button className="c-title-cal">
-                📅
-                <DatePicker
-                  selected={selectedDate}
-                  onChange={this.onChangeDate}
-                  dateFormat="yyyy년 MM월 dd일"
-                  locale="ko"
-                />
-              </button>
             </div>            
           </div>       
           <hr />
         </div>
-        <div className="c-nav">
-            { groupName }
-        </div>
+
         <div className="c-body">
-          <div className="nav-down nav-none" onClick={this.onClickNavArrow}>
-            ▼
-          </div>
-          <div className="sub-nav nav-none">
-            <div className="c-channels">
-              {channelName}
-            </div>
-            <div className="nav-up" onClick={this.onClickNavArrow}>
-              ▲
-            </div>
-            <div className="sub-nav-bottom"></div>
-          </div>
           <div className="c-contents">
-            { contents }
+            { MyContents }
           </div>
         </div>        
       </div>
@@ -269,4 +186,4 @@ class Contents extends React.Component {
   }
 }
 
-export default Contents
+export default MyScrap

@@ -93,7 +93,7 @@ class Home extends React.Component {
               </div>
             </Dropdown.ItemText>
             <Dropdown.ItemText><div className="line"></div></Dropdown.ItemText>
-            <Dropdown.Item as="button"><Link to="/Scrap" className="link">즐겨찾기</Link></Dropdown.Item>
+            <Dropdown.Item as="button"><Link to="/scrap" className="link">즐겨찾기</Link></Dropdown.Item>
             <Dropdown.Item as="button"><Link to="/edupro" className="link">PRO설정</Link></Dropdown.Item>
             <Dropdown.Item as="button" onClick={this.onLogout} className="logout-text">로그아웃</Dropdown.Item>
           </DropdownButton> 

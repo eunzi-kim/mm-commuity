@@ -9,6 +9,7 @@ import Home from "./components/Main/Home";
 import Login from "./components/Login/Login";
 import EduPro from "./components/EduPro/EduPro";
 import Scrap from './components/Main/Scrap';
+import DarkMode from './components/DarkMode/DarkMode';
 
 import './App.css';
 
@@ -16,6 +17,7 @@ import './App.css';
 function App() {
   return (
     <BrowserRouter>
+      <DarkMode />
       <Switch>
         <PrivateRoute path="/" component={Home} exact={true} />
         <PublicRoute restricted="true" path="/login" component={Login} />

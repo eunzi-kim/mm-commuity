@@ -144,3 +144,12 @@
     font-size: 3.5rem;
   }
 }
+
+/* 다크모드 */
+.dark-left-bg {
+  background-color: #332940;
+}
+
+.dark-right-bg {
+  background-color: #808080;
+}

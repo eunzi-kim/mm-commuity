@@ -15,17 +15,22 @@ class EduPro extends React.Component {
         username: ""
       };
 
-      takeUserInfo = () => {
-        if (JSON.parse(sessionStorage.getItem('userInfo'))) {
-          const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
-          this.setState({nickname: userInfo.nickname})
-          this.setState({username: userInfo.username})
-        }
-      }
+    takeUserInfo = () => {
+    if (JSON.parse(sessionStorage.getItem('userInfo'))) {
+        const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+        this.setState({nickname: userInfo.nickname})
+        this.setState({username: userInfo.username})
+    }
+    }
 
-      componentDidMount() {
+    componentDidMount() {
         this.takeUserInfo()
-      }
+        
+        // 다크모드
+        if (localStorage.getItem('darkmode')) {
+            document.querySelector('.pro-container').classList.add('dark-pro-container')
+        }
+    }
 
     onClickPost = () => {
     }

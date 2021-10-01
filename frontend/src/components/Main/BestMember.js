@@ -53,6 +53,10 @@ class BestMember extends Component {
       autoplaySpeed: 3000,
     };
 
+    const gold = "/image/medal_1.png"
+    const silver = "/image/medal_2.png"
+    const bronze = "/image/medal_3.png"
+
     return (
       <div className="bm-container">
         <div className="bm-header">
@@ -64,7 +68,7 @@ class BestMember extends Component {
             <div className="bm-body">
               <h5 className="bm-title">💜 최다 반응 획득 💜</h5>
               <div className="bm-content">
-                <div className="bm-medal">🥇</div>
+                <div className="bm-medal"><img src={gold} alt="1" /></div>
                 <div className="bm-profile">
                   <div className="bm-image">
                     이미지
@@ -79,7 +83,7 @@ class BestMember extends Component {
                 </div>
               </div>
               <div className="bm-content">
-                <div className="bm-medal">🥈</div>
+                <div className="bm-medal"><img src={silver} alt="2" /></div>
                 <div className="bm-profile">
                   <div className="bm-image">
                     이미지
@@ -94,7 +98,7 @@ class BestMember extends Component {
                 </div>
               </div>
               <div className="bm-content">
-                <div className="bm-medal">🥉</div>
+                <div className="bm-medal"><img src={bronze} alt="3" /></div>
                 <div className="bm-profile">
                   <div className="bm-image">
                     이미지
@@ -113,7 +117,7 @@ class BestMember extends Component {
             <div className="bm-body">
               <h5 className="bm-title">❤ 우수 업로더 ❤</h5>
               <div className="bm-content">
-                <div className="bm-medal">🥇</div>
+                <div className="bm-medal"><img src={gold} alt="1" /></div>
                 <div className="bm-profile">
                   <div className="bm-image">
                     이미지
@@ -128,7 +132,7 @@ class BestMember extends Component {
                 </div>
               </div>
               <div className="bm-content">
-                <div className="bm-medal">🥈</div>
+                <div className="bm-medal"><img src={silver} alt="2" /></div>
                 <div className="bm-profile">
                   <div className="bm-image">
                     이미지
@@ -143,7 +147,7 @@ class BestMember extends Component {
                 </div>
               </div>
               <div className="bm-content">
-                <div className="bm-medal">🥉</div>
+                <div className="bm-medal"><img src={bronze} alt="3" /></div>
                 <div className="bm-profile">
                   <div className="bm-image">
                     이미지
@@ -162,7 +166,7 @@ class BestMember extends Component {
             <div className="bm-body">
               <h5 className="bm-title">💚 우수 리액션 💚</h5>
               <div className="bm-content">
-                <div className="bm-medal">🥇</div>
+                <div className="bm-medal"><img src={gold} alt="1" /></div>
                 <div className="bm-profile">
                   <div className="bm-image">
                     이미지
@@ -177,7 +181,7 @@ class BestMember extends Component {
                 </div>
               </div>
               <div className="bm-content">
-                <div className="bm-medal">🥈</div>
+                <div className="bm-medal"><img src={silver} alt="2" /></div>
                 <div className="bm-profile">
                   <div className="bm-image">
                     이미지
@@ -192,7 +196,7 @@ class BestMember extends Component {
                 </div>
               </div>
               <div className="bm-content">
-                <div className="bm-medal">🥉</div>
+                <div className="bm-medal"><img src={bronze} alt="3" /></div>
                 <div className="bm-profile">
                   <div className="bm-image">
                     이미지

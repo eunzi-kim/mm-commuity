@@ -25,7 +25,7 @@ class MyScrap extends React.Component {
           "username": "황성안[광주_1반_C103] 팀원", 
           "nickname": "sjd0051", 
           "image": "", 
-          "content": "성규님 고백해도 되나요?", 
+          "content": "3분할 <br /> 월 : 가슴, 어깨, 삼두 <br /> 화 : 등, 이두 <br /> 수 : 하체, 코어 <br /> 6일간 반복 <br />남은 1일은 유산소", 
           "scrap": "n", 
           "date": "2021-09-27"
         },
@@ -36,7 +36,7 @@ class MyScrap extends React.Component {
           "username": "김성규[광주_1반_C103] 팀장", 
           "nickname": "rkttjdrb", 
           "image": "", 
-          "content": "네 해도 됩니다", 
+          "content": "즐겨 찾기 데이터 넣어뒀습니다 한번 즐찾해보실?", 
           "scrap": "y", 
           "date": "2021-09-27"
         },
@@ -58,7 +58,7 @@ class MyScrap extends React.Component {
           "username": "황성안[광주_1반_C103] 팀원", 
           "nickname": "sjd0051", 
           "image": "", 
-          "content": "오늘은 하체할 예정", 
+          "content": "하체 루틴 스쿼트, 핵스쿼트, 수평레그프레스, 레그 컬, 레그 익스텐션", 
           "scrap": "n", 
           "date": "2021-09-27"
         },
@@ -128,12 +128,12 @@ class MyScrap extends React.Component {
 
     // 스크랩 된 게시글
     const MyContents = Myscrap.map((item) =>
-        <div className="cc-container">
+        <div className="scrap-cc-container">
           {/* <h1>확인용</h1> */}
-          <div className="ccc-container">
-            <div className="contents-header">
-              <div className="ch-profile">
-                <div className="ch-image">
+          <div className="scrap-ccc-container">
+            <div className="scrap-contents-header">
+              <div className="scrap-ch-profile">
+                <div className="scrap-ch-image">
                 </div>
                 <div>
                   <h5><b>{item["username"]}</b></h5>
@@ -142,8 +142,8 @@ class MyScrap extends React.Component {
               </div>
               {/* 채널명 , 날짜 */}
               <div>
-                <div className="contents-header-date"><h4>📌{item["channel"]}</h></div>
-                <div className="contents-header-date"><h3>{item["date"]}</h3></div>
+                <div className="scrap-contents-header-date"><h4>📌{item["channel"]}</h4></div>
+                <div className="scrap-contents-header-date"><h3>{item["date"]}</h3></div>
               </div>
               <div 
                 className={this.noKeepChk(item["scrap"])} 
@@ -158,26 +158,26 @@ class MyScrap extends React.Component {
                 <h3><AiFillStar className={this.keepChk(item["scrap"])} /></h3>
               </div>
             </div>
-            <div className="c-hr"><hr /></div>
-            <div className="cc-body-content" dangerouslySetInnerHTML={{ __html: item["content"] }}>
+            <div className="scrap-c-hr"><hr /></div>
+            <div className="scrap-cc-body-content" dangerouslySetInnerHTML={{ __html: item["content"] }}>
             </div>
          </div> 
       </div>
     );
 
     return (
-      <div className="c-container">
-        <div className="c-header">
-          <div className="c-title">
+      <div className="scrap-c-container">
+        <div className="scrap-c-header">
+          <div className="scrap-c-title">
             <h2>즐겨찾기</h2>
-            <div className="c-title-right">
+            <div className="scrap-c-title-right">
             </div>            
           </div>       
           <hr />
         </div>
 
-        <div className="c-body">
-          <div className="c-contents">
+        <div className="scrap-c-body">
+          <div className="scrap-c-contents">
             { MyContents }
           </div>
         </div>        

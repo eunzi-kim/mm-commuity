@@ -1,196 +1,196 @@
-.main {
+.scrap-main {
     height: 100vh;
   }
   
-  .main-header {
+.scrap-main-header {
     height: 20%;
     width: 100vw;
     display: flex;
     align-items: center;
     justify-content: space-around;
   }
-  
-  .main-header-responsive {
-    display: none;
-  }
-  
-  .main-search {
-    display: flex;
-    background-color: #0E4289;
-    border-radius: 5px;
-    width: 31rem;
-  }
-  
-  .search-input {
-    margin: 0.4rem;
-    width: 27rem;
-    height: 3rem;
-    border-radius: 5px;
-  }
-  
-  .search-btn {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: #0E4289;  
-    border: 0;
-    margin-right: 0.4rem;
-  }
-  
-  .main-profile {
-    display: flex;
-    align-items: center;
-  }
-  
-  .mp-image {
-    background-color: darkgray;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-  }
-  
-  .mp-info {
-    margin-left: 1rem;
+
+.scrap-main-header-responsive {
+  display: none;
+}
+
+.scrap-main-search {
+  display: flex;
+  background-color: #0E4289;
+  border-radius: 5px;
+  width: 31rem;
+}
+
+.scrap-search-input {
+  margin: 0.4rem;
+  width: 27rem;
+  height: 3rem;
+  border-radius: 5px;
+}
+
+.scrap-search-btn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #0E4289;  
+  border: 0;
+  margin-right: 0.4rem;
+}
+
+.scrap-main-profile {
+  display: flex;
+  align-items: center;
+}
+
+.scrap-mp-image {
+  background-color: darkgray;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.scrap-mp-info {
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.scrap-mp-nn,
+.scrap-mp-un {
+  font-size: 0.9rem;
+}
+
+.scrap-mp-point {
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+}
+
+.scrap-main-btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.scrap-main-btn {
+  border-radius: 9px;
+  border-width: 2px;
+  padding: 0.2rem 1rem;
+  margin: 0.2rem ;
+}
+
+.scrap-main-body {
+  display: flex;
+  height: 80vh;
+}
+
+.scrap-main-left {
+  width: 65%;
+  height: 100%;
+}
+
+.scrap-find-contents {
+  height: 100%;
+}
+
+.scrap-main-right {
+  width: 35%;
+}
+
+.scrap-best-member {
+  height: 50%;
+}
+
+.MyScrap-container {
+  align-items: center;
+  /* display: flex; */
+}
+
+/* 반응형 */
+@media (max-width: 992px) {
+  .scrap-main-header-responsive {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-  }
-  
-  .mp-nn,
-  .mp-un {
-    font-size: 0.9rem;
-  }
-  
-  .mp-point {
-    margin-top: 0.3rem;
-    font-size: 0.8rem;
-  }
-  
-  .main-btns {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .main-btn {
-    border-radius: 9px;
-    border-width: 2px;
-    padding: 0.2rem 1rem;
-    margin: 0.2rem ;
-  }
-  
-  .main-body {
-    display: flex;
-    height: 80vh;
-  }
-  
-  .main-left {
-    width: 65%;
-    height: 100%;
-  }
-  
-  .find-contents {
-    height: 100%;
-  }
-  
-  .main-right {
-    width: 35%;
-  }
-  
-  .best-member {
-    height: 50%;
   }
 
-  .MyScrap-container {
+  .scrap-main-header {
+    display: none;
+  }
+
+  .scrap-main-logo {
+    margin: 2rem 0;
+  }
+
+  .hamburger {
+    position: absolute;
+    top: 1vh;
+    right: 1vw;
+  }
+
+  .dropdown-item-text {
+    width: max-content;
+    display: flex;
+    justify-content: center;
+  }
+
+  .scrap-mp-image {
+    margin: 1rem 0;
+  }
+
+  .scrap-mr-mp {
+    display: flex;
     align-items: center;
-    /* display: flex; */
+    margin: 0 1rem;
+  }
+
+  .scrap-line {
+    background-color: gray;
+    height: 1px;
+    width: 18.5rem;
+  }
+
+  .dropdwon-item {
+    margin: 1rem 0;
+  }
+
+  .scrap-main-search {
+    margin-bottom: 0.5rem;
+  }
+
+  .scrap-link {
+    text-decoration: none;
+    color: #000;
+  }
+
+  .scrap-logout-text {
+    color: tomato;
+  }
+
+  .scrap-main-body {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .scrap-main-search {
+    width: 85vw;
+    display: flex;
+    justify-content: space-evenly;
   }
   
-  /* 반응형 */
-  @media (max-width: 992px) {
-    .main-header-responsive {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .main-header {
-      display: none;
-    }
-  
-    .main-logo {
-      margin: 2rem 0;
-    }
-  
-    .hamburger {
-      position: absolute;
-      top: 1vh;
-      right: 1vw;
-    }
-  
-    .dropdown-item-text {
-      width: max-content;
-      display: flex;
-      justify-content: center;
-    }
-  
-    .mp-image {
-      margin: 1rem 0;
-    }
-  
-    .mr-mp {
-      display: flex;
-      align-items: center;
-      margin: 0 1rem;
-    }
-  
-    .line {
-      background-color: gray;
-      height: 1px;
-      width: 18.5rem;
-    }
-  
-    .dropdwon-item {
-      margin: 1rem 0;
-    }
-  
-    .main-search {
-      margin-bottom: 0.5rem;
-    }
-  
-    .link {
-      text-decoration: none;
-      color: #000;
-    }
-  
-    .logout-text {
-      color: tomato;
-    }
-  
-    .main-body {
-      flex-direction: column;
-      height: auto;
-    }
-  
-    .main-search {
-      width: 85vw;
-      display: flex;
-      justify-content: space-evenly;
-    }
-    
-    .search-input {
-      width: 70vw;
-    }
-  
-    .main-right {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-  
-    .main-left {
-      width: 100%;
-      margin-bottom: 1rem;
-    }
+  .scrap-search-input {
+    width: 70vw;
   }
+
+  .scrap-main-right {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .scrap-main-left {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}

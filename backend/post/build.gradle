@@ -9,9 +9,7 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
+    compile.exclude group: "org.slf4j", module: "slf4j-log4j12"
 }
 
 repositories {
@@ -22,12 +20,13 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.data:spring-data-hadoop:2.5.0.RELEASE'
+    implementation 'org.apache.hbase:hbase-client:2.3.6'
+    implementation 'org.apache.hbase:hbase:2.3.6'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation group: 'org.springframework.data', name: 'spring-data-redis', version: '2.5.4'
-
 }
 
 test {

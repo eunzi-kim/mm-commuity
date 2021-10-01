@@ -1,6 +1,4 @@
 com/alsselssajob/post/PostApplication.java
  com.alsselssajob.post.PostApplication
-com/alsselssajob/post/RedisSampleService.java
- com.alsselssajob.post.RedisSampleService
-com/alsselssajob/post/Controller.java
- com.alsselssajob.post.Controller
+com/alsselssajob/post/domain/HBaseRepository.java
+ com.alsselssajob.post.domain.HBaseRepository

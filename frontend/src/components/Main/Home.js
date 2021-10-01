@@ -36,6 +36,21 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.takeUserInfo()
+
+    // 다크모드 확인
+    if (localStorage.getItem('darkmode')) {
+      document.querySelector(".main").classList.add("dark-main-body")
+      document.querySelector(".main-right").classList.add("dark-main-body")
+      document.querySelector(".c-nav").classList.add("dark-nav")
+      document.querySelector(".sub-nav").classList.add("dark-sub-nav")
+      document.querySelector(".sub-nav-bottom").classList.add("dark-sub-nav-bottom")
+      document.querySelector(".nav-down").classList.add("dark-nav-down")
+      document.querySelector(".search-input").classList.add("dark-search-input")
+      document.querySelector(".c-title-btn").classList.add("dark-c-title-btn")
+      document.querySelector(".c-title-cal").classList.add("dark-c-title-cal")
+      document.querySelector(".calender").classList.add("dark-calender")
+      document.querySelector(".c-channels").classList.add("dark-c-channels")
+    }
   }
 
   // 로그아웃 함수

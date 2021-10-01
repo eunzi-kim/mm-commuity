@@ -238,6 +238,7 @@ class Contents extends React.Component {
                   onChange={this.onChangeDate}
                   dateFormat="yyyy년 MM월 dd일"
                   locale="ko"
+                  className="calender"
                 />
               </button>
               <button className="c-title-btn"><h6>전체보기</h6></button>

@@ -53,9 +53,14 @@
 
 .a-detail-title:hover {
   cursor: pointer;
-  color: #0E4289;
 }
 
 .a-detail-title p {
   font-size: 1.1rem;
+}
+
+
+/* 다크모드 */
+.dark-s-detail-body {
+  background-color: #242424;
 }

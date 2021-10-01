@@ -96,11 +96,46 @@
 
 .main-right {
   width: 35%;
+  height: 100%;
+  overflow-y: hidden;
 }
 
 .best-member {
   height: 50%;
 }
+
+
+/* 다크모드 */
+.dark-main-body {
+  background-color: #242424;
+  color: #bbb;
+ }
+ 
+ .dark-nav {
+   background-color: transparent;
+   border: 1px solid whitesmoke;
+   border-radius: 1px;
+ }
+ 
+ .dark-sub-nav {
+   background-color: #363636;
+ }
+ 
+ .dark-sub-nav-bottom,
+ .dark-nav-down,
+ .dark-search-input,
+ .dark-c-title-btn,
+ .dark-c-title-cal,
+ .dark-calender {
+   background-color: #242424;
+   color: #bbb;
+ }
+ 
+ .dark-c-channels::-webkit-scrollbar-thumb {
+   background-color: gray;
+   border-radius: 9px;  
+ }
+
 
 /* 반응형 */
 @media (max-width: 992px) {
@@ -182,6 +217,7 @@
     width: 100%;
     display: flex;
     justify-content: space-evenly;
+    padding-bottom: 2rem;
   }
 
   .main-left {

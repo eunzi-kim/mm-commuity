@@ -1,4 +1,4 @@
-package com.alsselssajob.mattermostapi.post.application;
+package com.alsselssajob.mattermostapi.mattermostuser.domain;
 
 import net.bis5.mattermost.client4.MattermostClient;
 import net.bis5.mattermost.model.*;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 @ExtendWith(SpringExtension.class)
 @TestPropertySource("classpath:/application-local.properties")
-class PostServiceTest {
+class MattermostUserTest {
 
     @Value("${mattermost.url}")
     private String url;
@@ -30,7 +30,7 @@ class PostServiceTest {
     @Value("${user.password}")
     private String password;
 
-    private PostService postService;
+    private MattermostUser mattermostUser;
     private MattermostClient client;
     private User user;
 
@@ -42,7 +42,7 @@ class PostServiceTest {
                 .ignoreUnknownProperties()
                 .build();
         user = client.login(id, password).readEntity();
-        postService = PostService.builder()
+        mattermostUser = MattermostUser.builder()
                 .client(client)
                 .user(user)
                 .build();
@@ -52,15 +52,15 @@ class PostServiceTest {
     @Test
     void construct_test() {
         assertAll(
-                () -> assertThat(postService).isNotNull(),
-                () -> assertThat(postService).isExactlyInstanceOf(PostService.class)
+                () -> assertThat(mattermostUser).isNotNull(),
+                () -> assertThat(mattermostUser).isExactlyInstanceOf(MattermostUser.class)
         );
     }
 
     @DisplayName("PostService 클래스 / 사용자가 속한 팀 리스트 조회 테스트")
     @Test
     void get_teams_for_user_test() {
-        final TeamList teams = ReflectionTestUtils.invokeMethod(postService, "getTeamsForUser");
+        final TeamList teams = ReflectionTestUtils.invokeMethod(mattermostUser, "getTeamsForUser");
 
         assertThat(teams.size()).isGreaterThanOrEqualTo(0);
     }
@@ -68,8 +68,8 @@ class PostServiceTest {
     @DisplayName("PostService 클래스 / 팀 내 공개 채널 리스트 조회 테스트")
     @Test
     void get_public_channels_for_team_test() {
-        final TeamList teams = ReflectionTestUtils.invokeMethod(postService, "getTeamsForUser");
-        final ChannelList channels = ReflectionTestUtils.invokeMethod(postService, "getPublicChannelsForTeam", teams.get(0));
+        final TeamList teams = ReflectionTestUtils.invokeMethod(mattermostUser, "getTeamsForUser");
+        final ChannelList channels = ReflectionTestUtils.invokeMethod(mattermostUser, "getPublicChannelsForTeam", teams.get(0));
 
         assertThat(channels.size()).isGreaterThanOrEqualTo(0);
     }
@@ -77,9 +77,9 @@ class PostServiceTest {
     @DisplayName("PostService 클래스 / 채널 내 게시글 리스트 조회 테스트")
     @Test
     void get_posts_for_channel_test() {
-        final TeamList teams = ReflectionTestUtils.invokeMethod(postService, "getTeamsForUser");
-        final ChannelList channels = ReflectionTestUtils.invokeMethod(postService, "getPublicChannelsForTeam", teams.get(0));
-        final PostList posts = ReflectionTestUtils.invokeMethod(postService, "getPostsForChannelSinceYesterday", channels.get(0));
+        final TeamList teams = ReflectionTestUtils.invokeMethod(mattermostUser, "getTeamsForUser");
+        final ChannelList channels = ReflectionTestUtils.invokeMethod(mattermostUser, "getPublicChannelsForTeam", teams.get(0));
+        final PostList posts = ReflectionTestUtils.invokeMethod(mattermostUser, "getPostsForChannelSinceYesterday", channels.get(0));
 
         assertThat(posts.size()).isGreaterThanOrEqualTo(0);
     }
@@ -87,7 +87,7 @@ class PostServiceTest {
     @DisplayName("PostService 클래스 / 사용자가 속한 채널들에서 오늘 하루 올라온 게시글 리스트 조회 테스트")
     @Test
     void get_posts_for_today_test() {
-        final List<Post> posts = postService.getPostsForToday();
+        final List<Post> posts = mattermostUser.getPostsForToday();
 
         assertThat(posts.size()).isGreaterThanOrEqualTo(0);
     }

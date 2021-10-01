@@ -25,14 +25,13 @@ dependencies {
     implementation 'org.springframework.data:spring-data-hadoop:2.5.0.RELEASE'
     implementation 'org.apache.hbase:hbase-client:2.3.6'
     implementation 'org.apache.hbase:hbase:2.3.6'
+    implementation 'org.apache.hbase:hbase-mapreduce:2.3.6'
     implementation 'org.glassfish.jersey.test-framework:jersey-test-framework-core:2.25.1'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.kafka:spring-kafka-test'
-    testImplementation 'org.apache.hbase:hbase-testing-util:2.3.6'
-
 }
 
 test {

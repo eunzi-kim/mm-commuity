@@ -127,8 +127,8 @@ class MyScrap extends React.Component {
     registerLocale("ko", ko);
 
     // 스크랩 된 게시글
-    const MyContents = Myscrap.map((item) =>
-        <div className="scrap-cc-container">
+    const MyContents = Myscrap.map((item, idx) =>
+        <div className="scrap-cc-container" key={idx}>
           {/* <h1>확인용</h1> */}
           <div className="scrap-ccc-container">
             <div className="scrap-contents-header">

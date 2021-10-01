@@ -24,17 +24,13 @@ import java.util.logging.Level;
 
 public class PostRepository {
 
-    private final static String CONFIGURATION_FILE_PATH = "/usr/local/hbase-2.3.6/conf/hbase-site.xml";
     private final static TableName POST_TABLE_NAME = TableName.valueOf("posts");
-    private final static String POST_COLUMN_FAMILY_NAME = "post";
-    private final static String USER_COLUMN_FAMILY_NAME = "user";
-    private final static String EMOJI_COLUMN_FAMILY_NAME = "emoji";
-    private final static String FILE_COLUMN_FAMILY_NAME = "file";
+    private final static String CONFIGURATION_FILE_PATH = "/usr/local/hbase-2.3.6/conf/hbase-site.xml";
     private final static String EMPTY = "";
 
     private final Configuration configuration;
 
-    public PostRepository() throws IOException {
+    public PostRepository() {
         configuration = HBaseConfiguration.create();
         configuration.addResource(CONFIGURATION_FILE_PATH);
     }
@@ -84,10 +80,10 @@ public class PostRepository {
         if (!admin.tableExists(POST_TABLE_NAME)) {
             final TableDescriptorBuilder table = TableDescriptorBuilder.newBuilder(POST_TABLE_NAME);
 
-            table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(POST_COLUMN_FAMILY_NAME));
-            table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(USER_COLUMN_FAMILY_NAME));
-            table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(EMOJI_COLUMN_FAMILY_NAME));
-            table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(FILE_COLUMN_FAMILY_NAME));
+            table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.post.name()));
+            table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.user.name()));
+            table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.emoji.name()));
+            table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.file.name()));
 
             admin.createTable(table.build());
         }

@@ -46,6 +46,7 @@ class DarkMode extends React.Component{
       document.querySelector(".c-title-cal").classList.add("dark-c-title-cal")
       document.querySelector(".calender").classList.add("dark-calender")
       document.querySelector(".c-channels").classList.add("dark-c-channels")
+      document.querySelector(".s-detail-body").classList.add("dark-s-detail-body")
     }
   }
 
@@ -86,6 +87,7 @@ class DarkMode extends React.Component{
       document.querySelector(".c-title-cal").classList.remove("dark-c-title-cal")
       document.querySelector(".calender").classList.remove("dark-calender")
       document.querySelector(".c-channels").classList.remove("dark-c-channels")
+      document.querySelector(".s-detail-body").classList.remove("dark-s-detail-body")
     }
   }
 

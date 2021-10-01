@@ -1,7 +1,7 @@
 .darkmode-container {
   position: fixed;
-  left: 1rem;
-  top: 1rem;
+  right: 2rem;
+  bottom: 2rem;
 }
 
 .darkmode-none {
@@ -19,4 +19,11 @@
 
 .light-mode:hover {
   cursor: pointer;
+}
+
+@media (max-width: 992px) {
+  .darkmode-container {
+    top: 2rem;
+    left: 2rem;
+  }
 }

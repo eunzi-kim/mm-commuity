@@ -16,12 +16,23 @@ class SsafycialDetail extends React.Component {
       {'id':8, 'title': '[9월 2주차] 근육가족', 'reporter': '황성안', 'link': 'https://pythontoomuchinformation.tistory.com/448'},
       {'id':9, 'title': '[9월 2주차] 근육가족', 'reporter': '황성안', 'link': 'https://pythontoomuchinformation.tistory.com/448'},
       {'id':10, 'title': '[9월 2주차] 근육가족', 'reporter': '황성안', 'link': 'https://pythontoomuchinformation.tistory.com/448'},
-
     ]
   }
 
-  onClickDetailClose() {
+  onCloseDetail() {
     document.querySelector(".s-detail").className = "s-detail-none"
+  }
+
+  componentDidMount() {
+    if (localStorage.getItem('darkmode')) {
+      document.querySelector(".s-detail-body").classList.add("dark-s-detail-body")
+    }
+
+    document.addEventListener("keyup", e => {
+      if (e.keyCode === 27) {
+        this.onCloseDetail()
+      }
+    })
   }
 
   render() {
@@ -37,7 +48,7 @@ class SsafycialDetail extends React.Component {
     return (
       <div className="s-detail-none">
         <div className="s-detail-header">
-          <h3 onClick={this.onClickDetailClose}>❌</h3>
+          <h3 onClick={this.onCloseDetail}>❌</h3>
         </div>
         <div className="s-detail-body">        
           <div className="s-detail-title">

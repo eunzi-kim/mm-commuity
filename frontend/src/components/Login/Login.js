@@ -68,8 +68,13 @@ class Login extends React.Component {
 
     // 다크모드 확인
     if (localStorage.getItem('darkmode')) {
+      document.querySelector(".login-container").classList.add("dark-login-bg")
       document.querySelector(".login-left").classList.add("dark-left-bg")
       document.querySelector(".login-right").classList.add("dark-right-bg")
+      document.querySelector(".login-id-box").classList.add("dark-login-box")
+      document.querySelector(".login-password-box").classList.add("dark-login-box")
+      document.querySelector(".btn-primary").classList.add("btn-secondary")
+      document.querySelector(".signin-btn").classList.add("dark-login-btn")
     }
   }
 
@@ -96,12 +101,12 @@ class Login extends React.Component {
             <Form className="login-form">
               <Form.Group className="mb-4 login-id" controlId="formBasicEmail">
                 <Form.Label>전자우편 또는 사용자 이름</Form.Label>
-                <Form.Control className="login-box" type="email" onChange={this.onChangeId} placeholder="Enter email or username" />
+                <Form.Control className="login-id-box" type="email" onChange={this.onChangeId} placeholder="Enter email or username" />
               </Form.Group>
 
               <Form.Group className="mb-5 login-password" controlId="formBasicPassword">
                 <Form.Label>패스워드</Form.Label>
-                <Form.Control className="login-box" type="password" onChange={this.onChangePassword} placeholder="Password" />
+                <Form.Control className="login-password-box" type="password" onChange={this.onChangePassword} placeholder="Password" />
               </Form.Group>
 
               <div className={this.alertClassName()}>

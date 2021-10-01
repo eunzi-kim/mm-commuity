@@ -66,7 +66,8 @@
   letter-spacing: -0.9px;
 }
 
-.login-box {
+.login-id-box,
+.login-password-box {
   height: 2.7rem;
   background-color: #D0DFF2;
 }
@@ -97,13 +98,31 @@
   color: tomato;
 }
 
+
+/* 다크모드 */
+.dark-left-bg {
+  background-color: #1F1A24;
+}
+
+.dark-right-bg {
+  background-color: #808080;
+}
+
+.dark-login-box {
+  background-color: #afafaf;
+}
+
+.dark-login-btn {
+  background-color: rgb(58, 57, 57);
+}
+
+/* 반응형 */
 @media (max-width: 992px) {
   .login-right-all {
     width: 70%;
   }
 }
 
-/* 반응형 */
 @media (max-width: 768px) {
   .login-container {
     flex-direction: column;
@@ -143,13 +162,11 @@
   .login-right-header p {
     font-size: 3.5rem;
   }
-}
 
-/* 다크모드 */
-.dark-left-bg {
-  background-color: #332940;
-}
-
-.dark-right-bg {
-  background-color: #808080;
+  .dark-login-bg,
+  .dark-left-bg,
+  .dark-right-bg {
+    background-color: #1F1A24;
+    color: #aaaaaa;
+  }
 }

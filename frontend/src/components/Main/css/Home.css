@@ -83,15 +83,19 @@
 .main-body {
   display: flex;
   height: 80vh;
+  width: 100vw;
+  justify-content: space-around;
 }
 
 .main-left {
-  width: 65%;
+  width: 55%;
   height: 100%;
 }
 
 .find-contents {
+  width: 100%;
   height: 100%;
+  margin: 0;
 }
 
 .main-right {
@@ -102,6 +106,14 @@
 
 .best-member {
   height: 50%;
+  border: 2px solid #b6b6b6;
+  border-radius: 7px;
+  padding: 0.4rem 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.ssafycial {
+  padding: 0rem 2rem;
 }
 
 
@@ -135,6 +147,14 @@
    background-color: gray;
    border-radius: 9px;  
  }
+
+ .dark-c-channels > .c-channel {
+  color: #cccccc;
+  }
+
+  .dark-c-channels > .c-channel:hover {
+    color: #A1BEE5;
+    }
 
 
 /* 반응형 */
@@ -199,8 +219,10 @@
   }
 
   .main-body {
+    width: auto;
     flex-direction: column;
     height: auto;
+    justify-content: space-around;
   }
 
   .main-search {
@@ -217,11 +239,16 @@
     width: 100%;
     display: flex;
     justify-content: space-evenly;
-    padding-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 
   .main-left {
     width: 100%;
     margin-bottom: 1rem;
+  }
+
+  .ssafycial,
+  .best-member {
+    padding: 0 0 2rem 0;
   }
 }

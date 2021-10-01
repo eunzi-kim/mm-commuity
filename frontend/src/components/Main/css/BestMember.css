@@ -1,5 +1,4 @@
 .bm-container {
-  margin: 0 5rem 5rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,10 +46,15 @@
   align-items: center;
   justify-content: space-between;
   margin: 0.5rem 0;
+  padding: 0 0.5rem;
 }
 
 .bm-medal {
   font-size: 1.5rem;
+}
+
+.bm-medal img {
+  width: 1.3rem;
 }
 
 .bm-profile {

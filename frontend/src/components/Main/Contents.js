@@ -111,7 +111,7 @@ class Contents extends React.Component {
 
   // nav바의 화살표
   onClickNavArrow = (e) => {    
-    if (e.target.className === "nav-down") {
+    if (e.target.classList[0] === "nav-down") {
       document.querySelector(".nav-down").classList.add("nav-none")
       document.querySelector(".sub-nav").classList.remove("nav-none")
     }

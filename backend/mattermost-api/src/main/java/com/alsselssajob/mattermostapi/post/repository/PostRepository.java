@@ -15,6 +15,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
+import org.apache.hadoop.hbase.util.Bytes;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -96,6 +97,9 @@ public class PostRepository {
         row.addColumn(ColumnFamily.post.name().getBytes(),
                 PostQualifier.root_id.name().getBytes(),
                 post.getRootId().getBytes());
+        row.addColumn(ColumnFamily.post.name().getBytes(),
+                PostQualifier.created_at.name().getBytes(),
+                Bytes.toBytes(post.getCreateAt()));
         row.addColumn(ColumnFamily.post.name().getBytes(),
                 PostQualifier.parent_id.name().getBytes(),
                 post.getParentId().getBytes());

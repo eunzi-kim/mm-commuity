@@ -48,6 +48,11 @@ class DarkMode extends React.Component{
       document.querySelector(".c-channels").classList.add("dark-c-channels")
       document.querySelector(".s-detail-body").classList.add("dark-s-detail-body")
     }
+
+    // 프로페이지
+    else if (page === "edupro") {
+      document.querySelector('.pro-container').classList.add('dark-pro-container')
+    }
   }
 
 
@@ -88,6 +93,11 @@ class DarkMode extends React.Component{
       document.querySelector(".calender").classList.remove("dark-calender")
       document.querySelector(".c-channels").classList.remove("dark-c-channels")
       document.querySelector(".s-detail-body").classList.remove("dark-s-detail-body")
+    }
+
+    // 프로페이지
+    else if (page === "edupro") {
+      document.querySelector('.pro-container').classList.remove('dark-pro-container')
     }
   }
 

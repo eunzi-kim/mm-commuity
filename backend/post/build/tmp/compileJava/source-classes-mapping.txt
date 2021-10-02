@@ -2,3 +2,9 @@ com/alsselssajob/post/PostApplication.java
  com.alsselssajob.post.PostApplication
 com/alsselssajob/post/domain/HBaseRepository.java
  com.alsselssajob.post.domain.HBaseRepository
+dto/request/PostRequest.java
+ dto.request.PostRequest
+com/alsselssajob/post/config/RedisPostConfig.java
+ com.alsselssajob.post.config.RedisPostConfig
+com/alsselssajob/post/application/PostService.java
+ com.alsselssajob.post.application.PostService

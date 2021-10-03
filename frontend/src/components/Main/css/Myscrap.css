@@ -4,6 +4,7 @@
   flex-direction: column;
   align-items: center;
   height: 100%;
+
 }
 
 .scrap-c-header {
@@ -18,7 +19,7 @@
 .scrap-c-title h2 {
   font-weight: bold;
   margin: 0;
-  color: #D0DFF2;
+  color: #A1BEE5;
 }
 
 .scrap-c-title-right {
@@ -167,12 +168,12 @@
 
 .scrap-c-channels::-webkit-scrollbar {
   width: auto;
-  background-color: rgb(161, 190, 229);
+  /* background-color: rgb(161, 190, 229); */
   border-radius: 9px;
 }
 
 .scrap-c-channels::-webkit-scrollbar-thumb {
-  background-color: rgb(14, 66, 137);
+  /* background-color: rgb(14, 66, 137); */
   border-radius: 9px;  
 }
 
@@ -193,12 +194,13 @@
   overflow-y: auto;
   height: 100%;
   width: 80%;
+
 }
 
 .scrap-c-contents::-webkit-scrollbar {
   width: auto;
   border-radius: 9px;
-  background-color: rgb(161, 190, 229);
+  background-color: #A1BEE5;
 }
 
 .scrap-c-contents::-webkit-scrollbar-thumb {
@@ -210,7 +212,9 @@
   display: flex;
   margin-top: 1rem;
   margin-right: 2rem;
-  background-color: rgb(161, 190, 229);
+  /* background-color: rgb(161, 190, 229); */
+  border: 2px solid;
+  border-color: rgb(14, 66, 137);
   border-radius: 9px;
   width: 80%;
 }
@@ -218,15 +222,17 @@
 .scrap-ccc-container {
   width: 100%;
   margin: 1rem;
-
 }
 
+/* 즐겨찾기 스크랩 헤더 */
 .scrap-contents-header {
+  /* color: #000; */
   margin-top: 1rem;
   display: flex;
   justify-content: space-between;
 }
 
+/* 즐겨찾기 프로필 */
 .scrap-ch-profile {
   display: flex;
   align-items: center;
@@ -271,14 +277,37 @@ h6 {
 }
 
 .scrap-c-hr {
+  /* color: #000; */
   margin: 0 1.8rem;
 }
 
+/* 즐겨찾기 스크랩 내용 */
 .scrap-cc-body-content {
-  margin: 0 4rem;
+  padding: 1rem 2rem;
+  font-size: large;
+}
+.scrap-contents-header-date h3,h4 {
+  font-size: 1.3rem;
 }
 
+/* 다크모드 */
+.dark-scrap-cc-body-content {
+  color: #A1BEE5;
+}
 
+.dark-scrap-contents-header {
+  color: #A1BEE5;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dark-scrap-c-hr {
+  color: #A1BEE5;
+  margin: 0 1.8rem;
+}
+
+/* 반응형 */
 @media (max-width: 992px) {
   .scrap-c-container {
     margin: 1rem 5%;
@@ -303,12 +332,12 @@ h6 {
   }
 
   .scrap-contents-header-date h3,h4 {
-    font-size: small;
+    display: none;
   }
 
   .scrap-c-contents {
     font-size: small;
-    margin: 1rem 0 1rem 1rem;
+    margin: 1rem 0 1rem 5rem;
     height: 35vh;
   }
 
@@ -324,4 +353,12 @@ h6 {
     font-size: 0.8rem;
   }
 
+  .scrap-cc-body-content {
+    display: inline;
+    /* padding: rem 2rem; */
+    font-size: 14px;
+  }
+  .scrap-c-hr {
+    max-width: 10000rem;
+  }
 }

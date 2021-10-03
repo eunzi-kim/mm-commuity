@@ -9,11 +9,15 @@
 }
 
 .profile {
-    background-color: rgb(161, 190, 229);
+    /* background-color: rgb(161, 190, 229); */
+    
     width: 40rem;
     height: 6.5rem;
     display: flex;
     align-items: center;
+
+    border: 2px solid;
+    border-color: rgb(14, 66, 137);
     border-radius: 5px;
     margin-bottom: 20px;
 }

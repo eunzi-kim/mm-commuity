@@ -29,6 +29,7 @@ class EduPro extends React.Component {
         // 다크모드
         if (localStorage.getItem('darkmode')) {
             document.querySelector('.pro-container').classList.add('dark-pro-container')
+            // document.querySelector('.pro-body-bodylist').classList.add('dark-pro-body-bodylist::-webkit-scrollbar-thumb')
         }
     }
 

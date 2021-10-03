@@ -3,6 +3,7 @@ import { Button, Dropdown, DropdownButton } from "react-bootstrap";
 import { GiHamburgerMenu } from 'react-icons/gi';
 
 import "./css/Scrap.css"
+import "./css/Myscrap.css"
 import MyScrap from "./MyScrap"
 import { Link } from "react-router-dom";
 
@@ -33,6 +34,13 @@ class Scrap extends React.Component {
 
   componentDidMount() {
     this.takeUserInfo()
+
+    // 다크모드
+    if (localStorage.getItem('darkmode')) {
+      document.querySelector('.scrap-main').classList.add('dark-scrap-main')
+      document.querySelector('.MyScrap-container').classList.add('dark-MyScrap-container')
+      document.querySelector(".scrap-search-input").classList.add("dark-search-input")
+    }
   }
 
   // 로그아웃 함수

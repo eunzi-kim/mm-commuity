@@ -1,5 +1,6 @@
 .scrap-main {
     height: 100vh;
+    color: #000;
   }
   
 .scrap-main-header {
@@ -105,6 +106,23 @@
 .MyScrap-container {
   align-items: center;
   /* display: flex; */
+}
+
+
+/* 다크모드 */
+.dark-scrap-main {
+  background-color: #242424;
+  color: rgb(161, 190, 229);
+}
+
+.dark-search-input {
+  background-color: #242424;
+  color: #bbb;
+}
+
+.dark-MyScrap-container {
+  background-color: #242424;
+  color: rgb(161, 190, 229);
 }
 
 /* 반응형 */

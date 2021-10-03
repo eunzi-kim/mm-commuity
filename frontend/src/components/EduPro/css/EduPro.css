@@ -9,7 +9,7 @@
 .pro-body-container h2 {
     font-weight: bold;
     margin: 0;
-    color: #D0DFF2;
+    color: #A1BEE5;
 }
 
 .pro-head {
@@ -73,7 +73,8 @@
     width: 100px;
     height: 35px;
     margin-left: 3ch;
-    background-color: rgb(161, 190, 229);
+    background-color: #A1BEE5;
+
 
     border-radius: 9px;
     border-width: 0px;
@@ -82,6 +83,24 @@
     font-weight:bolder;
     
 }
+
+/* .dark-category-btn {
+    width: 100px;
+    height: 35px;
+    margin-left: 3ch;
+    border: 2px solid;
+    background-color: #A1BEE5;
+    border-color: 
+
+    border-radius: 9px;
+    border-width: 0px;
+    padding: 0.2rem 1rem;
+
+    font-weight:bolder;
+    
+} */
+
+
 .btnchk {
     background-color: rgb(14, 66, 137);
 }
@@ -98,7 +117,7 @@
 
 .pro-body-bodylist::-webkit-scrollbar {
     width: auto;
-    background-color: rgb(161, 190, 229);
+    /* background-color: rgb(161, 190, 229); */
     border-radius: 9px;
 }
 
@@ -115,8 +134,14 @@
 /* 다크모드 */
 .dark-pro-container {
     background-color: #242424;
-    color: #bbb;
+    color: rgb(161, 190, 229);
 }
+
+
+/* .dark-pro-body-bodylist::-webkit-scrollbar-thumb {
+    background-color: rgb(161, 190, 229);
+    color: rgb(161, 190, 229);
+} */
 
 
 /* 반응형 */

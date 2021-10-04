@@ -4,7 +4,6 @@ import com.alsselssajob.mattermostapi.common.vo.ColumnFamily;
 import com.alsselssajob.mattermostapi.common.vo.qualifier.SsafycialQualifier;
 import com.alsselssajob.mattermostapi.common.vo.qualifier.UserQualifier;
 import com.alsselssajob.mattermostapi.domain.ssafycial.domain.Ssafycial;
-import net.bis5.mattermost.model.Post;
 import net.bis5.mattermost.model.User;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -29,7 +28,6 @@ public class SsafycialRepository {
         configuration = HBaseConfiguration.create();
         configuration.addResource(CONFIGURATION_FILE_PATH);
     }
-
 
     private void createTableIfNotExists(final Admin admin) throws IOException {
         if (!admin.tableExists(SSAFYCIAL_TABLE_NAME)) {

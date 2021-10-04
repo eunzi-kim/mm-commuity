@@ -1,21 +1,28 @@
 package com.alsselssajob.mattermostapi.domain.mattermostuser.domain;
 
+import com.alsselssajob.mattermostapi.domain.ssafycial.domain.Ssafycial;
 import lombok.Builder;
 import net.bis5.mattermost.client4.MattermostClient;
 import net.bis5.mattermost.model.*;
 
+import java.lang.System;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.logging.Level;
 
 import static java.util.stream.Collectors.toList;
 
 public class MattermostUser {
 
+    private final static String PRESS_CORPS_TEAM_ID = "jnai78zewj87dfjwxtj8qmuydr";
+    private final static String SSAFYCIAL_CHANNEL_ID = "9yxif5ehwirt7eo4wyz34af67e";
     private final static int ONE_DAY = 1;
+    private final static long TWO_WEEKS = 2;
+    private final static int SSAFYCIAL_CHANNEL_INDEX = 0;
 
     private final MattermostClient client;
     private final User user;
@@ -51,5 +58,11 @@ public class MattermostUser {
                 .minusDays(ONE_DAY)
                 .atZone(ZoneId.systemDefault()))
                 .readEntity();
+    }
+
+    private Channel getSsafycialChannel() {
+        return client.getPublicChannelsByIdsForTeam(PRESS_CORPS_TEAM_ID, SSAFYCIAL_CHANNEL_ID)
+                .readEntity()
+                .get(SSAFYCIAL_CHANNEL_INDEX);
     }
 }

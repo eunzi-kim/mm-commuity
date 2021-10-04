@@ -3,18 +3,20 @@ package com.alsselssajob.mattermostapi.domain.ssafycial.repository;
 import com.alsselssajob.mattermostapi.common.vo.ColumnFamily;
 import com.alsselssajob.mattermostapi.common.vo.qualifier.SsafycialQualifier;
 import com.alsselssajob.mattermostapi.common.vo.qualifier.UserQualifier;
+import com.alsselssajob.mattermostapi.domain.mattermostuser.domain.MattermostUser;
 import com.alsselssajob.mattermostapi.domain.ssafycial.domain.Ssafycial;
+import net.bis5.mattermost.client4.MattermostClient;
+import net.bis5.mattermost.model.Post;
 import net.bis5.mattermost.model.User;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.TableName;
-import org.apache.hadoop.hbase.client.Admin;
-import org.apache.hadoop.hbase.client.ColumnFamilyDescriptorBuilder;
-import org.apache.hadoop.hbase.client.Put;
-import org.apache.hadoop.hbase.client.TableDescriptorBuilder;
+import org.apache.hadoop.hbase.client.*;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
 
 @Component
 public class SsafycialRepository {
@@ -27,6 +29,45 @@ public class SsafycialRepository {
     public SsafycialRepository() {
         configuration = HBaseConfiguration.create();
         configuration.addResource(CONFIGURATION_FILE_PATH);
+    }
+
+    public static void main(String[] args) throws IOException {
+        SsafycialRepository ssafycialRepository = new SsafycialRepository();
+        MattermostClient client = MattermostClient.builder()
+                .url("https://meeting.ssafy.com")
+                .logLevel(Level.INFO)
+                .ignoreUnknownProperties()
+                .build();
+        User user = client.login("mymysuzy0627@gmail.com", "Qwer1234!!").readEntity();
+
+        MattermostUser mattermostUser = new MattermostUser(client, user);
+        List<Ssafycial> temp = mattermostUser.getSsafycialsForLastTwoWeeks();
+        List<Ssafycial> ssafycials = temp.subList(0, 1);
+        ssafycialRepository.saveSsafycials(user, ssafycials);
+    }
+
+    public void saveSsafycials(final User user, final List<Ssafycial> ssafycials) throws IOException {
+        final Connection connection = ConnectionFactory.createConnection(configuration);
+        final Admin admin = connection.getAdmin();
+
+        createTableIfNotExists(admin);
+
+        final Table ssafycialTable = connection.getTable(SSAFYCIAL_TABLE_NAME);
+        ssafycials.stream()
+                .forEach(ssafycial -> {
+                    final Put row = new Put(ssafycial.id().getBytes());
+
+                    addSsafycialColumnFamily(ssafycial, row);
+                    addUserColumnFamily(user, row);
+
+                    try {
+                        ssafycialTable.put(row);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+
+        connection.close();
     }
 
     private void createTableIfNotExists(final Admin admin) throws IOException {

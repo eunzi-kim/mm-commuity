@@ -67,6 +67,7 @@ public class MattermostUser {
                 .map(Map::values)
                 .flatMap(Collection::stream)
                 .map(SsafycialUtil::parsePostToSsafycial)
+                .flatMap(List::stream)
                 .collect(toList());
     }
 

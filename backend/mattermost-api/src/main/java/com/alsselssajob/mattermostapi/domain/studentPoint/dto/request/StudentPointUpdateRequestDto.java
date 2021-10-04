@@ -1,4 +1,4 @@
-package com.alsselssajob.mattermostapi.domain.student.domain;
+package com.alsselssajob.mattermostapi.domain.studentPoint.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;

@@ -65,4 +65,11 @@ public class MattermostUser {
                 .readEntity()
                 .get(SSAFYCIAL_CHANNEL_INDEX);
     }
+
+    private PostList getSsafycialsForChannelSinceLastTwoWeeks(final Channel channel) {
+        return client.getPostsSince(channel.getId(), LocalDateTime.now()
+                .minusWeeks(TWO_WEEKS)
+                .atZone(ZoneId.systemDefault()))
+                .readEntity();
+    }
 }

@@ -16,4 +16,12 @@ public class Ssafycial {
         this.title = title;
         this.link = link;
     }
+
+    public String title() {
+        return title;
+    }
+
+    public String link() {
+        return link;
+    }
 }

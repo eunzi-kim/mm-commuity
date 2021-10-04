@@ -1,11 +1,14 @@
 package com.alsselssajob.mattermostapi.domain.ssafycial.repository;
 
 import com.alsselssajob.mattermostapi.common.vo.ColumnFamily;
+import com.alsselssajob.mattermostapi.common.vo.qualifier.UserQualifier;
+import net.bis5.mattermost.model.User;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Admin;
 import org.apache.hadoop.hbase.client.ColumnFamilyDescriptorBuilder;
+import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.client.TableDescriptorBuilder;
 import org.springframework.stereotype.Component;
 
@@ -36,4 +39,15 @@ public class SsafycialRepository {
         }
     }
 
+    private void addUserColumnFamily(final User user, final Put row) {
+        row.addColumn(ColumnFamily.user.name().getBytes(),
+                UserQualifier.user_id.name().getBytes(),
+                user.getId().getBytes());
+        row.addColumn(ColumnFamily.user.name().getBytes(),
+                UserQualifier.username.name().getBytes(),
+                user.getUsername().getBytes());
+        row.addColumn(ColumnFamily.user.name().getBytes(),
+                UserQualifier.nickname.name().getBytes(),
+                user.getNickname().getBytes());
+    }
 }

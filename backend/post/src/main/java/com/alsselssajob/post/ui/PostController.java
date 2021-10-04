@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 @RequiredArgsConstructor
 @RestController
 public class PostController {
@@ -14,5 +16,10 @@ public class PostController {
     @GetMapping("/setPost")
     public void setPost() {
         postService.setPost();
+    }
+
+    @GetMapping("/setPostWithHBase")
+    public void setPostWithHBase() throws IOException {
+        postService.setPostWithHBase();
     }
 }

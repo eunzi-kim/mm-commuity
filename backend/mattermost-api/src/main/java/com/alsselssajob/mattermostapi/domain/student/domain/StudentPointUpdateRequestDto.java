@@ -27,4 +27,20 @@ public class StudentPointUpdateRequestDto {
         this.reactedCountForUpdate = reactedCountForUpdate;
         this.reactingCountForUpdate = reactingCountForUpdate;
     }
+
+    public String id() {
+        return id;
+    }
+
+    public Integer postCountForUpdate() {
+        return postCountForUpdate;
+    }
+
+    public Integer reactedCountForUpdate() {
+        return reactedCountForUpdate;
+    }
+
+    public Integer reactingCountForUpdate() {
+        return reactingCountForUpdate;
+    }
 }

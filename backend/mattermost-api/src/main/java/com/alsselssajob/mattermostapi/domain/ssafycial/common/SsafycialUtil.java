@@ -32,6 +32,7 @@ public class SsafycialUtil {
 
             if (isPair(titleAndLink)) {
                 ssafycials.add(Ssafycial.builder()
+                        .id(post.getId())
                         .title(titleAndLink[TITLE_INDEX].trim())
                         .link(HTTP_PREFIX.concat(titleAndLink[LINK_INDEX]).trim())
                         .build());
@@ -39,6 +40,7 @@ public class SsafycialUtil {
                 title = Optional.of(titleAndLink[TITLE_INDEX].trim());
             } else if (title.isPresent()) {
                 ssafycials.add(Ssafycial.builder()
+                        .id(post.getId())
                         .title(title.get())
                         .link(HTTP_PREFIX.concat(titleAndLink[LINK_INDEX_WITHOUT_TITLE]).trim())
                         .build());

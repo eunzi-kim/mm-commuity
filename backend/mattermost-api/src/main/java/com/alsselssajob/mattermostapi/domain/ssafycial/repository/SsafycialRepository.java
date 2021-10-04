@@ -42,6 +42,9 @@ public class SsafycialRepository {
 
     private void addSsafycialColumnFamily(final Ssafycial ssafycial, final Put row) {
         row.addColumn(ColumnFamily.ssafycial.name().getBytes(),
+                SsafycialQualifier.id.name().getBytes(),
+                ssafycial.id().getBytes());
+        row.addColumn(ColumnFamily.ssafycial.name().getBytes(),
                 SsafycialQualifier.title.name().getBytes(),
                 ssafycial.title().getBytes());
         row.addColumn(ColumnFamily.ssafycial.name().getBytes(),

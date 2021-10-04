@@ -1,4 +1,4 @@
-package com.alsselssajob.mattermostapi.post.ui;
+package com.alsselssajob.mattermostapi.domain.post.ui;
 
 import net.bis5.mattermost.model.Post;
 import net.bis5.mattermost.model.User;

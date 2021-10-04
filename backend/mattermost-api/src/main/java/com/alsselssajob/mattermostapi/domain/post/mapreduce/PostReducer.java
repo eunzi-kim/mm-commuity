@@ -1,7 +1,7 @@
-package com.alsselssajob.mattermostapi.post.mapreduce;
+package com.alsselssajob.mattermostapi.domain.post.mapreduce;
 
-import com.alsselssajob.mattermostapi.post.domain.vo.ColumnFamily;
-import com.alsselssajob.mattermostapi.post.domain.vo.qualifier.PostQualifier;
+import com.alsselssajob.mattermostapi.common.vo.ColumnFamily;
+import com.alsselssajob.mattermostapi.common.vo.qualifier.PostQualifier;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.io.ImmutableBytesWritable;
 import org.apache.hadoop.hbase.mapreduce.TableReducer;

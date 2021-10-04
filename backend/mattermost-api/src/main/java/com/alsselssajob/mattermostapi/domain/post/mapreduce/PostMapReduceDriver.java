@@ -1,6 +1,6 @@
-package com.alsselssajob.mattermostapi.post.mapreduce;
+package com.alsselssajob.mattermostapi.domain.post.mapreduce;
 
-import com.alsselssajob.mattermostapi.post.domain.vo.Table;
+import com.alsselssajob.mattermostapi.common.vo.Table;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.client.Scan;

@@ -1,4 +1,4 @@
-package com.alsselssajob.mattermostapi.post.domain.vo.qualifier;
+package com.alsselssajob.mattermostapi.common.vo.qualifier;
 
 public enum UserQualifier {
     user_id,

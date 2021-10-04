@@ -1,4 +1,4 @@
-package com.alsselssajob.mattermostapi.mattermostuser.domain;
+package com.alsselssajob.mattermostapi.domain.mattermostuser.domain;
 
 import lombok.Builder;
 import net.bis5.mattermost.client4.MattermostClient;

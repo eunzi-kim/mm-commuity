@@ -19,11 +19,15 @@ public class PostMapReduceDriver {
         final Job job = Job.getInstance(configuration);
         job.setJarByClass(PostMapReduceDriver.class);
 
+        job.setMapperClass(PostMapper.class);
+        job.setReducerClass(PostReducer.class);
+
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(Text.class);
+
         final Scan scan = new Scan();
         scan.setCaching(CACHE_SIZE);
-
         scan.setCacheBlocks(false);
-        scan.readAllVersions();
 
         TableMapReduceUtil.initTableMapperJob(Table.posts.name(), scan, PostMapper.class, Text.class, LongWritable.class, job);
         TableMapReduceUtil.initTableReducerJob(Table.posts.name(), PostReducer.class, job);
@@ -31,4 +35,5 @@ public class PostMapReduceDriver {
         job.setNumReduceTasks(REDUCER_COUNT);
         job.waitForCompletion(true);
     }
+
 }

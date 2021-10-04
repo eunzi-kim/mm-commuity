@@ -15,11 +15,16 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
+import org.apache.hadoop.hbase.util.Bytes;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.TimeZone;
 import java.util.logging.Level;
 
 public class PostRepository {
@@ -27,6 +32,9 @@ public class PostRepository {
     private final static TableName POST_TABLE_NAME = TableName.valueOf("posts");
     private final static String CONFIGURATION_FILE_PATH = "/usr/local/hbase-2.3.6/conf/hbase-site.xml";
     private final static String EMPTY = "";
+    private final static String DASH = "-";
+    private final static String SPACE = " ";
+    private final static String COLON = ":";
 
     private final Configuration configuration;
 
@@ -97,6 +105,12 @@ public class PostRepository {
                 PostQualifier.root_id.name().getBytes(),
                 post.getRootId().getBytes());
         row.addColumn(ColumnFamily.post.name().getBytes(),
+                PostQualifier.created_at.name().getBytes(),
+                Bytes.toBytes(post.getCreateAt()));
+        row.addColumn(ColumnFamily.post.name().getBytes(),
+                PostQualifier.created_date.name().getBytes(),
+                calculateCreatedDate(post).getBytes());
+        row.addColumn(ColumnFamily.post.name().getBytes(),
                 PostQualifier.parent_id.name().getBytes(),
                 post.getParentId().getBytes());
         row.addColumn(ColumnFamily.post.name().getBytes(),
@@ -105,6 +119,25 @@ public class PostRepository {
         row.addColumn(ColumnFamily.post.name().getBytes(),
                 PostQualifier.hashTag.name().getBytes(),
                 post.getHashtags().getBytes());
+    }
+
+    private String calculateCreatedDate(final Post post) {
+        final LocalDateTime createdDate = Instant.ofEpochMilli(post.getCreateAt())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+
+        return new StringBuilder().append(createdDate.getYear())
+                .append(DASH)
+                .append(createdDate.getMonthValue())
+                .append(DASH)
+                .append(createdDate.getDayOfMonth())
+                .append(SPACE)
+                .append(createdDate.getHour())
+                .append(COLON)
+                .append(createdDate.getMinute())
+                .append(COLON)
+                .append(createdDate.getSecond())
+                .toString();
     }
 
     private void addUserColumnFamily(final User user, final Put row) {

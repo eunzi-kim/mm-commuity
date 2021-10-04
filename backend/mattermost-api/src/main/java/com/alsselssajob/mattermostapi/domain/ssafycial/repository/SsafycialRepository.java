@@ -1,7 +1,10 @@
 package com.alsselssajob.mattermostapi.domain.ssafycial.repository;
 
 import com.alsselssajob.mattermostapi.common.vo.ColumnFamily;
+import com.alsselssajob.mattermostapi.common.vo.qualifier.SsafycialQualifier;
 import com.alsselssajob.mattermostapi.common.vo.qualifier.UserQualifier;
+import com.alsselssajob.mattermostapi.domain.ssafycial.domain.Ssafycial;
+import net.bis5.mattermost.model.Post;
 import net.bis5.mattermost.model.User;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -37,6 +40,15 @@ public class SsafycialRepository {
 
             admin.createTable(table.build());
         }
+    }
+
+    private void addSsafycialColumnFamily(final Ssafycial ssafycial, final Put row) {
+        row.addColumn(ColumnFamily.ssafycial.name().getBytes(),
+                SsafycialQualifier.title.name().getBytes(),
+                ssafycial.title().getBytes());
+        row.addColumn(ColumnFamily.ssafycial.name().getBytes(),
+                SsafycialQualifier.link.name().getBytes(),
+                ssafycial.link().getBytes());
     }
 
     private void addUserColumnFamily(final User user, final Put row) {

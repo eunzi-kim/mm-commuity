@@ -1,11 +1,11 @@
-package com.alsselssajob.mattermostapi.post.repository;
+package com.alsselssajob.mattermostapi.domain.post.repository;
 
-import com.alsselssajob.mattermostapi.mattermostuser.domain.MattermostUser;
-import com.alsselssajob.mattermostapi.post.domain.vo.ColumnFamily;
-import com.alsselssajob.mattermostapi.post.domain.vo.qualifier.EmojiQualifier;
-import com.alsselssajob.mattermostapi.post.domain.vo.qualifier.FileQualifier;
-import com.alsselssajob.mattermostapi.post.domain.vo.qualifier.PostQualifier;
-import com.alsselssajob.mattermostapi.post.domain.vo.qualifier.UserQualifier;
+import com.alsselssajob.mattermostapi.domain.mattermostuser.domain.MattermostUser;
+import com.alsselssajob.mattermostapi.common.vo.ColumnFamily;
+import com.alsselssajob.mattermostapi.common.vo.qualifier.EmojiQualifier;
+import com.alsselssajob.mattermostapi.common.vo.qualifier.FileQualifier;
+import com.alsselssajob.mattermostapi.common.vo.qualifier.PostQualifier;
+import com.alsselssajob.mattermostapi.common.vo.qualifier.UserQualifier;
 import net.bis5.mattermost.client4.MattermostClient;
 import net.bis5.mattermost.model.FileInfo;
 import net.bis5.mattermost.model.Post;
@@ -24,7 +24,6 @@ import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.TimeZone;
 import java.util.logging.Level;
 
 public class PostRepository {

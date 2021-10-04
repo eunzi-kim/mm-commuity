@@ -1,5 +1,7 @@
-package com.alsselssajob.mattermostapi.mattermostuser.domain;
+package com.alsselssajob.mattermostapi.domain.mattermostuser.domain;
 
+import com.alsselssajob.mattermostapi.domain.ssafycial.common.SsafycialUtil;
+import com.alsselssajob.mattermostapi.domain.ssafycial.domain.Ssafycial;
 import lombok.Builder;
 import net.bis5.mattermost.client4.MattermostClient;
 import net.bis5.mattermost.model.*;
@@ -10,12 +12,17 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
 public class MattermostUser {
 
+    private final static String PRESS_CORPS_TEAM_ID = "jnai78zewj87dfjwxtj8qmuydr";
+    private final static String SSAFYCIAL_CHANNEL_ID = "9yxif5ehwirt7eo4wyz34af67e";
+    private final static int SSAFYCIAL_CHANNEL_INDEX = 0;
     private final static int ONE_DAY = 1;
+    private final static long TWO_WEEKS = 2;
 
     private final MattermostClient client;
     private final User user;
@@ -49,6 +56,30 @@ public class MattermostUser {
     private PostList getPostsForChannelSinceYesterday(final Channel channel) {
         return client.getPostsSince(channel.getId(), LocalDateTime.now()
                 .minusDays(ONE_DAY)
+                .atZone(ZoneId.systemDefault()))
+                .readEntity();
+    }
+
+    public List<Ssafycial> getSsafycialsForLastTwoWeeks() {
+        return Stream.of(getSsafycialsForChannelSinceLastTwoWeeks(getSsafycialChannel()))
+                .map(PostList::getPosts)
+                .filter(Objects::nonNull)
+                .map(Map::values)
+                .flatMap(Collection::stream)
+                .map(SsafycialUtil::parsePostToSsafycial)
+                .flatMap(List::stream)
+                .collect(toList());
+    }
+
+    private Channel getSsafycialChannel() {
+        return client.getPublicChannelsByIdsForTeam(PRESS_CORPS_TEAM_ID, SSAFYCIAL_CHANNEL_ID)
+                .readEntity()
+                .get(SSAFYCIAL_CHANNEL_INDEX);
+    }
+
+    private PostList getSsafycialsForChannelSinceLastTwoWeeks(final Channel channel) {
+        return client.getPostsSince(channel.getId(), LocalDateTime.now()
+                .minusWeeks(TWO_WEEKS)
                 .atZone(ZoneId.systemDefault()))
                 .readEntity();
     }

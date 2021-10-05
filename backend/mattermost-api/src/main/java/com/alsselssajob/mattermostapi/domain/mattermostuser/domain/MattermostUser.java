@@ -3,29 +3,35 @@ package com.alsselssajob.mattermostapi.domain.mattermostuser.domain;
 import com.alsselssajob.mattermostapi.domain.ssafycial.common.SsafycialUtil;
 import com.alsselssajob.mattermostapi.domain.ssafycial.domain.Ssafycial;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 import net.bis5.mattermost.client4.MattermostClient;
 import net.bis5.mattermost.model.*;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
+@Component
+@NoArgsConstructor
 public class MattermostUser {
 
-    private final static String PRESS_CORPS_TEAM_ID = "jnai78zewj87dfjwxtj8qmuydr";
-    private final static String SSAFYCIAL_CHANNEL_ID = "9yxif5ehwirt7eo4wyz34af67e";
     private final static int SSAFYCIAL_CHANNEL_INDEX = 0;
     private final static int ONE_DAY = 1;
     private final static long TWO_WEEKS = 2;
 
-    private final MattermostClient client;
-    private final User user;
+    @Value("${presscorps.team.id}")
+    private String pressCorpsTeamId;
+
+    @Value("${ssafycial.channel.id}")
+    private String ssafycialChannelId;
+
+    private MattermostClient client;
+    private User user;
 
     @Builder
     public MattermostUser(final MattermostClient client, final User user) {
@@ -33,16 +39,27 @@ public class MattermostUser {
         this.user = user;
     }
 
-    public List<Post> getPostsForToday() {
-        return getTeamsForUser().stream()
-                .map(this::getPublicChannelsForTeam)
-                .flatMap(List::stream)
-                .map(this::getPostsForChannelSinceYesterday)
-                .map(PostList::getPosts)
-                .filter(Objects::nonNull)
-                .map(Map::values)
-                .flatMap(Collection::stream)
-                .collect(toList());
+    public Map<String, List<Map<String, List<Post>>>> getPostsForTodayGroupByChannelGroupByTeam() {
+        final Map<String, List<Map<String, List<Post>>>> postsGroupByChannelGroupByTeam = new HashMap<>();
+
+        final List<Team> teams = getTeamsForUser();
+        for (Team team : teams) {
+            final List<Map<String, List<Post>>> channelsContainingPosts = new ArrayList<>();
+            final List<Channel> channels = getPublicChannelsForTeam(team);
+
+            for (Channel channel : channels) {
+                final Map<String, List<Post>> postsGroupByChannel = new HashMap<>();
+                final Map<String, Post> posts = getPostsForChannelSinceYesterday(channel).getPosts();
+
+                if (Objects.nonNull(posts)) {
+                    postsGroupByChannel.put(channel.getDisplayName(), new ArrayList<>(posts.values()));
+                    channelsContainingPosts.add(postsGroupByChannel);
+                }
+            }
+            postsGroupByChannelGroupByTeam.put(team.getDisplayName(), channelsContainingPosts);
+        }
+
+        return postsGroupByChannelGroupByTeam;
     }
 
     private List<Team> getTeamsForUser() {
@@ -72,7 +89,7 @@ public class MattermostUser {
     }
 
     private Channel getSsafycialChannel() {
-        return client.getPublicChannelsByIdsForTeam(PRESS_CORPS_TEAM_ID, SSAFYCIAL_CHANNEL_ID)
+        return client.getPublicChannelsByIdsForTeam(pressCorpsTeamId, ssafycialChannelId)
                 .readEntity()
                 .get(SSAFYCIAL_CHANNEL_INDEX);
     }

@@ -87,7 +87,7 @@ class MattermostUserTest {
     @DisplayName("PostService 클래스 / 사용자가 속한 채널들에서 오늘 하루 올라온 게시글 리스트 조회 테스트")
     @Test
     void get_posts_for_today_test() {
-        final List<Post> posts = mattermostUser.getPostsForToday();
+        final List<Post> posts = mattermostUser.getPostsForTodayGroupByChannelGroupByTeam();
 
         assertThat(posts.size()).isGreaterThanOrEqualTo(0);
     }

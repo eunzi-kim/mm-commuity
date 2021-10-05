@@ -7,5 +7,6 @@ public enum PostQualifier {
     created_at,
     created_date,
     message,
+    is_scrapped,
     hashTag
 }

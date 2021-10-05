@@ -40,7 +40,7 @@ class PostControllerTest {
 
         assertThat(user.getId().length()).isEqualTo(26);
     }
-
+/*
     @DisplayName("PostController 클래스 / 게시글 조회 테스트")
     @Test
     void get_posts_for_user_test() {
@@ -48,4 +48,6 @@ class PostControllerTest {
 
         assertThat(posts.size()).isGreaterThanOrEqualTo(0);
     }
+    
+ */
 }

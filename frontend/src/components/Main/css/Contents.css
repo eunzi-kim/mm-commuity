@@ -5,6 +5,39 @@
   height: 100%;
 }
 
+.left-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 20vh;
+}
+
+.main-search {
+  display: flex;
+  background-color: #0E4289;
+  border-radius: 5px;
+  width: 31rem;
+  align-items: center;
+  height: 4rem;
+}
+
+.search-input {
+  margin: 0.4rem;
+  width: 27rem;
+  height: 3rem;
+  border-radius: 5px;
+}
+
+.search-btn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #0E4289;  
+  border: 0;
+  margin-right: 0.4rem;
+}
+
 .c-header {
   width: 100%;
 }
@@ -249,7 +282,29 @@ h6 {
   color: gray;
 }
 
+/* 반응형 */
 @media (max-width: 992px) {
+  .left-header {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin-bottom: 2rem;
+  }
+
+  .main-logo {
+    margin: 2rem 0;
+  }
+
+  .main-search {
+    width: 85vw;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .search-input {
+    width: 70vw;
+  }
+
   .c-container {
     margin: 1rem 5%;
   }

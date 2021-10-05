@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import DatePicker, { registerLocale } from "react-datepicker";
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import $ from "jquery";
+import { Link } from "react-router-dom";
 
 import "react-datepicker/dist/react-datepicker.css";
 import ko from 'date-fns/locale/ko';
@@ -15,7 +16,7 @@ class Contents extends React.Component {
     Channel: {},
     ChkChannel: [],
     selectedDate: new Date(),
-    Content: []
+    Content: [],
   }
 
   componentDidMount() {
@@ -123,11 +124,17 @@ class Contents extends React.Component {
 
   // 날짜 변경
   onChangeDate = (date) => {
-    this.setState({
-      "selectedDate": date
-    })
+    if (date > new Date()) {
+      alert("오늘 이후의 날짜를 탐색할 수 없습니다.")
+    }
+    else {
+      this.setState({
+        "selectedDate": date
+      })
+      console.log((date))
+      // 선택한 날짜의 게시글들 보여주기 //
+    }
 
-    // 선택한 날짜의 게시글들 보여주기 //
   }
 
   // 즐겨찾기
@@ -168,6 +175,7 @@ class Contents extends React.Component {
 
   render() {
     const { Group, ChkChannel, selectedDate, Content } = this.state
+    const logo = "/image/logo_1.png"
 
     const settings = {
       infinite: false,
@@ -193,6 +201,8 @@ class Contents extends React.Component {
     );
 
     registerLocale("ko", ko);
+
+    console.log(this.props.search)
 
     // 게시글
     const contents = Content.map((item, idx) =>
@@ -227,6 +237,18 @@ class Contents extends React.Component {
 
     return (
       <div className="c-container">
+        <div className="left-header">
+          <Link to="/">
+            <div className="main-logo">
+              <img width="180rem" src={logo} alt="알쓸싸잡" />
+            </div>
+          </Link>
+          <div className="main-search">
+            <input className="search-input" onChange={this.onSearchChange} onKeyUp={this.onSearchEnter} autoFocus />
+            <button className="search-btn" onClick={this.onSearch}><h4>🔍</h4></button>
+          </div>
+        </div>
+        
         <div className="c-header">
           <div className="c-title">
             <h2>Find Contents</h2>
@@ -267,7 +289,7 @@ class Contents extends React.Component {
           <div className="c-contents">
             { contents }
           </div>
-        </div>        
+        </div>
       </div>
     )
   }

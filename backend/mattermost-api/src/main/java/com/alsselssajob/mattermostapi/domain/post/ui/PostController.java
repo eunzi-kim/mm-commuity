@@ -1,7 +1,8 @@
 package com.alsselssajob.mattermostapi.domain.post.ui;
 
 import com.alsselssajob.mattermostapi.domain.mattermostuser.domain.MattermostUser;
-import lombok.NoArgsConstructor;
+import com.alsselssajob.mattermostapi.domain.post.application.PostService;
+import lombok.RequiredArgsConstructor;
 import net.bis5.mattermost.client4.MattermostClient;
 import net.bis5.mattermost.model.Post;
 import net.bis5.mattermost.model.User;
@@ -9,14 +10,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
 @Component
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class PostController {
 
+    private final PostService postService;
     private MattermostClient client;
 
     @Value("${mattermost.url}")
@@ -39,6 +42,16 @@ public class PostController {
 
     private User login() {
         return client.login(id, password).readEntity();
+    }
+
+    public void savePostsEveryDay() throws IOException {
+        final User user = login();
+        final MattermostUser mattermostUser = MattermostUser.builder()
+                .client(client)
+                .user(user)
+                .build();
+
+        postService.savePosts(user, mattermostUser.getPostsForTodayGroupByChannelGroupByTeam());
     }
 
     public List<Post> getPosts() {

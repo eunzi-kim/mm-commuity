@@ -31,21 +31,6 @@ public class SsafycialRepository {
         configuration.addResource(CONFIGURATION_FILE_PATH);
     }
 
-    public static void main(String[] args) throws IOException {
-        SsafycialRepository ssafycialRepository = new SsafycialRepository();
-        MattermostClient client = MattermostClient.builder()
-                .url("https://meeting.ssafy.com")
-                .logLevel(Level.INFO)
-                .ignoreUnknownProperties()
-                .build();
-        User user = client.login("mymysuzy0627@gmail.com", "Qwer1234!!").readEntity();
-
-        MattermostUser mattermostUser = new MattermostUser(client, user);
-        List<Ssafycial> temp = mattermostUser.getSsafycialsForLastTwoWeeks();
-        List<Ssafycial> ssafycials = temp.subList(0, 1);
-        ssafycialRepository.saveSsafycials(user, ssafycials);
-    }
-
     public void saveSsafycials(final User user, final List<Ssafycial> ssafycials) throws IOException {
         final Connection connection = ConnectionFactory.createConnection(configuration);
         final Admin admin = connection.getAdmin();

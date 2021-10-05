@@ -22,6 +22,13 @@ public class StudentPointService {
         final List<Post> posts = postController.getPosts();
         final List<StudentPointUpdateRequest> requests = new ArrayList<>();
 
+        addRequestsAboutPost(requests, posts);
+        addRequestsAboutReaction(requests, posts);
+
+        return requests;
+    }
+
+    private void addRequestsAboutPost(final List<StudentPointUpdateRequest> requests, final List<Post> posts) {
         final Map<String, List<Post>> postsGroupByUserId = posts.stream()
                 .collect(groupingBy(Post::getUserId));
 
@@ -42,7 +49,9 @@ public class StudentPointService {
                             .build();
                     requests.add(request);
                 });
+    }
 
+    private void addRequestsAboutReaction(final List<StudentPointUpdateRequest> requests, final List<Post> posts) {
         final Map<String, List<Reaction>> reactionsGroupByUserId = posts.stream()
                 .map(Post::getMetadata)
                 .map(PostMetadata::getReactions)
@@ -67,7 +76,5 @@ public class StudentPointService {
                         requests.add(request);
                     }
                 });
-
-        return requests;
     }
 }

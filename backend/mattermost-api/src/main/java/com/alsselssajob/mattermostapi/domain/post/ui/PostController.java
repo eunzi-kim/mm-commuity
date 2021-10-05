@@ -1,6 +1,6 @@
 package com.alsselssajob.mattermostapi.domain.post.ui;
 
-import com.alsselssajob.mattermostapi.domain.mattermostuser.domain.MattermostUser;
+import com.alsselssajob.mattermostapi.common.infra.MattermostUser;
 import com.alsselssajob.mattermostapi.domain.post.application.PostService;
 import lombok.RequiredArgsConstructor;
 import net.bis5.mattermost.client4.MattermostClient;

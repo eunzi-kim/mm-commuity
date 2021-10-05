@@ -3,10 +3,7 @@ package com.alsselssajob.mattermostapi.domain.ssafycial.repository;
 import com.alsselssajob.mattermostapi.common.vo.ColumnFamily;
 import com.alsselssajob.mattermostapi.common.vo.qualifier.SsafycialQualifier;
 import com.alsselssajob.mattermostapi.common.vo.qualifier.UserQualifier;
-import com.alsselssajob.mattermostapi.domain.mattermostuser.domain.MattermostUser;
 import com.alsselssajob.mattermostapi.domain.ssafycial.domain.Ssafycial;
-import net.bis5.mattermost.client4.MattermostClient;
-import net.bis5.mattermost.model.Post;
 import net.bis5.mattermost.model.User;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -16,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
 
 @Component
 public class SsafycialRepository {

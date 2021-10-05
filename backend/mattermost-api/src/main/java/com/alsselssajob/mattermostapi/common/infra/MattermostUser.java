@@ -1,6 +1,6 @@
-package com.alsselssajob.mattermostapi.domain.mattermostuser.domain;
+package com.alsselssajob.mattermostapi.common.infra;
 
-import com.alsselssajob.mattermostapi.domain.ssafycial.common.SsafycialUtil;
+import com.alsselssajob.mattermostapi.domain.ssafycial.infra.SsafycialUtil;
 import com.alsselssajob.mattermostapi.domain.ssafycial.domain.Ssafycial;
 import lombok.Builder;
 import lombok.NoArgsConstructor;

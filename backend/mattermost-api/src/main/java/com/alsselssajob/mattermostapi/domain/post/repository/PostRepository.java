@@ -2,8 +2,6 @@ package com.alsselssajob.mattermostapi.domain.post.repository;
 
 import com.alsselssajob.mattermostapi.common.vo.ColumnFamily;
 import com.alsselssajob.mattermostapi.common.vo.qualifier.*;
-import com.alsselssajob.mattermostapi.domain.mattermostuser.domain.MattermostUser;
-import net.bis5.mattermost.client4.MattermostClient;
 import net.bis5.mattermost.model.FileInfo;
 import net.bis5.mattermost.model.Post;
 import net.bis5.mattermost.model.Reaction;
@@ -23,7 +21,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.logging.Level;
 
 @Component
 public class PostRepository {

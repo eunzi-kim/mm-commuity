@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 
 @Component
@@ -46,6 +47,10 @@ public class PostController {
                 .user(login())
                 .build();
 
-        return mattermostUser.getPostsForToday();
+        return (List<Post>) mattermostUser.getPostsForTodayGroupByChannelGroupByTeam()
+                .values()
+                .stream()
+                .flatMap(List::stream)
+                .map(Map::values);
     }
 }

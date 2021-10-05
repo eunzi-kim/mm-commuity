@@ -1,11 +1,8 @@
 package com.alsselssajob.mattermostapi.domain.post.repository;
 
-import com.alsselssajob.mattermostapi.domain.mattermostuser.domain.MattermostUser;
 import com.alsselssajob.mattermostapi.common.vo.ColumnFamily;
-import com.alsselssajob.mattermostapi.common.vo.qualifier.EmojiQualifier;
-import com.alsselssajob.mattermostapi.common.vo.qualifier.FileQualifier;
-import com.alsselssajob.mattermostapi.common.vo.qualifier.PostQualifier;
-import com.alsselssajob.mattermostapi.common.vo.qualifier.UserQualifier;
+import com.alsselssajob.mattermostapi.common.vo.qualifier.*;
+import com.alsselssajob.mattermostapi.domain.mattermostuser.domain.MattermostUser;
 import net.bis5.mattermost.client4.MattermostClient;
 import net.bis5.mattermost.model.FileInfo;
 import net.bis5.mattermost.model.Post;
@@ -23,6 +20,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Level;
 
@@ -52,33 +50,45 @@ public class PostRepository {
         User user = client.login("kskyu610@gmail.com", "Skskyu610@gmail.com5").readEntity();
 
         MattermostUser mattermostUser = new MattermostUser(client, user);
-        List<Post> temp = mattermostUser.getPostsForToday();
-        List<Post> posts = temp.subList(0, 1);
+        Map<String, List<Map<String, List<Post>>>> posts = mattermostUser.getPostsForTodayGroupByChannelGroupByTeam();
         postRepository.savePosts(user, posts);
     }
 
-    public void savePosts(final User user, final List<Post> posts) throws IOException {
+    public void savePosts(final User user, final Map<String, List<Map<String, List<Post>>>> teams) throws IOException {
         final Connection connection = ConnectionFactory.createConnection(configuration);
         final Admin admin = connection.getAdmin();
 
         createTableIfNotExists(admin);
 
         final Table postTable = connection.getTable(POST_TABLE_NAME);
-        posts.stream()
-                .forEach(post -> {
-                    final Put row = new Put(post.getId().getBytes());
+        teams.keySet()
+                .forEach(teamName ->
+                        teams.get(teamName)
+                                .stream()
+                                .forEach(channels ->
+                                        channels.keySet()
+                                                .forEach(channelName ->
+                                                        channels.get(channelName)
+                                                                .stream()
+                                                                .forEach(post -> {
+                                                                    final Put row = new Put(post.getId().getBytes());
 
-                    addPostColumnFamily(post, row);
-                    addUserColumnFamily(user, row);
-                    addEmojiColumnFamily(post.getMetadata().getReactions(), row);
-                    addFileColumnFamily(post.getMetadata().getFiles(), row);
+                                                                    addTeamColumnFamily(teamName, row);
+                                                                    addChannelColumnFamily(channelName, row);
+                                                                    addPostColumnFamily(post, row);
+                                                                    addUserColumnFamily(user, row);
+                                                                    addEmojiColumnFamily(post.getMetadata().getReactions(), row);
+                                                                    addFileColumnFamily(post.getMetadata().getFiles(), row);
 
-                    try {
-                        postTable.put(row);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
+                                                                    try {
+                                                                        postTable.put(row);
+                                                                    } catch (IOException e) {
+                                                                        e.printStackTrace();
+                                                                    }
+                                                                })
+                                                )
+                                )
+                );
 
         connection.close();
     }
@@ -94,6 +104,18 @@ public class PostRepository {
 
             admin.createTable(table.build());
         }
+    }
+
+    private void addChannelColumnFamily(final String channelName, Put row) {
+        row.addColumn(ColumnFamily.channel.name().getBytes(),
+                ChannelQualifier.channel_name.name().getBytes(),
+                channelName.getBytes());
+    }
+
+    private void addTeamColumnFamily(final String teamName, final Put row) {
+        row.addColumn(ColumnFamily.team.name().getBytes(),
+                TeamQualifier.team_name.name().getBytes(),
+                teamName.getBytes());
     }
 
     private void addPostColumnFamily(final Post post, final Put row) {
@@ -115,6 +137,9 @@ public class PostRepository {
         row.addColumn(ColumnFamily.post.name().getBytes(),
                 PostQualifier.message.name().getBytes(),
                 post.getMessage().getBytes());
+        row.addColumn(ColumnFamily.post.name().getBytes(),
+                PostQualifier.is_scrapped.name().getBytes(),
+                Bytes.toBytes(false));
         row.addColumn(ColumnFamily.post.name().getBytes(),
                 PostQualifier.hashTag.name().getBytes(),
                 post.getHashtags().getBytes());

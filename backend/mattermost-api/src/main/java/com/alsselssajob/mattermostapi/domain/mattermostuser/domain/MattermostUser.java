@@ -11,10 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -42,16 +39,27 @@ public class MattermostUser {
         this.user = user;
     }
 
-    public List<Post> getPostsForToday() {
-        return getTeamsForUser().stream()
-                .map(this::getPublicChannelsForTeam)
-                .flatMap(List::stream)
-                .map(this::getPostsForChannelSinceYesterday)
-                .map(PostList::getPosts)
-                .filter(Objects::nonNull)
-                .map(Map::values)
-                .flatMap(Collection::stream)
-                .collect(toList());
+    public Map<String, List<Map<String, List<Post>>>> getPostsForTodayGroupByChannelGroupByTeam() {
+        final Map<String, List<Map<String, List<Post>>>> postsGroupByChannelGroupByTeam = new HashMap<>();
+
+        final List<Team> teams = getTeamsForUser();
+        for (Team team : teams) {
+            final List<Map<String, List<Post>>> channelsContainingPosts = new ArrayList<>();
+            final List<Channel> channels = getPublicChannelsForTeam(team);
+
+            for (Channel channel : channels) {
+                final Map<String, List<Post>> postsGroupByChannel = new HashMap<>();
+                final Map<String, Post> posts = getPostsForChannelSinceYesterday(channel).getPosts();
+
+                if (Objects.nonNull(posts)) {
+                    postsGroupByChannel.put(channel.getDisplayName(), new ArrayList<>(posts.values()));
+                    channelsContainingPosts.add(postsGroupByChannel);
+                }
+            }
+            postsGroupByChannelGroupByTeam.put(team.getDisplayName(), channelsContainingPosts);
+        }
+
+        return postsGroupByChannelGroupByTeam;
     }
 
     private List<Team> getTeamsForUser() {

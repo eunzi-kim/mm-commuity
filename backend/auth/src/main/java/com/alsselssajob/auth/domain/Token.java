@@ -1,6 +1,5 @@
 package com.alsselssajob.auth.domain;
 
-import com.sun.istack.NotNull;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
@@ -53,7 +52,7 @@ public class Token {
     }
 
     //isActive를 false로바꿔주는 메서드
-    public void switchIsActiveToFalse(){
+    public void switchIsActiveToFalse() {
         this.isActive = false;
     }
 

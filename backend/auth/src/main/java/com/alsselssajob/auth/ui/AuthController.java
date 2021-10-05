@@ -3,9 +3,9 @@ package com.alsselssajob.auth.ui;
 import com.alsselssajob.auth.application.AuthService;
 import com.alsselssajob.auth.dto.request.LoginRequest;
 import com.alsselssajob.auth.dto.request.LogoutRequest;
+import com.alsselssajob.auth.dto.request.TokenRequest;
 import com.alsselssajob.auth.dto.response.LoginResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,8 +30,20 @@ public class AuthController {
     @PostMapping("/api/auth/logout")
     public ResponseEntity logout(@RequestBody final LogoutRequest logoutRequest) {
         authService.logout(logoutRequest);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent()
+                .build();
+    }
 
+    @PostMapping("/api/auth/token")
+    public ResponseEntity token(@RequestBody final TokenRequest tokenRequest) {
+
+        //200 or 400
+        if (authService.validateToken(tokenRequest)) {
+            return ResponseEntity.noContent()
+                    .build();
+        }
+        return ResponseEntity.badRequest()
+                .build();
     }
 
 }

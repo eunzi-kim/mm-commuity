@@ -12,13 +12,16 @@ public class LoginResponse {
     private String nickName;
     @JsonProperty("userName")
     private String userName;
+    @JsonProperty("token")
+    private String token;
 
     // 생성자 자체
     @Builder
-    public LoginResponse(final String userId, final String nickName, final String userName) {
+    public LoginResponse(final String userId, final String nickName, final String userName, final String token) {
         this.userId = userId;
         this.nickName = nickName;
         this.userName = userName;
+        this.token = token;
     }
 
     public String userId() {
@@ -31,5 +34,9 @@ public class LoginResponse {
 
     public String userName() {
         return userName;
+    }
+
+    public String token() {
+        return token;
     }
 }

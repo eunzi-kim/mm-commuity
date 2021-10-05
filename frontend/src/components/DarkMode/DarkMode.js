@@ -53,6 +53,13 @@ class DarkMode extends React.Component{
     else if (page === "edupro") {
       document.querySelector('.pro-container').classList.add('dark-pro-container')
     }
+
+    // 스크랩(즐겨찾기) 페이지
+    else if (page ==="scrap") {
+      document.querySelector('.scrap-main').classList.add('dark-scrap-main')
+      document.querySelector('.MyScrap-container').classList.add('dark-MyScrap-container')
+      document.querySelector(".scrap-search-input").classList.add("dark-search-input")
+    }
   }
 
 
@@ -99,6 +106,14 @@ class DarkMode extends React.Component{
     else if (page === "edupro") {
       document.querySelector('.pro-container').classList.remove('dark-pro-container')
     }
+
+    // 스크랩(즐겨찾기) 페이지
+    else if (page ==="scrap") {
+      document.querySelector('.scrap-main').classList.remove('dark-scrap-main')
+      document.querySelector('.MyScrap-container').classList.remove('dark-MyScrap-container')
+      document.querySelector(".scrap-search-input").classList.remove("dark-search-input")
+    }
+
   }
 
 

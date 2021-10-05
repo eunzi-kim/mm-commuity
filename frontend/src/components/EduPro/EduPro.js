@@ -56,7 +56,7 @@ class EduPro extends React.Component {
                         <h1>Pro 전용 교육생 조회</h1>
                     </div>
                     <div className="pro-head-profileall">
-                        <div className="main-profile">
+                        <div className="pro-main-profile">
                             <div className="mp-image">
                             이미지
                             </div>
@@ -66,7 +66,7 @@ class EduPro extends React.Component {
                                 <div className="mp-point">150 point</div>
                             </div>
                         </div>
-                        <div className="main-btns">
+                        <div className="pro-main-btns">
                             <Link to="/scrap">
                               <Button variant="outline-primary" className="main-btn" size="sm">즐겨찾기</Button>{' '}
                             </Link>

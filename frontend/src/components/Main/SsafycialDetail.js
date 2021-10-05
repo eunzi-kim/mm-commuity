@@ -8,7 +8,9 @@ class SsafycialDetail extends React.Component {
   }
 
   onCloseDetail() {
-    document.querySelector(".s-detail").className = "s-detail-none"
+    if (document.querySelector(".s-detail")) {
+      document.querySelector(".s-detail").className = "s-detail-none"
+    }
   }
 
   componentDidMount() {

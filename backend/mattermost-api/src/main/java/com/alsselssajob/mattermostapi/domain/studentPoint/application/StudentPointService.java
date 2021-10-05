@@ -1,7 +1,7 @@
 package com.alsselssajob.mattermostapi.domain.studentPoint.application;
 
 import com.alsselssajob.mattermostapi.domain.post.ui.PostController;
-import com.alsselssajob.mattermostapi.domain.studentPoint.dto.request.StudentPointUpdateRequest;
+import com.alsselssajob.mattermostapi.domain.studentPoint.domain.StudentPoint;
 import lombok.RequiredArgsConstructor;
 import net.bis5.mattermost.model.Post;
 import net.bis5.mattermost.model.PostMetadata;
@@ -16,21 +16,23 @@ import static java.util.stream.Collectors.groupingBy;
 @RequiredArgsConstructor
 public class StudentPointService {
 
+    private final static int INITIAL_COUNT = 0;
+
     private final PostController postController;
 
-    public List<StudentPointUpdateRequest> updateStudentPoint() {
+    public List<StudentPoint> updateStudentPoint() {
         final List<Post> posts = postController.getPosts();
-        final List<StudentPointUpdateRequest> requests = new ArrayList<>();
+        final List<StudentPoint> studentPoints = new ArrayList<>();
 
-        addRequestsAboutPost(requests, posts);
-        addRequestsAboutReaction(requests, posts);
-        requests.stream()
-                .forEach(StudentPointUpdateRequest::calculatePoint);
+        addRequestsAboutPost(studentPoints, posts);
+        addRequestsAboutReaction(studentPoints, posts);
+        studentPoints.stream()
+                .forEach(StudentPoint::calculatePoint);
 
-        return requests;
+        return studentPoints;
     }
 
-    private void addRequestsAboutPost(final List<StudentPointUpdateRequest> requests, final List<Post> posts) {
+    private void addRequestsAboutPost(final List<StudentPoint> studentPoints, final List<Post> posts) {
         final Map<String, List<Post>> postsGroupByUserId = posts.stream()
                 .collect(groupingBy(Post::getUserId));
 
@@ -43,17 +45,17 @@ public class StudentPointService {
                             .filter(Objects::nonNull)
                             .flatMap(Arrays::stream)
                             .count();
-                    final StudentPointUpdateRequest request = StudentPointUpdateRequest.builder()
-                            .id(userId)
-                            .postCountForUpdate(postsGroup.size())
-                            .reactedCountForUpdate(reactedCount)
-                            .reactingCountForUpdate(0)
+                    final StudentPoint studentPoint = StudentPoint.builder()
+                            .userId(userId)
+                            .postCount(postsGroup.size())
+                            .reactedCount(reactedCount)
+                            .reactingCount(INITIAL_COUNT)
                             .build();
-                    requests.add(request);
+                    studentPoints.add(studentPoint);
                 });
     }
 
-    private void addRequestsAboutReaction(final List<StudentPointUpdateRequest> requests, final List<Post> posts) {
+    private void addRequestsAboutReaction(final List<StudentPoint> studentPoints, final List<Post> posts) {
         final Map<String, List<Reaction>> reactionsGroupByUserId = posts.stream()
                 .map(Post::getMetadata)
                 .map(PostMetadata::getReactions)
@@ -64,18 +66,18 @@ public class StudentPointService {
         reactionsGroupByUserId.keySet()
                 .forEach(userId -> {
                     final int reactingCount = reactionsGroupByUserId.get(userId).size();
-                    final StudentPointUpdateRequest request = StudentPointUpdateRequest.builder()
-                            .id(userId)
-                            .postCountForUpdate(0)
-                            .reactedCountForUpdate(0)
-                            .reactingCountForUpdate(reactingCount)
+                    final StudentPoint studentPoint = StudentPoint.builder()
+                            .userId(userId)
+                            .postCount(INITIAL_COUNT)
+                            .reactedCount(INITIAL_COUNT)
+                            .reactingCount(reactingCount)
                             .build();
 
-                    if (requests.contains(request)) {
-                        final StudentPointUpdateRequest updatedRequest = requests.get(requests.indexOf(request));
-                        updatedRequest.updateReactingCount(reactingCount);
+                    if (studentPoints.contains(studentPoint)) {
+                        final StudentPoint studentPointToUpdate = studentPoints.get(studentPoints.indexOf(studentPoint));
+                        studentPointToUpdate.updateReactingCount(reactingCount);
                     } else {
-                        requests.add(request);
+                        studentPoints.add(studentPoint);
                     }
                 });
     }

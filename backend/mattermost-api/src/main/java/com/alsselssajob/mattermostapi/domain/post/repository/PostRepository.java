@@ -42,20 +42,6 @@ public class PostRepository {
         configuration.addResource(CONFIGURATION_FILE_PATH);
     }
 
-    public static void main(String[] args) throws IOException {
-        PostRepository postRepository = new PostRepository();
-        MattermostClient client = MattermostClient.builder()
-                .url("https://meeting.ssafy.com")
-                .logLevel(Level.INFO)
-                .ignoreUnknownProperties()
-                .build();
-        User user = client.login("kskyu610@gmail.com", "Skskyu610@gmail.com5").readEntity();
-
-        MattermostUser mattermostUser = new MattermostUser(client, user);
-        Map<String, List<Map<String, List<Post>>>> posts = mattermostUser.getPostsForTodayGroupByChannelGroupByTeam();
-        postRepository.savePosts(user, posts);
-    }
-
     public void savePosts(final User user, final Map<String, List<Map<String, List<Post>>>> teams) throws IOException {
         final Connection connection = ConnectionFactory.createConnection(configuration);
         final Admin admin = connection.getAdmin();

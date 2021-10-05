@@ -20,4 +20,17 @@ public class PostController {
     public List<ResponsePost> getPosts(@PathVariable String today_date) throws IOException {
         return postService.getPosts(today_date);
     }
+
+    @GetMapping("/api/posts/redis/{today_date}")
+    public void getPostsWithRedis(@PathVariable String today_date) throws IOException {
+        postService.getPostsWithRedis(today_date);
+    }
+
+//    @GetMapping(
+//            value = "/image"
+////            produces = MediaType.IMAGE_JPEG_VALUE
+//    )
+//    public byte[] getProfileImage() {
+//        return postService.getProfileImage();
+//    }
 }

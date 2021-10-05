@@ -4,13 +4,13 @@ import com.alsselssajob.auth.domain.Token;
 import com.alsselssajob.auth.domain.TokenRepository;
 import com.alsselssajob.auth.dto.request.LoginRequest;
 import com.alsselssajob.auth.dto.request.LogoutRequest;
+import com.alsselssajob.auth.dto.request.TokenRequest;
 import com.alsselssajob.auth.dto.response.LoginResponse;
 import lombok.RequiredArgsConstructor;
 import net.bis5.mattermost.client4.ApiResponse;
 import net.bis5.mattermost.client4.MattermostClient;
 import net.bis5.mattermost.model.User;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -78,6 +78,17 @@ public class AuthService {
                 .orElseThrow(IllegalArgumentException::new);
 
         currentToken.switchIsActiveToFalse();
+
+    }
+
+    @Transactional
+    public Boolean validateToken(final TokenRequest tokenRequest) {
+
+        //db의 token
+        final Token userToken = tokenRepository.findByToken(tokenRequest.token())
+                .orElseThrow(IllegalArgumentException::new);
+        //유효성 검사
+        return userToken.isActive();
 
     }
 

@@ -9,6 +9,8 @@ import java.util.Objects;
 public class StudentPointUpdateRequest {
 
     private final static int INITIAL_POINT = 0;
+    private final static int POST_COUNT_WEIGHT = 3;
+    private final static int REACTION_COUNT_WEIGHT = 1;
 
     private String id;
     private int postCountForUpdate;
@@ -48,6 +50,12 @@ public class StudentPointUpdateRequest {
 
     public void updateReactingCount(int reactingCountForUpdate) {
         this.reactingCountForUpdate = reactingCountForUpdate;
+    }
+
+    public void calculatePoint() {
+        point += postCountForUpdate * POST_COUNT_WEIGHT
+                + reactedCountForUpdate * REACTION_COUNT_WEIGHT
+                + reactingCountForUpdate * REACTION_COUNT_WEIGHT;
     }
 
     @Override

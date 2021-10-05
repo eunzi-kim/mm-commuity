@@ -24,6 +24,8 @@ public class StudentPointService {
 
         addRequestsAboutPost(requests, posts);
         addRequestsAboutReaction(requests, posts);
+        requests.stream()
+                .forEach(StudentPointUpdateRequest::calculatePoint);
 
         return requests;
     }

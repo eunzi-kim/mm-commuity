@@ -108,6 +108,25 @@
   /* display: flex; */
 }
 
+/* .MyScrap-list {
+  margin: 2.5rem 0 0 2rem;
+  overflow-y: auto;
+  height: 100%;
+  width: 80%;
+
+}
+
+.MyScrap-list::-webkit-scrollbar {
+  width: auto;
+  border-radius: 9px;
+  background-color: #A1BEE5;
+}
+
+.MyScrap-list::-webkit-scrollbar-thumb {
+  background-color: rgb(14, 66, 137);
+  border-radius: 9px;  
+} */
+
 
 /* 다크모드 */
 .dark-scrap-main {

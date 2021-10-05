@@ -190,7 +190,7 @@
 }
 
 .scrap-c-contents {
-  margin: 2.5rem 0 0 2rem;
+  margin: 2.5rem 0 -10rem 19rem;
   overflow-y: auto;
   height: 100%;
   width: 80%;
@@ -200,7 +200,6 @@
 .scrap-c-contents::-webkit-scrollbar {
   width: auto;
   border-radius: 9px;
-  background-color: #A1BEE5;
 }
 
 .scrap-c-contents::-webkit-scrollbar-thumb {
@@ -212,7 +211,6 @@
   display: flex;
   margin-top: 1rem;
   margin-right: 2rem;
-  /* background-color: rgb(161, 190, 229); */
   border: 2px solid;
   border-color: rgb(14, 66, 137);
   border-radius: 9px;
@@ -226,7 +224,6 @@
 
 /* 즐겨찾기 스크랩 헤더 */
 .scrap-contents-header {
-  /* color: #000; */
   margin-top: 1rem;
   display: flex;
   justify-content: space-between;
@@ -255,7 +252,6 @@ h6 {
 
 .scrap-contents-header-date {
   display: flex;
-  /* margin-top: 0.3rem; */
 }
 
 .scrap-no-show {
@@ -277,7 +273,6 @@ h6 {
 }
 
 .scrap-c-hr {
-  /* color: #000; */
   margin: 0 1.8rem;
 }
 
@@ -289,6 +284,7 @@ h6 {
 .scrap-contents-header-date h3,h4 {
   font-size: 1.3rem;
 }
+
 
 /* 다크모드 */
 .dark-scrap-cc-body-content {
@@ -306,6 +302,8 @@ h6 {
   color: #A1BEE5;
   margin: 0 1.8rem;
 }
+
+
 
 /* 반응형 */
 @media (max-width: 992px) {
@@ -331,7 +329,8 @@ h6 {
     padding: 0;
   }
 
-  .scrap-contents-header-date h3,h4 {
+  .scrap-contents-header-date h3
+  .scrap-contents-header-date h4 {
     display: none;
   }
 
@@ -355,7 +354,6 @@ h6 {
 
   .scrap-cc-body-content {
     display: inline;
-    /* padding: rem 2rem; */
     font-size: 14px;
   }
   .scrap-c-hr {

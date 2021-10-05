@@ -11,13 +11,13 @@ import "./css/Myscrap.css";
 class MyScrap extends React.Component {
   state = {
     "selectedDate": new Date(),
-    "Myscrap": []
+    Myscrap: []
   }
 
   componentDidMount() {
     // 서버에서 api 받아와서 데이터 정리!!
     this.setState({
-      "Myscrap": [
+      Myscrap: [
         {
           "id": 1, 
           "group": "그룹1", 

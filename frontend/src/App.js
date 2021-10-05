@@ -8,7 +8,7 @@ import PublicRoute from './lib/PublicRoute';
 import Home from "./components/Main/Home";
 import Login from "./components/Login/Login";
 import EduPro from "./components/EduPro/EduPro";
-import Scrap from './components/Main/Scrap';
+import Scrap from './components/Scrap/Scrap';
 import DarkMode from './components/DarkMode/DarkMode';
 import NotFound from './components/Main/NotFound';
 

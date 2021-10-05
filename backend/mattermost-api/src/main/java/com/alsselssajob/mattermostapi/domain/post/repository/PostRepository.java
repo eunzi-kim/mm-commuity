@@ -13,6 +13,7 @@ import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.util.Bytes;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -24,6 +25,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Level;
 
+@Component
 public class PostRepository {
 
     private final static TableName POST_TABLE_NAME = TableName.valueOf("posts");

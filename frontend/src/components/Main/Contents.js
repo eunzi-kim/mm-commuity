@@ -16,6 +16,7 @@ class Contents extends React.Component {
     Channel: {},
     ChkChannel: [],
     selectedDate: new Date(),
+    AllContents: [],
     Content: [],
   }
 
@@ -33,6 +34,52 @@ class Contents extends React.Component {
         // 개인 메시지 Group dict에 추가해주기
         "개인 메시지": ["곽동희(교육프로)", "곽온겸(광주실습코치)", "광주 1반 이민교(전임교수)", "광주_1반_김세희"]
       },
+      AllContents : [
+        {
+          "id": 1, 
+          "group": "그룹1", 
+          "channel": "공지사항", 
+          "username": "황성안[광주_1반_C103] 팀원", 
+          "nickname": "sjd0051", 
+          "image": "", 
+          "content": "성규님 고백해도 되나요?", 
+          "scrap": "n", 
+          "date": "2021-09-27"
+        },
+        {
+          "id": 2, 
+          "group": "그룹1", 
+          "channel": "공지사항", 
+          "username": "김성규[광주_1반_C103] 팀장", 
+          "nickname": "rkttjdrb", 
+          "image": "", 
+          "content": "네 해도 됩니다", 
+          "scrap": "y", 
+          "date": "2021-09-27"
+        },
+        {
+          "id": 3, 
+          "group": "그룹1", 
+          "channel": "공지사항", 
+          "username": "이태성[광주_2반_C204] 팀장", 
+          "nickname": "lts", 
+          "image": "", 
+          "content": "안녕하세요.<br/> SSAFY 사무국입니다.<br/> 09/24 진행된 라이브 강의 이벤트 당첨자 안내드립니다 <br/> 라이브 강의를 적극적으로 참여해 주는 교육생에게는 선물이 팡팡 터집니다 <br/> 적극적인 참여와 채팅 부탁드립니다!<br/><br/>축하드립니다", 
+          "scrap": "n", 
+          "date": "2021-09-27"
+        },
+        {
+          "id": 7, 
+          "group": "그룹1", 
+          "channel": "공지사항", 
+          "username": "황성안[광주_1반_C103] 팀원", 
+          "nickname": "sjd0051", 
+          "image": "", 
+          "content": "오늘은 하체할 예정", 
+          "scrap": "n", 
+          "date": "2021-09-27"
+        }
+      ],
       Content: [
         {
           "id": 1, 
@@ -90,8 +137,11 @@ class Contents extends React.Component {
     });
   }
 
+
   // 그룹 버튼 클릭
   onClickGroup = (e) => {
+    this.onWatchAll()
+
     // state에 선택한 그룹의 채널들 넣기
     var v = e.target.innerText
     this.setState({
@@ -122,6 +172,7 @@ class Contents extends React.Component {
     } 
   }
 
+
   // 날짜 변경
   onChangeDate = (date) => {
     if (date > new Date()) {
@@ -134,9 +185,55 @@ class Contents extends React.Component {
       console.log((date))
       // 선택한 날짜의 게시글들 보여주기 //
     }
-
   }
 
+    
+  // 검색
+  onSearch = () => {
+    const search_words = this.state.search
+    const search_result = []
+    var all_contents = this.state.AllContents
+    for (let i=0; i<all_contents.length; i++) {
+      if (all_contents[i]['username'].includes(search_words) || all_contents[i]['nickname'].includes(search_words) || all_contents[i]['content'].includes(search_words)) {
+        search_result.push(all_contents[i])
+      }
+    }
+    if (document.querySelector(".group-chk")) {
+      document.querySelector(".group-chk").classList.remove("group-chk")
+    }
+    this.setState({
+      Content: search_result
+    })
+  }
+
+  onSearchEnter = (e) => {
+    if (e.keyCode === 13) {
+      this.onSearch()
+    }
+  }
+
+  onSearchChange = (e) => {
+    this.setState({
+      search: e.target.value
+    })
+  }
+
+
+  // 전체보기
+  onWatchAll = () => {
+    if (document.querySelector(".group-chk")) {
+      document.querySelector(".group-chk").classList.remove("group-chk")
+    }
+    
+    if (this.state.AllContents !== this.state.Content) {
+      var all_contents = this.state.AllContents
+      this.setState({
+        Content: all_contents
+      })
+    }
+  }
+
+  
   // 즐겨찾기
   noKeepChk(chk) {
     if (chk === "y") {
@@ -155,23 +252,6 @@ class Contents extends React.Component {
       return "ch-keep"
     }
   }
-
-  onClickKeep = (id) => {
-    const idx = this.state.Content.findIndex(p => {
-      return p.id === id;
-    })
-
-    const changeContent = this.state.Content
-    if (changeContent[idx]["scrap"] === "n") {
-      changeContent[idx]["scrap"] = "y"
-    } else {
-      changeContent[idx]["scrap"] = "n"
-    }
-
-    this.setState({"Contents": changeContent})
-
-    // 즐겨찾기 post 보내기 //
-  }  
 
   render() {
     const { Group, ChkChannel, selectedDate, Content } = this.state
@@ -202,8 +282,6 @@ class Contents extends React.Component {
 
     registerLocale("ko", ko);
 
-    console.log(this.props.search)
-
     // 게시글
     const contents = Content.map((item, idx) =>
       <div className="cc-container" key={idx}>
@@ -216,16 +294,10 @@ class Contents extends React.Component {
               <h6>@{item["nickname"]}</h6>
             </div>
           </div>
-          <div 
-            className={this.noKeepChk(item["scrap"])} 
-            onClick={() => this.onClickKeep(item["id"])}
-          >
+          <div className={this.noKeepChk(item["scrap"])}>
             <h3><AiOutlineStar className={this.noKeepChk(item["scrap"])} /></h3>
           </div>
-          <div 
-            className={this.keepChk(item["scrap"])} 
-            onClick={() => this.onClickKeep(item["id"])}
-          >
+          <div className={this.keepChk(item["scrap"])}>
             <h3><AiFillStar className={this.keepChk(item["scrap"])} /></h3>
           </div>
         </div>
@@ -263,7 +335,7 @@ class Contents extends React.Component {
                   className="calender"
                 />
               </button>
-              <button className="c-title-btn"><h6>전체보기</h6></button>
+              <button className="c-title-btn" onClick={this.onWatchAll}><h6>전체보기</h6></button>
             </div>            
           </div>       
           <hr />

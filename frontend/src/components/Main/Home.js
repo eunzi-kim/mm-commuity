@@ -23,23 +23,6 @@ class Home extends React.Component {
       this.setState({username: userInfo.username})
     }
   }
-  
-  // 검색
-  onSearch = () => {
-    alert(this.state.search)
-  }
-
-  onSearchEnter = (e) => {
-    if (e.keyCode === 13) {
-      this.onSearch()
-    }
-  }
-
-  onSearchChange = (e) => {
-    this.setState({
-      search: e.target.value
-    })
-  }
 
   componentDidMount() {
     this.takeUserInfo()

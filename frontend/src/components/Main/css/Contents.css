@@ -272,15 +272,6 @@ h6 {
   color: tomato;
 }
 
-.ch-no-keep:hover,
-.ch-keep:hover {
-  cursor: pointer;
-  color: tomato;
-}
-
-.ch-keep:hover {
-  color: gray;
-}
 
 /* 반응형 */
 @media (max-width: 992px) {

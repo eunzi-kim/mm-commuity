@@ -3,8 +3,12 @@ package com.alsselssajob.mattermostapi.domain.studentPoint.domain;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
+@Entity
 @NoArgsConstructor
 public class StudentPoint {
 
@@ -12,7 +16,9 @@ public class StudentPoint {
     private final static int POST_COUNT_WEIGHT = 3;
     private final static int REACTION_COUNT_WEIGHT = 1;
 
+    @Id
     private String userId;
+
     private int postCount;
     private int reactedCount;
     private int reactingCount;

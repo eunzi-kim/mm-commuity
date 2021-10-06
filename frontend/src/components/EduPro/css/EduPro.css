@@ -72,24 +72,27 @@
   
 
 .category-btn {
+    /* 버튼 크기, 속성 */
     width: 100px;
     height: 35px;
     margin-left: 3ch;
     background-color: #A1BEE5;
-
-
+    /* 폰트 관련 */
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-weight:bolder;
+    /* 버튼 디자인 및 주변 */
     border-radius: 9px;
     border-width: 0px;
-    padding: 0.2rem 1rem;
-
-    font-weight:bolder;
-    
+    padding: 0.2rem 1rem;  
 }
 
 .btnchk {
     background-color: rgb(14, 66, 137);
 }
 .category-btn:hover {
+    cursor: pointer;
     background-color: rgb(14, 66, 137);
 }
 
@@ -105,7 +108,7 @@
 }
 
 .pro-body-bodylist::-webkit-scrollbar-thumb {
-    background-color: rgb(14, 66, 137);
+    background-color: lightgray;
     border-radius: 9px;
 }
 

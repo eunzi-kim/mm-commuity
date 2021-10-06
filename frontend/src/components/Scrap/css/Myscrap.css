@@ -173,7 +173,7 @@
 }
 
 .scrap-c-channels::-webkit-scrollbar-thumb {
-  /* background-color: rgb(14, 66, 137); */
+  background-color: lightgray;
   border-radius: 9px;  
 }
 
@@ -203,7 +203,7 @@
 }
 
 .scrap-c-contents::-webkit-scrollbar-thumb {
-  background-color: rgb(14, 66, 137);
+  background-color: lightgray;
   border-radius: 9px;  
 }
 
@@ -212,7 +212,7 @@
   margin-top: 1rem;
   margin-right: 2rem;
   border: 2px solid;
-  border-color: rgb(14, 66, 137);
+  border-color: #A1BEE5;
   border-radius: 9px;
   width: 80%;
 }
@@ -227,6 +227,9 @@
   margin-top: 1rem;
   display: flex;
   justify-content: space-between;
+}
+.chname-data-container {
+  margin-right: 2rem;
 }
 
 /* 즐겨찾기 프로필 */

@@ -24,7 +24,7 @@ class ProBestMember extends Component {
     })
     
   }
-
+  
   // 정렬 알고리즘 함수 만들기
   // 게시글
   // const temp = this.stae.user_infos
@@ -37,16 +37,21 @@ class ProBestMember extends Component {
 
 
   render() {
-    
+    const arr = [5,2,3,4,1]
+    console.log(arr);
+
+    arr.sort();
+    console.log(arr);
+
+
+
+
+
+
+
     const { users_info } = this.state
-
-    //정렬 어캐하지 2
-    // const sort_users_info = [].concat(this.state.data)
-    // .sort((a, b) => a.users["id"] > b.users["id"] ? 1:-1)
-    // .map((users["id"], i) => (<div key={i}>{users.id}</div>))
-
-
-    // 정렬을 어캐하지
+    console.log();
+    // 조회된 교육생
     const sort_m_lst = users_info
     // .sort((a, b) => a.users["id"] > b.users["id"] ? 1:-1)
     .map((users, idx) =>

@@ -39,6 +39,18 @@ public class MattermostUser {
         this.user = user;
     }
 
+    public List<Post> getPostsForToday() {
+        return getTeamsForUser().stream()
+                .map(this::getPublicChannelsForTeam)
+                .flatMap(List::stream)
+                .map(this::getPostsForChannelSinceYesterday)
+                .map(PostList::getPosts)
+                .filter(Objects::nonNull)
+                .map(Map::values)
+                .flatMap(Collection::stream)
+                .collect(toList());
+    }
+
     public Map<String, List<Map<String, List<Post>>>> getPostsForTodayGroupByChannelGroupByTeam() {
         final Map<String, List<Map<String, List<Post>>>> postsGroupByChannelGroupByTeam = new HashMap<>();
 

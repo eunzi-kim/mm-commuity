@@ -53,7 +53,7 @@ public class StudentPoint {
         return point;
     }
 
-    public void updateReactingCount(int reactingCount) {
+    public void updateReactingCount(final int reactingCount) {
         this.reactingCount = reactingCount;
     }
 

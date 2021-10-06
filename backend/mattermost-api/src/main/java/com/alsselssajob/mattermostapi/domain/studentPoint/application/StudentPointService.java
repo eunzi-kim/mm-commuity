@@ -1,27 +1,32 @@
 package com.alsselssajob.mattermostapi.domain.studentPoint.application;
 
-import com.alsselssajob.mattermostapi.domain.post.ui.PostController;
+import com.alsselssajob.mattermostapi.common.infra.MattermostUser;
 import com.alsselssajob.mattermostapi.domain.studentPoint.domain.StudentPoint;
+import com.alsselssajob.mattermostapi.domain.studentPoint.domain.StudentPointRepository;
 import lombok.RequiredArgsConstructor;
 import net.bis5.mattermost.model.Post;
 import net.bis5.mattermost.model.PostMetadata;
 import net.bis5.mattermost.model.Reaction;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 import static java.util.stream.Collectors.groupingBy;
 
-@Component
+@Service
 @RequiredArgsConstructor
 public class StudentPointService {
 
     private final static int INITIAL_COUNT = 0;
 
-    private final PostController postController;
+    private final MattermostUser mattermostUser;
+    private final StudentPointRepository studentPointRepository;
 
-    public List<StudentPoint> updateStudentPoint() {
-        final List<Post> posts = postController.getPosts();
+    @Transactional
+    public void updateStudentPoint() {
+        final List<Post> posts = mattermostUser.getPostsForToday();
         final List<StudentPoint> studentPoints = new ArrayList<>();
 
         addRequestsAboutPost(studentPoints, posts);
@@ -29,7 +34,7 @@ public class StudentPointService {
         studentPoints.stream()
                 .forEach(StudentPoint::calculatePoint);
 
-        return studentPoints;
+        studentPointRepository.saveAll(studentPoints);
     }
 
     private void addRequestsAboutPost(final List<StudentPoint> studentPoints, final List<Post> posts) {

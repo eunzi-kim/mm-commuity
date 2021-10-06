@@ -101,6 +101,8 @@ public class PostRepository {
             table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.user.name()));
             table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.emoji.name()));
             table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.file.name()));
+            table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.team.name()));
+            table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.channel.name()));
 
             admin.createTable(table.build());
         }

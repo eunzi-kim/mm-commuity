@@ -2,6 +2,7 @@ package com.alsselssajob.mattermostapi.domain.post.repository;
 
 import com.alsselssajob.mattermostapi.common.vo.ColumnFamily;
 import com.alsselssajob.mattermostapi.common.vo.qualifier.*;
+import net.bis5.mattermost.client4.MattermostClient;
 import net.bis5.mattermost.model.FileInfo;
 import net.bis5.mattermost.model.Post;
 import net.bis5.mattermost.model.Reaction;
@@ -37,7 +38,7 @@ public class PostRepository {
         configuration = HBaseConfiguration.create();
     }
 
-    public void savePosts(final User user, final Map<String, List<Map<String, List<Post>>>> teams) throws IOException {
+    public void savePosts(final MattermostClient client, final Map<String, List<Map<String, List<Post>>>> teams) throws IOException {
         final Connection connection = ConnectionFactory.createConnection(configuration);
         final Admin admin = connection.getAdmin();
 
@@ -55,6 +56,8 @@ public class PostRepository {
                                                                 .stream()
                                                                 .forEach(post -> {
                                                                     final Put row = new Put(post.getId().getBytes());
+                                                                    final User user = client.getUser(post.getUserId())
+                                                                            .readEntity();
 
                                                                     addTeamColumnFamily(teamName, row);
                                                                     addChannelColumnFamily(channelName, row);

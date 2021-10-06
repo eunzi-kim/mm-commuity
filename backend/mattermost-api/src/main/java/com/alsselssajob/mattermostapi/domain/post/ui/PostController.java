@@ -55,6 +55,6 @@ public class PostController {
                 .user(user)
                 .build();
 
-        postService.savePosts(user, mattermostUser.getPostsForTodayGroupByChannelGroupByTeam());
+        postService.savePosts(client, mattermostUser.getPostsForTodayGroupByChannelGroupByTeam());
     }
 }

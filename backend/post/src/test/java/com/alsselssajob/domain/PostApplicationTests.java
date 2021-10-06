@@ -1,4 +1,4 @@
-package com.alsselssajob.post;
+package com.alsselssajob.domain;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

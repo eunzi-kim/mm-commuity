@@ -1,4 +1,4 @@
-package com.alsselssajob.post.domain;
+package com.alsselssajob.domain.post.domain;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;

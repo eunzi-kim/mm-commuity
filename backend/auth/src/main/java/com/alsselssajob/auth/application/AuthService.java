@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Base64;
 import java.util.logging.Level;
 
 @RequiredArgsConstructor
@@ -40,6 +41,11 @@ public class AuthService {
         // MM에서 client.login을 하면 여기에 담아야한다고 적혀져있을 것.
         // login인한 유저의 id와 password가져온다.
         final ApiResponse<User> apiResponse = client.login(loginRequest.id(), loginRequest.password());
+        final User user = apiResponse.readEntity();
+
+        String image = "data:image/png;base64," + Base64.getEncoder().encodeToString(client.getProfileImage(user.getId()).readEntity());
+
+
         // user정보가 들어있는 apiResponse에서 Token을 가져온 것.
         final String tokenValue = (String) apiResponse.getRawResponse()
                 .getHeaders()
@@ -47,7 +53,6 @@ public class AuthService {
 
         // 이것역시 MM의 api문서에 적혀있을 것.
         // apiResponse.readEntity()를 하면 user정보를 가지고 올 수 있음.
-        final User user = apiResponse.readEntity();
         final String userId = user.getId();
         final String userName = user.getUsername();
         final String nickName = user.getNickname();
@@ -68,6 +73,8 @@ public class AuthService {
                 .userId(userId)
                 .nickName(nickName)
                 .userName(userName)
+                .token(tokenValue)
+                .image(image)
                 .build();
     }
 

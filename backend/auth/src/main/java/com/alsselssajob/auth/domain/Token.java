@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 // VO : 특정 비즈니스 값을 담는 객체.
 // 유효성 검증.
 // DB에 있는 것들.

@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import net.bis5.mattermost.model.Post;
 import net.bis5.mattermost.model.PostMetadata;
 import net.bis5.mattermost.model.Reaction;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,23 +20,22 @@ public class StudentPointService {
 
     private final static int INITIAL_COUNT = 0;
 
-    private final MattermostUser mattermostUser;
     private final StudentPointRepository studentPointRepository;
 
     @Transactional
-    public void updateStudentPoint() {
+    public void updateStudentPoint(final MattermostUser mattermostUser) {
         final List<Post> posts = mattermostUser.getPostsForToday();
         final List<StudentPoint> studentPoints = new ArrayList<>();
 
-        addRequestsAboutPost(studentPoints, posts);
-        addRequestsAboutReaction(studentPoints, posts);
+        setPostAndReactingCounts(studentPoints, posts);
+        setReactedCounts(studentPoints, posts);
         studentPoints.stream()
                 .forEach(StudentPoint::calculatePoint);
 
         studentPointRepository.saveAll(studentPoints);
     }
 
-    private void addRequestsAboutPost(final List<StudentPoint> studentPoints, final List<Post> posts) {
+    private void setPostAndReactingCounts(final List<StudentPoint> studentPoints, final List<Post> posts) {
         final Map<String, List<Post>> postsGroupByUserId = posts.stream()
                 .collect(groupingBy(Post::getUserId));
 
@@ -60,7 +58,7 @@ public class StudentPointService {
                 });
     }
 
-    private void addRequestsAboutReaction(final List<StudentPoint> studentPoints, final List<Post> posts) {
+    private void setReactedCounts(final List<StudentPoint> studentPoints, final List<Post> posts) {
         final Map<String, List<Reaction>> reactionsGroupByUserId = posts.stream()
                 .map(Post::getMetadata)
                 .map(PostMetadata::getReactions)

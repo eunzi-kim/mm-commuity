@@ -3,7 +3,6 @@ package com.alsselssajob.mattermostapi.domain.studentPoint.domain;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Objects;

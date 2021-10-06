@@ -19,7 +19,7 @@ import java.util.logging.Level;
 @RequiredArgsConstructor
 public class SsafycialController {
 
-    private final static String EVERY_TWO_WEEKS_AT_ONE_AM_CRON_EXPRESSION = "0 0 1 1/14 * ?  *";
+    private final static String EVERY_TWO_WEEKS_AT_ONE_AM_CRON_EXPRESSION = "0 10 0 1/14 * ?  *";
     private final static String EVERY_MINUTE_CRON_EXPRESSION_FOR_TEST = "0 0/1 * * * *";
 
     private final SsafycialService ssafycialService;

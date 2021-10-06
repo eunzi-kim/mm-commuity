@@ -82,6 +82,8 @@ public class PostRepository {
         if (!admin.tableExists(POST_TABLE_NAME)) {
             final TableDescriptorBuilder table = TableDescriptorBuilder.newBuilder(POST_TABLE_NAME);
 
+            table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.team.name()));
+            table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.channel.name()));
             table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.post.name()));
             table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.user.name()));
             table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.emoji.name()));

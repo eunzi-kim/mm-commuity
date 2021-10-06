@@ -1,6 +1,6 @@
 import React from "react";
 import { registerLocale } from "react-datepicker";
-import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
+// import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import $ from "jquery";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -10,12 +10,11 @@ import "./css/Myscrap.css";
 
 class MyScrap extends React.Component {
   state = {
-    "selectedDate": new Date(),
     Myscrap: []
   }
 
   componentDidMount() {
-    // 서버에서 api 받아와서 데이터 정리!!
+    // 서버에서 API 받을때 쓰기
     this.setState({
       Myscrap: [
         {
@@ -76,50 +75,43 @@ class MyScrap extends React.Component {
 
 
 
-  // 날짜 변경
-  onChangeDate = (date) => {
-    this.setState({
-      "selectedDate": date
-    })
+  
 
-    // 선택한 날짜의 게시글들 보여주기 //
-  }
+  // 즐겨찾기 별표 버튼
+  // noKeepChk(chk) {
+  //   if (chk === "y") {
+  //     return "no-show"
+  //   }
+  //   else {
+  //     return "ch-no-keep"
+  //   }
+  // }
 
-  // 즐겨찾기
-  noKeepChk(chk) {
-    if (chk === "y") {
-      return "no-show"
-    }
-    else {
-      return "ch-no-keep"
-    }
-  }
+  // keepChk(chk) {
+  //   if (chk === "n") {
+  //     return "no-show"
+  //   }
+  //   else {
+  //     return "ch-keep"
+  //   }
+  // }
 
-  keepChk(chk) {
-    if (chk === "n") {
-      return "no-show"
-    }
-    else {
-      return "ch-keep"
-    }
-  }
+  // onClickKeep = (id) => {
+  //   const idx = this.state.Myscrap.findIndex(p => {
+  //     return p.id === id;
+  //   })
 
-  onClickKeep = (id) => {
-    const idx = this.state.Myscrap.findIndex(p => {
-      return p.id === id;
-    })
+  //   const changeContent = this.state.Myscrap
+  //   if (changeContent[idx]["scrap"] === "n") {
+  //     changeContent[idx]["scrap"] = "y"
+  //   } else {
+  //     changeContent[idx]["scrap"] = "n"
+  //   }
 
-    const changeContent = this.state.Myscrap
-    if (changeContent[idx]["scrap"] === "n") {
-      changeContent[idx]["scrap"] = "y"
-    } else {
-      changeContent[idx]["scrap"] = "n"
-    }
+  //   this.setState({"Contents": changeContent})
 
-    this.setState({"Contents": changeContent})
-
-    // 즐겨찾기 post 보내기 //
-  }  
+  //   // 즐겨찾기 post 보내기 //
+  // }  
 
   render() {
     const { Myscrap } = this.state
@@ -141,11 +133,12 @@ class MyScrap extends React.Component {
                 </div>
               </div>
               {/* 채널명 , 날짜 */}
-              <div>
+              <div className="chname-data-container">
                 <div className="scrap-contents-header-date"><h4>📌{item["channel"]}</h4></div>
                 <div className="scrap-contents-header-date"><h3>{item["date"]}</h3></div>
               </div>
-              <div 
+              {/* 별표 스크랩 버튼 */}
+              {/* <div 
                 className={this.noKeepChk(item["scrap"])} 
                 onClick={() => this.onClickKeep(item["id"])}
               >
@@ -156,7 +149,7 @@ class MyScrap extends React.Component {
                 onClick={() => this.onClickKeep(item["id"])}
               >
                 <h3><AiFillStar className={this.keepChk(item["scrap"])} /></h3>
-              </div>
+              </div> */}
             </div>
             <div className="scrap-c-hr"><hr /></div>
             <div className="scrap-cc-body-content" dangerouslySetInnerHTML={{ __html: item["content"] }}>

@@ -33,11 +33,27 @@ class EduPro extends React.Component {
         }
     }
 
-    onClickPost = () => {
+    onClickPost = (e) => {
+        // 버튼이 이동되거나 취소될경우
+        if (document.querySelector(".btnchk")) {
+            document.querySelector(".btnchk").classList.remove("btnchk")
+        }
+        // 버튼이 체크돼있을 경우
+        e.target.classList.add("btnchk")
     }
-    onClickEmo = () => {
+    onClickEmo = (e) => {
+        if (document.querySelector(".btnchk")) {
+            document.querySelector(".btnchk").classList.remove("btnchk")
+        }
+        // 버튼이 체크돼있을 경우
+        e.target.classList.add("btnchk")
     }
-    onClickComm = () => {
+    onClickComm = (e) => {
+        if (document.querySelector(".btnchk")) {
+            document.querySelector(".btnchk").classList.remove("btnchk")
+        }
+        // 버튼이 체크돼있을 경우
+        e.target.classList.add("btnchk")
     }
 
     render() {
@@ -105,9 +121,9 @@ class EduPro extends React.Component {
                     <div className="headtag"><h2> 교육생 조회 </h2>
                     <hr /></div>
                     <div className="pro-body-head">
-                        <Button className="category-btn" onClick={this.onClickPost}>게시글</Button>
-                        <Button className="category-btn" onClick={this.onClickEmo}>이모지</Button>
-                        <Button className="category-btn" onClick={this.onClickComm}>댓  글</Button>
+                        <div className="category-btn" onClick={this.onClickPost}>게시글</div>
+                        <div className="category-btn" onClick={this.onClickEmo}>이모지</div>
+                        <div className="category-btn" onClick={this.onClickComm}>댓  글</div>
                     </div>
                     <div className="pro-body-body">
                         <div className="pro-body-bodylist">

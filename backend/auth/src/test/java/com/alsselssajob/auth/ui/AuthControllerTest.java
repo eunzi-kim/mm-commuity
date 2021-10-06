@@ -3,6 +3,7 @@ package com.alsselssajob.auth.ui;
 import com.alsselssajob.auth.application.AuthService;
 import com.alsselssajob.auth.dto.request.LoginRequest;
 import com.alsselssajob.auth.dto.request.LogoutRequest;
+import com.alsselssajob.auth.dto.request.TokenRequest;
 import com.alsselssajob.auth.dto.response.LoginResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
@@ -14,8 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -73,6 +73,46 @@ class AuthControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
+
+    }
+
+    @DisplayName("AuthController 클래스 / success_token_api_test 테스트")
+    @Test
+    void success_token_api_test() throws Exception {
+
+        final TokenRequest tokenRequest = TokenRequest.builder()
+                .token("test_token")
+                .build();
+
+        // mock객체에 대한 부분. Authservice
+        doReturn(true).when(authService).validateToken(any());
+
+        // 실질적 요청 부분
+        mockMvc.perform(post("/api/auth/token")
+                        .content(objectMapper.writeValueAsString(tokenRequest))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
+
+    }
+
+    @DisplayName("AuthController 클래스 / fail_token_api_test 테스트")
+    @Test
+    void fail_token_api_test() throws Exception {
+
+        final TokenRequest tokenRequest = TokenRequest.builder()
+                .token("test_token")
+                .build();
+
+        // mock객체에 대한 부분. Authservice
+        doReturn(false).when(authService).validateToken(any());
+
+        // 실질적 요청 부분
+        mockMvc.perform(post("/api/auth/token")
+                        .content(objectMapper.writeValueAsString(tokenRequest))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
 
     }
 

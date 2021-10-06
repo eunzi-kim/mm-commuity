@@ -34,6 +34,14 @@ public class MattermostUser {
         this.user = user;
     }
 
+    public MattermostClient client() {
+        return client;
+    }
+
+    public User user() {
+        return user;
+    }
+
     public List<Post> getPostsForToday() {
         return getTeamsForUser().stream()
                 .map(this::getPublicChannelsForTeam)

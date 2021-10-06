@@ -47,7 +47,7 @@ public class PostController {
         return client.login(id, password).readEntity();
     }
 
-    @Scheduled(cron = EVERY_MINUTE_CRON_EXPRESSION_FOR_TEST)
+    @Scheduled(cron = EVERY_ZERO_AM_CRON_EXPRESSION)
     public void savePostsEveryDay() throws IOException {
         final User user = login();
         final MattermostUser mattermostUser = MattermostUser.builder()

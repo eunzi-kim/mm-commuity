@@ -19,7 +19,7 @@ import java.util.logging.Level;
 public class StudentController {
 
     private final static String EVERY_ZERO_AM_FIVE_MINUTE_CRON_EXPRESSION = "0 5 0 * * *";
-    private final static String EVERY_MINUTE_CRON_EXPRESSION_FOR_TEST = "30 0/1 * * * *";
+    private final static String EVERY_MINUTE_CRON_EXPRESSION_FOR_TEST = "0/30 * * * * *";
 
     private final StudentService studentService;
     private MattermostClient client;

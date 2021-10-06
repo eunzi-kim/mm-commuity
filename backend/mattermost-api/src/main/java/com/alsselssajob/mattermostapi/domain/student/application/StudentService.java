@@ -18,7 +18,7 @@ import static java.util.stream.Collectors.groupingBy;
 @RequiredArgsConstructor
 public class StudentService {
 
-    private final static int INITIAL_COUNT = 0;
+    private final static String IMAGE_ENCODING_FORMAT = "data:image/png;base64,";
 
     private final StudentRepository studentRepository;
 
@@ -27,15 +27,16 @@ public class StudentService {
         final List<Post> posts = mattermostUser.getPostsForToday();
         final List<Student> students = new ArrayList<>();
 
-        setPostAndReactingCounts(students, posts);
-        setReactedCounts(students, posts);
+        setPostAndReactingCounts(students, posts, mattermostUser);
+        setReactedCounts(students, posts, mattermostUser);
         students.stream()
                 .forEach(Student::calculatePoint);
 
         studentRepository.saveAll(students);
     }
 
-    private void setPostAndReactingCounts(final List<Student> students, final List<Post> posts) {
+    private void setPostAndReactingCounts(final List<Student> students, final List<Post> posts,
+                                          final MattermostUser mattermostUser) {
         final Map<String, List<Post>> postsGroupByUserId = posts.stream()
                 .collect(groupingBy(Post::getUserId));
 
@@ -52,16 +53,22 @@ public class StudentService {
                     final Student student = studentRepository.findById(userId)
                             .orElse(Student.builder()
                                     .userId(userId)
-                                    .postCount(INITIAL_COUNT)
-                                    .reactedCount(INITIAL_COUNT)
-                                    .reactingCount(INITIAL_COUNT)
+                                    .image(getProfileImage(mattermostUser, userId))
                                     .build());
                     student.updatePostAndReactedCount(postsGroup.size(), reactedCount);
                     students.add(student);
                 });
     }
 
-    private void setReactedCounts(final List<Student> students, final List<Post> posts) {
+    private String getProfileImage(MattermostUser mattermostUser, String userId) {
+        return IMAGE_ENCODING_FORMAT.concat(Base64.getEncoder()
+                .encodeToString(mattermostUser.client()
+                        .getProfileImage(userId)
+                        .readEntity()));
+    }
+
+    private void setReactedCounts(final List<Student> students, final List<Post> posts,
+                                  final MattermostUser mattermostUser) {
         final Map<String, List<Reaction>> reactionsGroupByUserId = posts.stream()
                 .map(Post::getMetadata)
                 .map(PostMetadata::getReactions)
@@ -73,12 +80,10 @@ public class StudentService {
                 .forEach(userId -> {
                     final int reactingCount = reactionsGroupByUserId.get(userId).size();
                     final Student student = studentRepository.findById(userId)
-                    .orElse(Student.builder()
-                            .userId(userId)
-                            .postCount(INITIAL_COUNT)
-                            .reactedCount(INITIAL_COUNT)
-                            .reactingCount(INITIAL_COUNT)
-                            .build());
+                            .orElse(Student.builder()
+                                    .userId(userId)
+                                    .image(getProfileImage(mattermostUser, userId))
+                                    .build());
 
                     if (students.contains(student)) {
                         final Student studentToUpdate = students.get(students.indexOf(student));

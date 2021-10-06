@@ -53,7 +53,7 @@ public class SsafycialController {
         return client.login(id, password).readEntity();
     }
 
-    @Scheduled(cron = EVERY_FOURTY_FIVE_SECS_CRON_EXPRESSION_FOR_TEST)
+    @Scheduled(cron = EVERY_TWO_WEEKS_AT_ONE_AM_CRON_EXPRESSION)
     public void saveSsafycialsEveryTwoWeeks() throws IOException {
         final User user = login();
         final MattermostUser mattermostUser = MattermostUser.builder()

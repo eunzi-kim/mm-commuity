@@ -59,7 +59,9 @@ public class MattermostUser {
         final User user = client.getUser(post.getUserId()).readEntity();
         final String nickname = user.getNickname();
 
-        return !(nickname.contains("교수") || nickname.contains("컨설턴스") || nickname.contains("프로"));
+        return !(nickname.contains(MattermostUserRole.PROFESSOR.role())
+                || nickname.contains(MattermostUserRole.CONSULTANT.role())
+                || nickname.contains(MattermostUserRole.EDU_PRO.role()));
     }
 
     public Map<String, List<Map<String, List<Post>>>> getPostsForTodayGroupByChannelGroupByTeam() {

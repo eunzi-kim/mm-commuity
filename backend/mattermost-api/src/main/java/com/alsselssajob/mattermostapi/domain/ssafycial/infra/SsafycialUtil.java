@@ -1,4 +1,4 @@
-package com.alsselssajob.mattermostapi.domain.ssafycial.common;
+package com.alsselssajob.mattermostapi.domain.ssafycial.infra;
 
 import com.alsselssajob.mattermostapi.domain.ssafycial.domain.Ssafycial;
 import net.bis5.mattermost.model.Post;

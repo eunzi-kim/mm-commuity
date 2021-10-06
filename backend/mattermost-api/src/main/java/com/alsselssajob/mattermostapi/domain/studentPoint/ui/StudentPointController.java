@@ -1,10 +1,9 @@
-package com.alsselssajob.mattermostapi.domain.post.ui;
+package com.alsselssajob.mattermostapi.domain.studentPoint.ui;
 
 import com.alsselssajob.mattermostapi.common.infra.MattermostUser;
-import com.alsselssajob.mattermostapi.domain.post.application.PostService;
+import com.alsselssajob.mattermostapi.domain.studentPoint.application.StudentPointService;
 import lombok.RequiredArgsConstructor;
 import net.bis5.mattermost.client4.MattermostClient;
-import net.bis5.mattermost.model.Post;
 import net.bis5.mattermost.model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -12,22 +11,17 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
-import java.util.stream.Collectors;
 
 @EnableScheduling
 @Component
 @RequiredArgsConstructor
-public class PostController {
+public class StudentPointController {
 
-    private final static String EVERY_ZERO_AM_CRON_EXPRESSION = "0 0 0 * * *";
-    private final static String EVERY_MINUTE_CRON_EXPRESSION_FOR_TEST = "0 0/1 * * * *";
+    private final static String EVERY_ZERO_AM_FIVE_MINUTE_CRON_EXPRESSION = "0 5 0 * * *";
+    private final static String EVERY_MINUTE_CRON_EXPRESSION_FOR_TEST = "30 0/1 * * * *";
 
-    private final PostService postService;
+    private final StudentPointService studentPointService;
     private MattermostClient client;
 
     @Value("${mattermost.url}")
@@ -52,14 +46,13 @@ public class PostController {
         return client.login(id, password).readEntity();
     }
 
-    @Scheduled(cron = EVERY_ZERO_AM_CRON_EXPRESSION)
-    public void savePostsEveryDay() throws IOException {
-        final User user = login();
+    @Scheduled(cron = EVERY_ZERO_AM_FIVE_MINUTE_CRON_EXPRESSION)
+    public void updateStudentPoints() {
         final MattermostUser mattermostUser = MattermostUser.builder()
                 .client(client)
-                .user(user)
+                .user(login())
                 .build();
 
-        postService.savePosts(user, mattermostUser.getPostsForTodayGroupByChannelGroupByTeam());
+        studentPointService.updateStudentPoint(mattermostUser);
     }
 }

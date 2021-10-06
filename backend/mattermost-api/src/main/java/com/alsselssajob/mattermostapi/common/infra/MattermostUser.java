@@ -1,6 +1,6 @@
-package com.alsselssajob.mattermostapi.domain.mattermostuser.domain;
+package com.alsselssajob.mattermostapi.common.infra;
 
-import com.alsselssajob.mattermostapi.domain.ssafycial.common.SsafycialUtil;
+import com.alsselssajob.mattermostapi.domain.ssafycial.infra.SsafycialUtil;
 import com.alsselssajob.mattermostapi.domain.ssafycial.domain.Ssafycial;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -37,6 +37,18 @@ public class MattermostUser {
     public MattermostUser(final MattermostClient client, final User user) {
         this.client = client;
         this.user = user;
+    }
+
+    public List<Post> getPostsForToday() {
+        return getTeamsForUser().stream()
+                .map(this::getPublicChannelsForTeam)
+                .flatMap(List::stream)
+                .map(this::getPostsForChannelSinceYesterday)
+                .map(PostList::getPosts)
+                .filter(Objects::nonNull)
+                .map(Map::values)
+                .flatMap(Collection::stream)
+                .collect(toList());
     }
 
     public Map<String, List<Map<String, List<Post>>>> getPostsForTodayGroupByChannelGroupByTeam() {

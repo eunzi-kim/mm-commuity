@@ -1,10 +1,9 @@
-package com.alsselssajob.mattermostapi.domain.post.ui;
+package com.alsselssajob.mattermostapi.domain.ssafycial.ui;
 
 import com.alsselssajob.mattermostapi.common.infra.MattermostUser;
-import com.alsselssajob.mattermostapi.domain.post.application.PostService;
+import com.alsselssajob.mattermostapi.domain.ssafycial.applicaion.SsafycialService;
 import lombok.RequiredArgsConstructor;
 import net.bis5.mattermost.client4.MattermostClient;
-import net.bis5.mattermost.model.Post;
 import net.bis5.mattermost.model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -13,21 +12,17 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
-import java.util.stream.Collectors;
 
 @EnableScheduling
 @Component
 @RequiredArgsConstructor
-public class PostController {
+public class SsafycialController {
 
-    private final static String EVERY_ZERO_AM_CRON_EXPRESSION = "0 0 0 * * *";
+    private final static String EVERY_TWO_WEEKS_AT_ONE_AM_CRON_EXPRESSION = "0 10 0 1/14 * ?";
     private final static String EVERY_MINUTE_CRON_EXPRESSION_FOR_TEST = "0 0/1 * * * *";
 
-    private final PostService postService;
+    private final SsafycialService ssafycialService;
     private MattermostClient client;
 
     @Value("${mattermost.url}")
@@ -52,14 +47,14 @@ public class PostController {
         return client.login(id, password).readEntity();
     }
 
-    @Scheduled(cron = EVERY_ZERO_AM_CRON_EXPRESSION)
-    public void savePostsEveryDay() throws IOException {
+    @Scheduled(cron = EVERY_TWO_WEEKS_AT_ONE_AM_CRON_EXPRESSION)
+    public void saveSsafycialsEveryTwoWeeks() throws IOException {
         final User user = login();
         final MattermostUser mattermostUser = MattermostUser.builder()
                 .client(client)
                 .user(user)
                 .build();
 
-        postService.savePosts(user, mattermostUser.getPostsForTodayGroupByChannelGroupByTeam());
+        ssafycialService.saveSsafycials(user, mattermostUser.getSsafycialsForLastTwoWeeks());
     }
 }

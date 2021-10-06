@@ -2,8 +2,6 @@ package com.alsselssajob.mattermostapi.domain.post.repository;
 
 import com.alsselssajob.mattermostapi.common.vo.ColumnFamily;
 import com.alsselssajob.mattermostapi.common.vo.qualifier.*;
-import com.alsselssajob.mattermostapi.domain.mattermostuser.domain.MattermostUser;
-import net.bis5.mattermost.client4.MattermostClient;
 import net.bis5.mattermost.model.FileInfo;
 import net.bis5.mattermost.model.Post;
 import net.bis5.mattermost.model.Reaction;
@@ -13,6 +11,7 @@ import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.util.Bytes;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -22,8 +21,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.logging.Level;
 
+@Component
 public class PostRepository {
 
     private final static TableName POST_TABLE_NAME = TableName.valueOf("posts");
@@ -38,20 +37,6 @@ public class PostRepository {
     public PostRepository() {
         configuration = HBaseConfiguration.create();
         configuration.addResource(CONFIGURATION_FILE_PATH);
-    }
-
-    public static void main(String[] args) throws IOException {
-        PostRepository postRepository = new PostRepository();
-        MattermostClient client = MattermostClient.builder()
-                .url("https://meeting.ssafy.com")
-                .logLevel(Level.INFO)
-                .ignoreUnknownProperties()
-                .build();
-        User user = client.login("kskyu610@gmail.com", "Skskyu610@gmail.com5").readEntity();
-
-        MattermostUser mattermostUser = new MattermostUser(client, user);
-        Map<String, List<Map<String, List<Post>>>> posts = mattermostUser.getPostsForTodayGroupByChannelGroupByTeam();
-        postRepository.savePosts(user, posts);
     }
 
     public void savePosts(final User user, final Map<String, List<Map<String, List<Post>>>> teams) throws IOException {
@@ -97,6 +82,8 @@ public class PostRepository {
         if (!admin.tableExists(POST_TABLE_NAME)) {
             final TableDescriptorBuilder table = TableDescriptorBuilder.newBuilder(POST_TABLE_NAME);
 
+            table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.team.name()));
+            table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.channel.name()));
             table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.post.name()));
             table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.user.name()));
             table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.emoji.name()));

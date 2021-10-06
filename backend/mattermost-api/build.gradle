@@ -21,8 +21,10 @@ repositories {
 dependencies {
     implementation 'net.bis5.mattermost4j:mattermost4j-core:0.22.1'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.kafka:spring-kafka'
-    implementation 'org.springframework.data:spring-data-hadoop:3.2.2.RELEASE'
+    implementation 'org.springframework.data:spring-data-hadoop:2.5.0.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'mysql:mysql-connector-java'
+    runtimeOnly 'com.h2database:h2'
     implementation 'org.apache.hbase:hbase-client:2.3.6'
     implementation 'org.apache.hbase:hbase:2.3.6'
     implementation 'org.apache.hbase:hbase-mapreduce:2.3.6'
@@ -31,7 +33,6 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.kafka:spring-kafka-test'
 }
 
 test {

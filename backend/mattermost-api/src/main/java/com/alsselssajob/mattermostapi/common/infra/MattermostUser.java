@@ -51,7 +51,15 @@ public class MattermostUser {
                 .filter(Objects::nonNull)
                 .map(Map::values)
                 .flatMap(Collection::stream)
+                .filter(this::isPostOfStudent)
                 .collect(toList());
+    }
+
+    private boolean isPostOfStudent(final Post post) {
+        final User user = client.getUser(post.getUserId()).readEntity();
+        final String nickname = user.getNickname();
+
+        return !(nickname.contains("교수") || nickname.contains("컨설턴스") || nickname.contains("프로"));
     }
 
     public Map<String, List<Map<String, List<Post>>>> getPostsForTodayGroupByChannelGroupByTeam() {

@@ -4,6 +4,7 @@ import com.alsselssajob.auth.domain.Token;
 import com.alsselssajob.auth.domain.TokenRepository;
 import com.alsselssajob.auth.dto.request.LoginRequest;
 import com.alsselssajob.auth.dto.request.LogoutRequest;
+import com.alsselssajob.auth.dto.request.TokenRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -82,6 +83,30 @@ class AuthServiceTest {
 
         //then
         verify(tokenRepository, times(1)).findByUserIdAndIsActive(any(), any());
+
+    }
+
+    @DisplayName("AuthService 클래스 / validateToken 테스트")
+    @Test
+    void validateToken() {
+
+        final TokenRequest tokenRequest = TokenRequest.builder()
+                .token("test_token")
+                .build();
+
+        final Token userToken = Token.builder()
+                .userId("test_userId")
+                .token("test_token")
+                .isActive(true)
+                .build();
+
+        doReturn(Optional.of(userToken)).when(tokenRepository).findByToken(any());
+
+        //when
+        authService.validateToken(tokenRequest);
+
+        //then
+        verify(tokenRepository, times(1)).findByToken(any());
 
     }
 

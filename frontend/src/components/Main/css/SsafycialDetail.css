@@ -45,6 +45,16 @@
   height: 85%;
 }
 
+.s-detail-contents::-webkit-scrollbar {
+  width: auto;
+  border-radius: 9px;
+}
+
+.s-detail-contents::-webkit-scrollbar-thumb {
+  background-color: lightgray;
+  border-radius: 9px;  
+}
+
 .a-detail-title {
   font-weight: bold;
   margin-bottom: 1.5rem;

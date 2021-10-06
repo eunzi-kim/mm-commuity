@@ -1,5 +1,6 @@
 .main {
   height: 100vh;
+  font-family: 'IM_Hyemin-Bold';
 }
 
 .main-header-responsive {
@@ -130,6 +131,10 @@
     color: #A1BEE5;
   }
 
+  .dark-c-channels > .c-channel-chk {
+    color: #A1BEE5;
+  }
+
 
 /* 반응형 */
 @media (max-width: 992px) {
@@ -203,21 +208,26 @@
 
   .main-right {
     width: 100%;
+    height: auto;
     display: flex;
     justify-content: space-evenly;
     overflow-y: visible;
+    padding-bottom: 1rem;
   }
 
   .right-header {
     display: none;
   }
 
-  .best-member {
+  .best-member,
+  .ssafycial {
     height: 18rem;
+    padding: 0 0 2rem 0;
   }
 
-  .ssafycial,
-  .best-member {
-    padding: 0 0 2rem 0;
+  .ssafycial {
+    border: 2px solid #b6b6b6;
+    border-radius: 7px;
+    padding-bottom: 0;
   }
 }

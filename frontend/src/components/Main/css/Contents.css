@@ -50,7 +50,7 @@
 .c-title h2 {
   font-weight: bold;
   margin: 0;
-  color: #D0DFF2;
+  color: #A1BEE5;
 }
 
 .c-title-right {
@@ -216,6 +216,12 @@
 
 .c-channel:hover {
   font-weight: bold;
+  color: #000;
+  cursor: pointer;
+}
+
+.c-channel-chk {
+  font-weight: bolder;
   color: #000;
   cursor: pointer;
 }

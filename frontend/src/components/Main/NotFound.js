@@ -11,10 +11,14 @@ class NotFound extends React.Component {
   }
 
   render() {
+    const zzanggu = '/image/zzanggu.gif'
+
     return (
       <div className="not-found">
-        <h1>404 Not Found</h1>
-        <h2>존재하지 않는 페이지 입니다.</h2>
+        <h1>404</h1>
+        <h1>Not Found</h1>        
+        <img className="not-found-img" src={zzanggu} alt="404" />
+        <h5>존재하지 않는 페이지 입니다.</h5>
       </div>
     )
   }

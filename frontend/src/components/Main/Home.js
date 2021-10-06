@@ -88,7 +88,6 @@ class Home extends React.Component {
                 <div className="mp-info">
                   <div className="mp-nn"><b>{ nickname }</b></div>
                   <div className="mp-un">@{ username }</div>
-                  <div className="mp-point">150 point</div>
                 </div>
               </div>
               <div className="main-btns">

@@ -160,6 +160,18 @@ class Contents extends React.Component {
     document.querySelector(".sub-nav").classList.remove("nav-none")
   }
 
+  // 채널 버튼 클릭
+  onClickChannel = (e) => {
+    // 버튼 취소
+    if (document.querySelector(".c-channel-chk")) {
+      document.querySelector(".c-channel-chk").classList.remove("c-channel-chk")
+    }
+    // 버튼 체크
+    e.target.classList.add("c-channel-chk")
+    console.log(e.target.innerText)
+  }
+
+
   // nav바의 화살표
   onClickNavArrow = (e) => {    
     if (e.target.classList[0] === "nav-down") {
@@ -224,6 +236,10 @@ class Contents extends React.Component {
     if (document.querySelector(".group-chk")) {
       document.querySelector(".group-chk").classList.remove("group-chk")
     }
+
+    if (document.querySelector(".c-channel-chk")) {
+      document.querySelector(".c-channel-chk").classList.remove("c-channel-chk")
+    }
     
     if (this.state.AllContents !== this.state.Content) {
       var all_contents = this.state.AllContents
@@ -275,7 +291,7 @@ class Contents extends React.Component {
 
     // 채널 이름
     const channelName = ChkChannel.map((name, idx) => 
-      <div className="c-channel" key={idx}>
+      <div className="c-channel" key={idx} onClick={this.onClickChannel}>
         { name }
       </div>
     );

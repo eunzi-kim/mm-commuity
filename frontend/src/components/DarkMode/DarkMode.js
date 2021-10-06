@@ -31,6 +31,7 @@ class DarkMode extends React.Component{
       document.querySelector(".login-password-box").classList.add("dark-login-box")
       document.querySelector(".btn-primary").classList.add("btn-secondary")
       document.querySelector(".signin-btn").classList.add("dark-login-btn")
+      document.querySelector(".login-left-footer").classList.add("dark-login-left-footer")
     }
 
     // 메인 화면
@@ -60,6 +61,10 @@ class DarkMode extends React.Component{
       document.querySelector('.MyScrap-container').classList.add('dark-MyScrap-container')
       document.querySelector(".scrap-search-input").classList.add("dark-search-input")
     }
+
+    else {
+      document.querySelector(".not-found").classList.add("dark-not-found")
+    }
   }
 
 
@@ -84,6 +89,7 @@ class DarkMode extends React.Component{
       document.querySelector(".login-password-box").classList.remove("dark-login-box")
       document.querySelector(".btn-primary").classList.remove("btn-secondary")
       document.querySelector(".signin-btn").classList.remove("dark-login-btn")
+      document.querySelector(".login-left-footer").classList.remove("dark-login-left-footer")
     }
 
     // 메인 화면
@@ -112,6 +118,10 @@ class DarkMode extends React.Component{
       document.querySelector('.scrap-main').classList.remove('dark-scrap-main')
       document.querySelector('.MyScrap-container').classList.remove('dark-MyScrap-container')
       document.querySelector(".scrap-search-input").classList.remove("dark-search-input")
+    }
+
+    else {
+      document.querySelector(".not-found").classList.remove("dark-not-found")
     }
 
   }

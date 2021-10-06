@@ -1,7 +1,7 @@
-package com.alsselssajob.ssafycial.ui;
+package com.alsselssajob.domain.ssafycial.ui;
 
-import com.alsselssajob.ssafycial.application.SsafycialService;
-import com.alsselssajob.ssafycial.dto.response.ResponseSsafycial;
+import com.alsselssajob.domain.ssafycial.application.SsafycialService;
+import com.alsselssajob.domain.ssafycial.dto.response.ResponseSsafycial;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

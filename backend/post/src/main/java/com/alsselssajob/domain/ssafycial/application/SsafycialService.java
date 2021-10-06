@@ -1,6 +1,6 @@
-package com.alsselssajob.ssafycial.application;
+package com.alsselssajob.domain.ssafycial.application;
 
-import com.alsselssajob.ssafycial.dto.response.ResponseSsafycial;
+import com.alsselssajob.domain.ssafycial.dto.response.ResponseSsafycial;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.TableName;

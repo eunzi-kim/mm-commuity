@@ -1,4 +1,4 @@
-package com.alsselssajob.ssafycial.dto.response;
+package com.alsselssajob.domain.ssafycial.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;

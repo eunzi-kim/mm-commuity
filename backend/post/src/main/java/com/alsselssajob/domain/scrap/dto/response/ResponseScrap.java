@@ -1,5 +1,6 @@
 package com.alsselssajob.domain.scrap.dto.response;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,9 +23,9 @@ public class ResponseScrap {
     @JsonProperty
     private String nickname;
     @JsonProperty
-    private String profileImage;
+    private String profileImg;
     @JsonProperty
-    private String content;
+    private String message;
     @JsonProperty
     private String isScrapped;
     @JsonProperty
@@ -35,4 +36,23 @@ public class ResponseScrap {
     private String fileName;
     @JsonProperty
     private String fileExtension;
+
+    @Builder
+    public ResponseScrap(final String postId, final String message, final String createdDate,
+                        final String username, final String nickname, final String profileImg,
+                        final String channelName, final String teamName, final String isScrapped,
+                        final String fileId, final String fileName, final String fileExtension) {
+        this.postId = postId;
+        this.channelName = channelName;
+        this.teamName = teamName;
+        this.isScrapped = isScrapped;
+        this.message = message;
+        this.createdDate = createdDate;
+        this.username = username;
+        this.nickname = nickname;
+        this.profileImg = profileImg;
+        this.fileId = fileId;
+        this.fileName = fileName;
+        this.fileExtension = fileExtension;
+    }
 }

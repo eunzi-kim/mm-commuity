@@ -4,7 +4,6 @@ import com.alsselssajob.mattermostapi.common.infra.MattermostUser;
 import com.alsselssajob.mattermostapi.domain.post.application.PostService;
 import lombok.RequiredArgsConstructor;
 import net.bis5.mattermost.client4.MattermostClient;
-import net.bis5.mattermost.model.Post;
 import net.bis5.mattermost.model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -13,11 +12,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
-import java.util.stream.Collectors;
 
 @EnableScheduling
 @Component
@@ -52,7 +47,7 @@ public class PostController {
         return client.login(id, password).readEntity();
     }
 
-    @Scheduled(cron = EVERY_ZERO_AM_CRON_EXPRESSION)
+    @Scheduled(cron = EVERY_MINUTE_CRON_EXPRESSION_FOR_TEST)
     public void savePostsEveryDay() throws IOException {
         final User user = login();
         final MattermostUser mattermostUser = MattermostUser.builder()

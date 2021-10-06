@@ -20,7 +20,7 @@ import java.util.logging.Level;
 public class SsafycialController {
 
     private final static String EVERY_TWO_WEEKS_AT_ONE_AM_CRON_EXPRESSION = "0 10 0 1/14 * ?";
-    private final static String EVERY_MINUTE_CRON_EXPRESSION_FOR_TEST = "0 0/1 * * * *";
+    private final static String EVERY_FOURTY_FIVE_SECS_CRON_EXPRESSION_FOR_TEST = "0/30 * * * * *";
 
     private final SsafycialService ssafycialService;
     private MattermostClient client;
@@ -33,6 +33,12 @@ public class SsafycialController {
 
     @Value("${user.password}")
     private String password;
+
+    @Value("${presscorps.team.id}")
+    private String pressCorpsTeamId;
+
+    @Value("${ssafycial.channel.id}")
+    private String ssafycialChannelId;
 
     @PostConstruct
     public void init() {
@@ -47,7 +53,7 @@ public class SsafycialController {
         return client.login(id, password).readEntity();
     }
 
-    @Scheduled(cron = EVERY_TWO_WEEKS_AT_ONE_AM_CRON_EXPRESSION)
+    @Scheduled(cron = EVERY_FOURTY_FIVE_SECS_CRON_EXPRESSION_FOR_TEST)
     public void saveSsafycialsEveryTwoWeeks() throws IOException {
         final User user = login();
         final MattermostUser mattermostUser = MattermostUser.builder()
@@ -55,6 +61,7 @@ public class SsafycialController {
                 .user(user)
                 .build();
 
-        ssafycialService.saveSsafycials(user, mattermostUser.getSsafycialsForLastTwoWeeks());
+        ssafycialService.saveSsafycials(user,
+                mattermostUser.getSsafycialsForLastTwoWeeks(pressCorpsTeamId, ssafycialChannelId));
     }
 }

@@ -26,7 +26,6 @@ import java.util.Objects;
 public class PostRepository {
 
     private final static TableName POST_TABLE_NAME = TableName.valueOf("posts");
-    private final static String CONFIGURATION_FILE_PATH = "/usr/local/hbase-2.3.6/conf/hbase-site.xml";
     private final static String EMPTY = "";
     private final static String DASH = "-";
     private final static String SPACE = " ";
@@ -36,7 +35,6 @@ public class PostRepository {
 
     public PostRepository() {
         configuration = HBaseConfiguration.create();
-        configuration.addResource(CONFIGURATION_FILE_PATH);
     }
 
     public void savePosts(final User user, final Map<String, List<Map<String, List<Post>>>> teams) throws IOException {
@@ -88,8 +86,6 @@ public class PostRepository {
             table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.user.name()));
             table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.emoji.name()));
             table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.file.name()));
-            table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.team.name()));
-            table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.channel.name()));
 
             admin.createTable(table.build());
         }

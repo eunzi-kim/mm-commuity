@@ -9,6 +9,7 @@ import net.bis5.mattermost.model.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.lang.System;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
@@ -23,12 +24,6 @@ public class MattermostUser {
     private final static int SSAFYCIAL_CHANNEL_INDEX = 0;
     private final static int ONE_DAY = 1;
     private final static long TWO_WEEKS = 2;
-
-    @Value("${presscorps.team.id}")
-    private String pressCorpsTeamId;
-
-    @Value("${ssafycial.channel.id}")
-    private String ssafycialChannelId;
 
     private MattermostClient client;
     private User user;
@@ -89,8 +84,9 @@ public class MattermostUser {
                 .readEntity();
     }
 
-    public List<Ssafycial> getSsafycialsForLastTwoWeeks() {
-        return Stream.of(getSsafycialsForChannelSinceLastTwoWeeks(getSsafycialChannel()))
+    public List<Ssafycial> getSsafycialsForLastTwoWeeks(final String pressCorpsTeamId, final String ssafycialChannelId) {
+        return Stream.of(getSsafycialsForChannelSinceLastTwoWeeks(
+                getSsafycialChannel(pressCorpsTeamId, ssafycialChannelId)))
                 .map(PostList::getPosts)
                 .filter(Objects::nonNull)
                 .map(Map::values)
@@ -100,7 +96,8 @@ public class MattermostUser {
                 .collect(toList());
     }
 
-    private Channel getSsafycialChannel() {
+    private Channel getSsafycialChannel(final String pressCorpsTeamId, final String ssafycialChannelId) {
+        System.out.println(pressCorpsTeamId + " " + ssafycialChannelId);
         return client.getPublicChannelsByIdsForTeam(pressCorpsTeamId, ssafycialChannelId)
                 .readEntity()
                 .get(SSAFYCIAL_CHANNEL_INDEX);

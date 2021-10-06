@@ -1,4 +1,4 @@
-package com.alsselssajob.domain.config;
+package com.alsselssajob.domain.post.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

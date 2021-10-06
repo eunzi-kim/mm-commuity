@@ -62,20 +62,4 @@ public class PostController {
 
         postService.savePosts(user, mattermostUser.getPostsForTodayGroupByChannelGroupByTeam());
     }
-
-    public List<Post> getPosts() {
-        final MattermostUser mattermostUser = MattermostUser.builder()
-                .client(client)
-                .user(login())
-                .build();
-
-        return mattermostUser.getPostsForTodayGroupByChannelGroupByTeam()
-                .values()
-                .stream()
-                .flatMap(List::stream)
-                .map(Map::values)
-                .flatMap(Collection::stream)
-                .flatMap(List::stream)
-                .collect(Collectors.toList());
-    }
 }

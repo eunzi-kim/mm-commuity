@@ -48,12 +48,15 @@ public class StudentPointService {
                             .filter(Objects::nonNull)
                             .flatMap(Arrays::stream)
                             .count();
-                    final StudentPoint studentPoint = StudentPoint.builder()
-                            .userId(userId)
-                            .postCount(postsGroup.size())
-                            .reactedCount(reactedCount)
-                            .reactingCount(INITIAL_COUNT)
-                            .build();
+
+                    final StudentPoint studentPoint = studentPointRepository.findById(userId)
+                            .orElse(StudentPoint.builder()
+                                    .userId(userId)
+                                    .postCount(INITIAL_COUNT)
+                                    .reactedCount(INITIAL_COUNT)
+                                    .reactingCount(INITIAL_COUNT)
+                                    .build());
+                    studentPoint.updatePostAndReactedCount(postsGroup.size(), reactedCount);
                     studentPoints.add(studentPoint);
                 });
     }
@@ -69,17 +72,19 @@ public class StudentPointService {
         reactionsGroupByUserId.keySet()
                 .forEach(userId -> {
                     final int reactingCount = reactionsGroupByUserId.get(userId).size();
-                    final StudentPoint studentPoint = StudentPoint.builder()
+                    final StudentPoint studentPoint = studentPointRepository.findById(userId)
+                    .orElse(StudentPoint.builder()
                             .userId(userId)
                             .postCount(INITIAL_COUNT)
                             .reactedCount(INITIAL_COUNT)
-                            .reactingCount(reactingCount)
-                            .build();
+                            .reactingCount(INITIAL_COUNT)
+                            .build());
 
                     if (studentPoints.contains(studentPoint)) {
                         final StudentPoint studentPointToUpdate = studentPoints.get(studentPoints.indexOf(studentPoint));
                         studentPointToUpdate.updateReactingCount(reactingCount);
                     } else {
+                        studentPoint.updateReactingCount(reactingCount);
                         studentPoints.add(studentPoint);
                     }
                 });

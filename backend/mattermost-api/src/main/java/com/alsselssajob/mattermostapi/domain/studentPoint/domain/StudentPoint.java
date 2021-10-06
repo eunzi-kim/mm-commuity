@@ -52,6 +52,11 @@ public class StudentPoint {
         return point;
     }
 
+    public void updatePostAndReactedCount(final int postCount, final int reactedCount) {
+        this.postCount += postCount;
+        this.reactedCount += reactedCount;
+    }
+
     public void updateReactingCount(final int reactingCount) {
         this.reactingCount = reactingCount;
     }

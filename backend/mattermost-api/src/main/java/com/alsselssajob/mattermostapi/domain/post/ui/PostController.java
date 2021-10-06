@@ -13,9 +13,11 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 @EnableScheduling
 @Component
@@ -67,10 +69,13 @@ public class PostController {
                 .user(login())
                 .build();
 
-        return (List<Post>) mattermostUser.getPostsForTodayGroupByChannelGroupByTeam()
+        return mattermostUser.getPostsForTodayGroupByChannelGroupByTeam()
                 .values()
                 .stream()
                 .flatMap(List::stream)
-                .map(Map::values);
+                .map(Map::values)
+                .flatMap(Collection::stream)
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
     }
 }

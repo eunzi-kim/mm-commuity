@@ -1,7 +1,7 @@
-package com.alsselssajob.post.ui;
+package com.alsselssajob.domain.ui;
 
-import com.alsselssajob.post.application.PostService;
-import com.alsselssajob.post.dto.response.ResponsePost;
+import com.alsselssajob.domain.application.PostService;
+import com.alsselssajob.domain.dto.response.ResponsePost;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

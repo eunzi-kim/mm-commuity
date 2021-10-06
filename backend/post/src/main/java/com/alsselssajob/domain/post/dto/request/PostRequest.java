@@ -1,4 +1,4 @@
-package com.alsselssajob.post.dto.request;
+package com.alsselssajob.domain.dto.request;
 
 public class PostRequest {
     private String date;

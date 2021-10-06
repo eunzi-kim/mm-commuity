@@ -2,6 +2,7 @@
   display: flex;
   width: 100vw;
   height: 100vh;
+  font-family: 'IM_Hyemin-Bold';
 }
 
 .login-left {
@@ -114,6 +115,10 @@
 
 .dark-login-btn {
   background-color: rgb(58, 57, 57);
+}
+
+.dark-login-left-footer {
+  color: #808080;
 }
 
 /* 반응형 */

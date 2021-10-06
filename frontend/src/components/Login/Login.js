@@ -75,6 +75,7 @@ class Login extends React.Component {
       document.querySelector(".login-password-box").classList.add("dark-login-box")
       document.querySelector(".btn-primary").classList.add("btn-secondary")
       document.querySelector(".signin-btn").classList.add("dark-login-btn")
+      document.querySelector(".login-left-footer").classList.add("dark-login-left-footer")
     }
   }
 

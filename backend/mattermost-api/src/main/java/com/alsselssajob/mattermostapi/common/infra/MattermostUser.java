@@ -59,7 +59,7 @@ public class MattermostUser {
         final User user = client.getUser(post.getUserId()).readEntity();
         final String nickname = user.getNickname();
 
-        return !(nickname.contains(MattermostUserRole.PROFESSOR.role())
+        return (nickname.contains(MattermostUserRole.PROFESSOR.role())
                 || nickname.contains(MattermostUserRole.CONSULTANT.role())
                 || nickname.contains(MattermostUserRole.EDU_PRO.role()));
     }
@@ -77,7 +77,10 @@ public class MattermostUser {
                 final Map<String, Post> posts = getPostsForChannelSinceYesterday(channel).getPosts();
 
                 if (Objects.nonNull(posts)) {
-                    postsGroupByChannel.put(channel.getDisplayName(), new ArrayList<>(posts.values()));
+                    postsGroupByChannel.put(channel.getDisplayName(), new ArrayList<>(posts.values()
+                            .stream()
+                            .filter(this::isPostOfStudent)
+                            .collect(toList())));
                     channelsContainingPosts.add(postsGroupByChannel);
                 }
             }

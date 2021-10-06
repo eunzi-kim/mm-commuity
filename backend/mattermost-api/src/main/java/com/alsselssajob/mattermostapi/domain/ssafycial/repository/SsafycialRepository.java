@@ -22,34 +22,11 @@ import java.util.logging.Level;
 public class SsafycialRepository {
 
     private final static TableName SSAFYCIAL_TABLE_NAME = TableName.valueOf("ssafycials");
-    private final static String CONFIGURATION_FILE_PATH = "/usr/local/hbase-2.3.6/conf/hbase-site.xml";
 
     private final Configuration configuration;
 
     public SsafycialRepository() {
         configuration = HBaseConfiguration.create();
-        configuration.addResource(CONFIGURATION_FILE_PATH);
-    }
-    public static void main(String[] args) throws IOException {
-        SsafycialRepository ssafycialRepository = new SsafycialRepository();
-        MattermostClient client = MattermostClient.builder()
-                .url("https://meeting.ssafy.com")
-                .logLevel(Level.INFO)
-                .ignoreUnknownProperties()
-                .build();
-        User user = client.login("mymysuzy0627@gmail.com", "Qwer1234!!").readEntity();
-        List<Team> teams = client.getTeamsForUser(user.getId()).readEntity();
-        teams.stream().forEach(team -> System.out.println(team.getDisplayName() + " " + team.getId()));
-        Channel channel = client.getPublicChannelsByIdsForTeam("jnai78zewj87dfjwxtj8qmuydr", "9yxif5ehwirt7eo4wyz34af67e")
-                .readEntity().get(0);
-        System.out.println(channel.getDisplayName());
-/*
-        MattermostUser mattermostUser = new MattermostUser(client, user);
-        List<Ssafycial> temp = mattermostUser.getSsafycialsForLastTwoWeeks();
-        List<Ssafycial> ssafycials = temp.subList(0, 1);
-        ssafycialRepository.saveSsafycials(user, ssafycials);
-
- */
     }
 
     public void saveSsafycials(final User user, final List<Ssafycial> ssafycials) throws IOException {

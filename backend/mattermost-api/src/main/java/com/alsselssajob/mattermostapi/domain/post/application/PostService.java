@@ -2,8 +2,8 @@ package com.alsselssajob.mattermostapi.domain.post.application;
 
 import com.alsselssajob.mattermostapi.domain.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import net.bis5.mattermost.client4.MattermostClient;
 import net.bis5.mattermost.model.Post;
-import net.bis5.mattermost.model.User;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class PostService {
 
     private final PostRepository postRepository;
 
-    public void savePosts(final User user, final Map<String, List<Map<String, List<Post>>>> teams) throws IOException {
-        postRepository.savePosts(user,teams);
+    public void savePosts(final MattermostClient client, final Map<String, List<Map<String, List<Post>>>> teams) throws IOException {
+        postRepository.savePosts(client, teams);
     }
 }

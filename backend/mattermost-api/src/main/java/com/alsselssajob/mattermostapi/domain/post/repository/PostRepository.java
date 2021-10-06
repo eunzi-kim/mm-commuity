@@ -2,6 +2,7 @@ package com.alsselssajob.mattermostapi.domain.post.repository;
 
 import com.alsselssajob.mattermostapi.common.vo.ColumnFamily;
 import com.alsselssajob.mattermostapi.common.vo.qualifier.*;
+import net.bis5.mattermost.client4.MattermostClient;
 import net.bis5.mattermost.model.FileInfo;
 import net.bis5.mattermost.model.Post;
 import net.bis5.mattermost.model.Reaction;
@@ -26,7 +27,6 @@ import java.util.Objects;
 public class PostRepository {
 
     private final static TableName POST_TABLE_NAME = TableName.valueOf("posts");
-    private final static String CONFIGURATION_FILE_PATH = "/usr/local/hbase-2.3.6/conf/hbase-site.xml";
     private final static String EMPTY = "";
     private final static String DASH = "-";
     private final static String SPACE = " ";
@@ -36,10 +36,9 @@ public class PostRepository {
 
     public PostRepository() {
         configuration = HBaseConfiguration.create();
-        configuration.addResource(CONFIGURATION_FILE_PATH);
     }
 
-    public void savePosts(final User user, final Map<String, List<Map<String, List<Post>>>> teams) throws IOException {
+    public void savePosts(final MattermostClient client, final Map<String, List<Map<String, List<Post>>>> teams) throws IOException {
         final Connection connection = ConnectionFactory.createConnection(configuration);
         final Admin admin = connection.getAdmin();
 
@@ -57,6 +56,8 @@ public class PostRepository {
                                                                 .stream()
                                                                 .forEach(post -> {
                                                                     final Put row = new Put(post.getId().getBytes());
+                                                                    final User user = client.getUser(post.getUserId())
+                                                                            .readEntity();
 
                                                                     addTeamColumnFamily(teamName, row);
                                                                     addChannelColumnFamily(channelName, row);
@@ -88,8 +89,6 @@ public class PostRepository {
             table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.user.name()));
             table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.emoji.name()));
             table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.file.name()));
-            table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.team.name()));
-            table.setColumnFamily(ColumnFamilyDescriptorBuilder.of(ColumnFamily.channel.name()));
 
             admin.createTable(table.build());
         }

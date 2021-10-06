@@ -9,6 +9,7 @@ import net.bis5.mattermost.model.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.lang.System;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
@@ -24,12 +25,6 @@ public class MattermostUser {
     private final static int ONE_DAY = 1;
     private final static long TWO_WEEKS = 2;
 
-    @Value("${presscorps.team.id}")
-    private String pressCorpsTeamId;
-
-    @Value("${ssafycial.channel.id}")
-    private String ssafycialChannelId;
-
     private MattermostClient client;
     private User user;
 
@@ -37,6 +32,14 @@ public class MattermostUser {
     public MattermostUser(final MattermostClient client, final User user) {
         this.client = client;
         this.user = user;
+    }
+
+    public MattermostClient client() {
+        return client;
+    }
+
+    public User user() {
+        return user;
     }
 
     public List<Post> getPostsForToday() {
@@ -48,7 +51,17 @@ public class MattermostUser {
                 .filter(Objects::nonNull)
                 .map(Map::values)
                 .flatMap(Collection::stream)
+                .filter(this::isPostOfStudent)
                 .collect(toList());
+    }
+
+    private boolean isPostOfStudent(final Post post) {
+        final User user = client.getUser(post.getUserId()).readEntity();
+        final String nickname = user.getNickname();
+
+        return (nickname.contains(MattermostUserRole.PROFESSOR.role())
+                || nickname.contains(MattermostUserRole.CONSULTANT.role())
+                || nickname.contains(MattermostUserRole.EDU_PRO.role()));
     }
 
     public Map<String, List<Map<String, List<Post>>>> getPostsForTodayGroupByChannelGroupByTeam() {
@@ -64,7 +77,10 @@ public class MattermostUser {
                 final Map<String, Post> posts = getPostsForChannelSinceYesterday(channel).getPosts();
 
                 if (Objects.nonNull(posts)) {
-                    postsGroupByChannel.put(channel.getDisplayName(), new ArrayList<>(posts.values()));
+                    postsGroupByChannel.put(channel.getDisplayName(), new ArrayList<>(posts.values()
+                            .stream()
+                            .filter(this::isPostOfStudent)
+                            .collect(toList())));
                     channelsContainingPosts.add(postsGroupByChannel);
                 }
             }
@@ -89,8 +105,9 @@ public class MattermostUser {
                 .readEntity();
     }
 
-    public List<Ssafycial> getSsafycialsForLastTwoWeeks() {
-        return Stream.of(getSsafycialsForChannelSinceLastTwoWeeks(getSsafycialChannel()))
+    public List<Ssafycial> getSsafycialsForLastTwoWeeks(final String pressCorpsTeamId, final String ssafycialChannelId) {
+        return Stream.of(getSsafycialsForChannelSinceLastTwoWeeks(
+                getSsafycialChannel(pressCorpsTeamId, ssafycialChannelId)))
                 .map(PostList::getPosts)
                 .filter(Objects::nonNull)
                 .map(Map::values)
@@ -100,7 +117,8 @@ public class MattermostUser {
                 .collect(toList());
     }
 
-    private Channel getSsafycialChannel() {
+    private Channel getSsafycialChannel(final String pressCorpsTeamId, final String ssafycialChannelId) {
+        System.out.println(pressCorpsTeamId + " " + ssafycialChannelId);
         return client.getPublicChannelsByIdsForTeam(pressCorpsTeamId, ssafycialChannelId)
                 .readEntity()
                 .get(SSAFYCIAL_CHANNEL_INDEX);

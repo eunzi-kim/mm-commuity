@@ -49,7 +49,7 @@ class Home extends React.Component {
 
   // 로그아웃
   fetchLogout = async (data) => {
-    const url = 'http://localhost:8083/api/auth/logout'
+    const url = 'https://j5c103.p.ssafy.io/api/auth/logout'
     await axios.post(url, data)
     .then(res => {
       if (res.status === 204) {

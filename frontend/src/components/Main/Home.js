@@ -13,15 +13,18 @@ class Home extends React.Component {
   state = {
     nickname: "",
     username: "",
+    profileImg: "",
     search: "",
   };
 
-  takeUserInfo = () => {
-    if (JSON.parse(sessionStorage.getItem('userInfo'))) {
-      const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
-      this.setState({nickname: userInfo.nickname})
-      this.setState({username: userInfo.username})
-    }
+  takeUserInfo = () => {    
+    const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+    this.setState({
+      nickname: userInfo.nickname,
+      username: userInfo.username,
+      profileImg: userInfo.image
+    })
+
   }
 
   componentDidMount() {
@@ -50,7 +53,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { nickname, username } = this.state;
+    const { nickname, username, profileImg } = this.state;
 
     return (
       <div className="main">
@@ -83,7 +86,7 @@ class Home extends React.Component {
             <div className="right-header">
               <div className="main-profile">
                 <div className="mp-image">
-                  이미지
+                  <img src={ profileImg } alt={ username } className="profile-img" />
                 </div>
                 <div className="mp-info">
                   <div className="mp-nn"><b>{ nickname }</b></div>

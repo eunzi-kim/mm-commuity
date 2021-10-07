@@ -46,6 +46,15 @@
   width: 70px;
   height: 70px;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-img {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
 }
 
 .mp-info {

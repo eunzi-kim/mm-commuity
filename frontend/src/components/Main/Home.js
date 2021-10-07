@@ -8,6 +8,7 @@ import BestMember from "./BestMember";
 import Ssafycial from "./Ssafycial";
 
 import "./css/Home.css"
+import axios from "axios";
 
 class Home extends React.Component {
   state = {
@@ -46,10 +47,27 @@ class Home extends React.Component {
     }
   }
 
+  // 로그아웃
+  fetchLogout = async (data) => {
+    const url = 'http://localhost:8083/api/auth/logout'
+    await axios.post(url, data)
+    .then(res => {
+      if (res.status === 204) {
+        alert("로그아웃")
+        sessionStorage.clear()
+        window.location.replace("/login");
+      }
+    })
+    .catch(err => {
+      alert("로그아웃에 실패하였습니다😭")
+    })
+  }
+
   // 로그아웃 함수
   onLogout = () => {
-    sessionStorage.clear()
-    window.location.replace("/login");
+    const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+    const data = {'userId': userInfo['userId']}
+    this.fetchLogout(data)
   }
 
   render() {
@@ -61,7 +79,7 @@ class Home extends React.Component {
           <DropdownButton className="hamburger" align="end" variant="secondary" id="dropdown-item-button" title={<GiHamburgerMenu />}>
             <Dropdown.ItemText className="dd-image">
               <div className="mp-image">
-                이미지
+                <img src={ profileImg } alt={ username } className="profile-img" />
               </div>
               <div className="mr-mp">
                 { nickname }<br />
@@ -69,8 +87,8 @@ class Home extends React.Component {
               </div>
             </Dropdown.ItemText>
             <Dropdown.ItemText><div className="line"></div></Dropdown.ItemText>
-            <Dropdown.Item as="button"><Link to="/scrap" className="link">즐겨찾기</Link></Dropdown.Item>
-            <Dropdown.Item as="button"><Link to="/edupro" className="link">PRO설정</Link></Dropdown.Item>
+            <Link to="/scrap" className="link"><Dropdown.Item as="button">즐겨찾기</Dropdown.Item></Link>
+            <Link to="/edupro" className="link"><Dropdown.Item as="button">PRO설정</Dropdown.Item></Link>
             <Dropdown.Item as="button" onClick={this.onLogout} className="logout-text">로그아웃</Dropdown.Item>
           </DropdownButton>       
         </div>

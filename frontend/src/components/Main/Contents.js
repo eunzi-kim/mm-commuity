@@ -1,9 +1,9 @@
 import React from "react";
 import Slider from "react-slick";
 import DatePicker, { registerLocale } from "react-datepicker";
-import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import $ from "jquery";
 import { Link } from "react-router-dom";
+import ReactMarkdown from 'react-markdown'
 
 import "react-datepicker/dist/react-datepicker.css";
 import ko from 'date-fns/locale/ko';
@@ -11,12 +11,14 @@ import ko from 'date-fns/locale/ko';
 import "./css/Contents.css";
 import axios from "axios";
 
+import example from "./../../2021-10-5.json";
+
 class Contents extends React.Component {
   state = {
     Group: [],
     Channel: {},
     ChkChannel: [],
-    selectedDate: new Date(),
+    selectedDate: new Date(new Date().setDate(new Date().getDate()-1)),
     AllContents: [],
     Content: [],
     ChkTeam: '',
@@ -37,113 +39,50 @@ class Contents extends React.Component {
     // setState로 state 관리!!
   }
 
+  
+
   componentDidMount() {
-    // 서버에서 api 받아와서 데이터 정리!!
+    // 서버에서 api 받아오기!!
+    // this.fetchPost(this.state.selectedDate)
+
+    // -- fetch로 나중에 옮기기 -- //
+    const group = []
+    const channel = {}
+    const all_contents = []
+    const contents = []
+
+    for (let i=0; i<example.length; i++) {
+      if (!group.includes(example[i]['teamName'])) {
+        group.push(example[i]['teamName'])
+      }
+
+      if (channel[example[i]['teamName']] && !(channel[example[i]['teamName']].includes(example[i]['channelName']))) {
+        channel[example[i]['teamName']].push(example[i]['channelName'])
+      }
+      else if (!channel[example[i]['teamName']]) {
+        channel[example[i]['teamName']] = [example[i]['channelName']]
+      }
+
+      const content_info = {
+        "id": example[i]["postId"],
+        "group": example[i]["teamName"], 
+        "channel": example[i]["channelName"], 
+        "username": example[i]["username"], 
+        "nickname": example[i]["nickname"], 
+        "profileImg": example[i]["profileImg"], 
+        "content": example[i]["message"]
+      }
+      all_contents.push(content_info)
+      contents.push(content_info)
+    }
+      
     this.setState({
-      Group: ["그룹1", "그룹2", "그룹3", "그룹4", "그룹5", "개인 메시지"],
-      // 채널 dict 정리할 때, 비공개 채널은 자물쇠 표시!!
-      Channel: {
-        "그룹1": ["공지사항", "잡담", "Q&A", "Q&A(자기주도 PJT)", "🔒광주 1반"],
-        "그룹2": ["1. SW 스타트 캠프", "2. 온라인 코칭", "공지사항", "이벤트", "일타싸피", "잡담", "종강식 이벤트", "BGM", "🔒5미자차", "🔒광주1반 거북컴들"],
-        "그룹3": ["공지사항", "Q&A"],
-        "그룹4": ["공지사항", "수다방", "팀구성:D", "QnA"],
-        "그룹5": ["공지사항", "수다방", "팀구성:D", "QnA"],
-        // 개인 메시지 Group dict에 추가해주기
-        "개인 메시지": ["곽동희(교육프로)", "곽온겸(광주실습코치)", "광주 1반 이민교(전임교수)", "광주_1반_김세희"]
-      },
-      AllContents : [
-        {
-          "id": 1, 
-          "group": "그룹1", 
-          "channel": "공지사항", 
-          "username": "황성안[광주_1반_C103] 팀원", 
-          "nickname": "sjd0051", 
-          "image": "", 
-          "content": "성규님 고백해도 되나요?", 
-          "scrap": "n", 
-          "date": "2021-09-27"
-        },
-        {
-          "id": 2, 
-          "group": "그룹1", 
-          "channel": "공지사항", 
-          "username": "김성규[광주_1반_C103] 팀장", 
-          "nickname": "rkttjdrb", 
-          "image": "", 
-          "content": "네 해도 됩니다", 
-          "scrap": "y", 
-          "date": "2021-09-27"
-        },
-        {
-          "id": 3, 
-          "group": "그룹1", 
-          "channel": "공지사항", 
-          "username": "이태성[광주_2반_C204] 팀장", 
-          "nickname": "lts", 
-          "image": "", 
-          "content": "안녕하세요.<br/> SSAFY 사무국입니다.<br/> 09/24 진행된 라이브 강의 이벤트 당첨자 안내드립니다 <br/> 라이브 강의를 적극적으로 참여해 주는 교육생에게는 선물이 팡팡 터집니다 <br/> 적극적인 참여와 채팅 부탁드립니다!<br/><br/>축하드립니다", 
-          "scrap": "n", 
-          "date": "2021-09-27"
-        },
-        {
-          "id": 7, 
-          "group": "그룹1", 
-          "channel": "공지사항", 
-          "username": "황성안[광주_1반_C103] 팀원", 
-          "nickname": "sjd0051", 
-          "image": "", 
-          "content": "오늘은 하체할 예정", 
-          "scrap": "n", 
-          "date": "2021-09-27"
-        }
-      ],
-      Content: [
-        {
-          "id": 1, 
-          "group": "그룹1", 
-          "channel": "공지사항", 
-          "username": "황성안[광주_1반_C103] 팀원", 
-          "nickname": "sjd0051", 
-          "image": "", 
-          "content": "성규님 고백해도 되나요?", 
-          "scrap": "n", 
-          "date": "2021-09-27"
-        },
-        {
-          "id": 2, 
-          "group": "그룹1", 
-          "channel": "공지사항", 
-          "username": "김성규[광주_1반_C103] 팀장", 
-          "nickname": "rkttjdrb", 
-          "image": "", 
-          "content": "네 해도 됩니다", 
-          "scrap": "y", 
-          "date": "2021-09-27"
-        },
-        {
-          "id": 3, 
-          "group": "그룹1", 
-          "channel": "공지사항", 
-          "username": "이태성[광주_2반_C204] 팀장", 
-          "nickname": "lts", 
-          "image": "", 
-          "content": "안녕하세요.<br/> SSAFY 사무국입니다.<br/> 09/24 진행된 라이브 강의 이벤트 당첨자 안내드립니다 <br/> 라이브 강의를 적극적으로 참여해 주는 교육생에게는 선물이 팡팡 터집니다 <br/> 적극적인 참여와 채팅 부탁드립니다!<br/><br/>축하드립니다", 
-          "scrap": "n", 
-          "date": "2021-09-27"
-        },
-        {
-          "id": 7, 
-          "group": "그룹1", 
-          "channel": "공지사항", 
-          "username": "황성안[광주_1반_C103] 팀원", 
-          "nickname": "sjd0051", 
-          "image": "", 
-          "content": "오늘은 하체할 예정", 
-          "scrap": "n", 
-          "date": "2021-09-27"
-        },
-      ]
+      Group: group,
+      Channel: channel,
+      AllContents : all_contents,
+      Content: contents
     })
+    // -- fetch로 나중에 옮기기 -- //
     
     // 스크롤바 밑으로
     $(document).ready(function () {
@@ -157,10 +96,8 @@ class Contents extends React.Component {
 
   // 그룹 버튼 클릭
   onClickGroup = (e) => {
-    this.onWatchAll()
-
     // state에 선택한 그룹의 채널들 넣기
-    var v = e.target.innerText
+    var v = " " + e.target.innerText
     this.setState({
       "ChkChannel": this.state.Channel[v]
     })
@@ -168,7 +105,7 @@ class Contents extends React.Component {
     this.setState({
       ChkTeam: v
     })
-
+    
     // 버튼 취소
     if (document.querySelector(".group-chk")) {
       document.querySelector(".group-chk").classList.remove("group-chk")
@@ -181,6 +118,7 @@ class Contents extends React.Component {
     document.querySelector(".sub-nav").classList.remove("nav-none")
   }
 
+
   // 채널 버튼 클릭
   onClickChannel = (e) => {
     // 버튼 취소
@@ -189,7 +127,18 @@ class Contents extends React.Component {
     }
     // 버튼 체크
     e.target.classList.add("c-channel-chk")
-    console.log(this.state.ChkTeam, e.target.innerText)
+
+    const all_contents = this.state.AllContents
+    const contents = []
+    for (let i=0; i<all_contents.length; i++) {
+      if (all_contents[i]['group'] === this.state.ChkTeam && all_contents[i]['channel'] === " "+e.target.innerText) {
+        contents.push(all_contents[i])
+      }
+    }
+
+    this.setState({
+      Content: contents
+    })
   }
 
 
@@ -208,14 +157,27 @@ class Contents extends React.Component {
 
   // 날짜 변경
   onChangeDate = (date) => {
+    const year = date.getFullYear()
+    const month = date.getMonth()+1
+    const day = date.getDate()
+
+    var now = new Date()
+    const t_year = now.getFullYear()
+    const t_month = now.getMonth()+1
+    const t_day = now.getDate()
+    
     if (date > new Date()) {
       alert("오늘 이후의 날짜를 탐색할 수 없습니다.")
+    }
+    else if (year === t_year && month === t_month && day === t_day) {
+      alert("오늘 날짜를 탐색할 수 없습니다.")
     }
     else {
       this.setState({
         "selectedDate": date
       })
-      console.log((date))
+      
+      const data = String(year)+"-"+String(month)+"-"+String(day)
       // 선택한 날짜의 게시글들 보여주기 //
     }
   }
@@ -275,26 +237,6 @@ class Contents extends React.Component {
     }
   }
 
-  
-  // 즐겨찾기
-  noKeepChk(chk) {
-    if (chk === "y") {
-      return "no-show"
-    }
-    else {
-      return "ch-no-keep"
-    }
-  }
-
-  keepChk(chk) {
-    if (chk === "n") {
-      return "no-show"
-    }
-    else {
-      return "ch-keep"
-    }
-  }
-
   render() {
     const { Group, ChkChannel, selectedDate, Content } = this.state
     const logo = "/image/logo_1.png"
@@ -330,20 +272,16 @@ class Contents extends React.Component {
         <div className="contents-header">
           <div className="ch-profile">
             <div className="ch-image">
+              <img src={item["profileImg"]} alt="이미지" className="ch-profile-img" />
             </div>
             <div>
-              <h5><b>{item["username"]}</b></h5>
-              <h6>@{item["nickname"]}</h6>
+              <h5><b>{item["nickname"]}</b></h5>
+              <h6>@{item["username"]}</h6>
             </div>
           </div>
-          <div className={this.noKeepChk(item["scrap"])}>
-            <h3><AiOutlineStar className={this.noKeepChk(item["scrap"])} /></h3>
-          </div>
-          <div className={this.keepChk(item["scrap"])}>
-            <h3><AiFillStar className={this.keepChk(item["scrap"])} /></h3>
-          </div>
         </div>
-        <div dangerouslySetInnerHTML={{ __html: item["content"] }}>
+        <div>
+          <ReactMarkdown>{item['content']}</ReactMarkdown>
         </div>
         <hr/>
       </div>
@@ -367,7 +305,7 @@ class Contents extends React.Component {
           <div className="c-title">
             <h2>Find Contents</h2>
             <div className="c-title-right">
-              <button className="c-title-cal">
+              <div className="c-title-cal">
                 📅
                 <DatePicker
                   selected={selectedDate}
@@ -376,7 +314,7 @@ class Contents extends React.Component {
                   locale="ko"
                   className="calender"
                 />
-              </button>
+              </div>
               <button className="c-title-btn" onClick={this.onWatchAll}><h6>전체보기</h6></button>
             </div>            
           </div>       

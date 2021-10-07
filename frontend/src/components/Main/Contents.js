@@ -11,7 +11,7 @@ import ko from 'date-fns/locale/ko';
 import "./css/Contents.css";
 import axios from "axios";
 
-import example from "./../../2021-10-5.json";
+// import example from "./../../2021-10-5.json";
 
 class Contents extends React.Component {
   state = {
@@ -26,63 +26,68 @@ class Contents extends React.Component {
 
   // api
   fetchPost = async (today_date) => {
-    const url = `/api/posts/${today_date}`
+    const url = `http://j5c103.p.ssafy.io:8081/api/posts/${today_date}`
+    const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+    const token = JSON.parse(sessionStorage.getItem('token'))
 
-    await axios.get(url)
+    const data = {
+      "userId": userInfo.userId,
+	    "token": token
+    }
+    console.log(data)
+
+    await axios.post(url, data)
     .then(res => {
-      console.log(res)
+      console.log(res.data)
+      const group = []
+      const channel = {}
+      const all_contents = []
+      const contents = []
+
+      for (let i=0; i<res.data.length; i++) {
+        if (!group.includes(res.data[i]['teamName'])) {
+          group.push(res.data[i]['teamName'])
+        }
+
+        if (channel[res.data[i]['teamName']] && !(channel[res.data[i]['teamName']].includes(res.data[i]['channelName']))) {
+          channel[res.data[i]['teamName']].push(res.data[i]['channelName'])
+        }
+        else if (!channel[res.data[i]['teamName']]) {
+          channel[res.data[i]['teamName']] = [res.data[i]['channelName']]
+        }
+
+        const content_info = {
+          "id": res.data[i]["postId"],
+          "group": res.data[i]["teamName"], 
+          "channel": res.data[i]["channelName"], 
+          "username": res.data[i]["username"], 
+          "nickname": res.data[i]["nickname"], 
+          "profileImg": res.data[i]["profileImg"], 
+          "content": res.data[i]["message"]
+        }
+        all_contents.push(content_info)
+        contents.push(content_info)
+      }
+        
+      this.setState({
+        Group: group,
+        Channel: channel,
+        AllContents : all_contents,
+        Content: contents
+      })
     })
     .catch(err => {
-      console.log(err)
+      console.log(err.response)
+      alert("새로고침을 해주세요.")
     })
-
-    // setState로 state 관리!!
-  }
-
-  
+  }  
 
   componentDidMount() {
     // 서버에서 api 받아오기!!
-    // this.fetchPost(this.state.selectedDate)
+    const now = this.state.selectedDate
+    const today_date = String(now.getFullYear())+"-"+String(now.getMonth()+1)+"-"+String(now.getDate())
+    this.fetchPost(today_date)
 
-    // -- fetch로 나중에 옮기기 -- //
-    const group = []
-    const channel = {}
-    const all_contents = []
-    const contents = []
-
-    for (let i=0; i<example.length; i++) {
-      if (!group.includes(example[i]['teamName'])) {
-        group.push(example[i]['teamName'])
-      }
-
-      if (channel[example[i]['teamName']] && !(channel[example[i]['teamName']].includes(example[i]['channelName']))) {
-        channel[example[i]['teamName']].push(example[i]['channelName'])
-      }
-      else if (!channel[example[i]['teamName']]) {
-        channel[example[i]['teamName']] = [example[i]['channelName']]
-      }
-
-      const content_info = {
-        "id": example[i]["postId"],
-        "group": example[i]["teamName"], 
-        "channel": example[i]["channelName"], 
-        "username": example[i]["username"], 
-        "nickname": example[i]["nickname"], 
-        "profileImg": example[i]["profileImg"], 
-        "content": example[i]["message"]
-      }
-      all_contents.push(content_info)
-      contents.push(content_info)
-    }
-      
-    this.setState({
-      Group: group,
-      Channel: channel,
-      AllContents : all_contents,
-      Content: contents
-    })
-    // -- fetch로 나중에 옮기기 -- //
     
     // 스크롤바 밑으로
     $(document).ready(function () {
@@ -176,9 +181,6 @@ class Contents extends React.Component {
       this.setState({
         "selectedDate": date
       })
-      
-      const data = String(year)+"-"+String(month)+"-"+String(day)
-      // 선택한 날짜의 게시글들 보여주기 //
     }
   }
 

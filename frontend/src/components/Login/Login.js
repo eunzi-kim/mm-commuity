@@ -21,7 +21,7 @@ class Login extends React.Component {
 
   // 로그인 실행 함수
   fetchLogin = async ( data ) => {
-    const url = "https://j5c103.p.ssafy.io/api/auth/login"
+    const url = "http://j5c103.p.ssafy.io:8083/api/auth/login"
 
     await axios.post(url, data)
     .then(res => {

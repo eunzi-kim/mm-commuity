@@ -4,6 +4,7 @@ import com.alsselssajob.domain.scrap.application.ScrapService;
 import com.alsselssajob.domain.scrap.dto.request.RequestScrap;
 import com.alsselssajob.domain.scrap.dto.response.ResponseScrap;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;

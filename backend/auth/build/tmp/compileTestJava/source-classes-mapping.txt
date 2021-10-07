@@ -1,0 +1,16 @@
+com/alsselssajob/auth/ui/AuthControllerTest.java
+ com.alsselssajob.auth.ui.AuthControllerTest
+com/alsselssajob/auth/dto/response/LoginResponseTest.java
+ com.alsselssajob.auth.dto.response.LoginResponseTest
+com/alsselssajob/auth/AuthApplicationTests.java
+ com.alsselssajob.auth.AuthApplicationTests
+com/alsselssajob/auth/domain/TokenTest.java
+ com.alsselssajob.auth.domain.TokenTest
+com/alsselssajob/auth/application/AuthServiceTest.java
+ com.alsselssajob.auth.application.AuthServiceTest
+com/alsselssajob/auth/dto/request/LoginRequestTest.java
+ com.alsselssajob.auth.dto.request.LoginRequestTest
+com/alsselssajob/auth/dto/request/LogoutRequestTest.java
+ com.alsselssajob.auth.dto.request.LogoutRequestTest
+com/alsselssajob/auth/dto/request/TokenRequestTest.java
+ com.alsselssajob.auth.dto.request.TokenRequestTest

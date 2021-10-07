@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.util.logging.Level;
 
+@CrossOrigin(originPatterns = "*")
 @EnableScheduling
 @Component
 @RequiredArgsConstructor

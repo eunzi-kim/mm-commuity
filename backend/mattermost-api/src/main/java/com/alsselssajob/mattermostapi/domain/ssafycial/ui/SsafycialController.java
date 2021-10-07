@@ -14,6 +14,7 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.logging.Level;
 
+@CrossOrigin(originPatterns = "*")
 @EnableScheduling
 @Component
 @RequiredArgsConstructor

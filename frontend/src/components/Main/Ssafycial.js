@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 
 import "./css/Ssafycial.css"
@@ -10,6 +11,18 @@ class Ssafycial extends React.Component {
 
   onClickSsafycialDetail() {
     document.querySelector(".s-detail-none").className = "s-detail"
+  }
+
+  fetchSsafycial = async () => {
+    const url = '/api/ssafycials'
+
+    await axios.get(url)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 
   componentDidMount() {

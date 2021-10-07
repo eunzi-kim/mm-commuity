@@ -21,19 +21,20 @@ class Login extends React.Component {
 
   // 로그인 실행 함수
   fetchLogin = async ( data ) => {
-    const url = "/api/v4/users/login"
+    const url = "http://localhost:8083/api/auth/login"
 
     await axios.post(url, data)
     .then(res => {
-      // console.log(res.data)
       const userInfo = {
-        "id": res.data.id,
-        "username": res.data.username,
-        "nickname": res.data.nickname,
-        "email": res.data.nickname        
+        "userId": res.data.userId,
+        "username": res.data.userName,
+        "nickname": res.data.nickName,
+        "image": res.data.image       
       }
+      const token = res.data.token
 
       sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
+      sessionStorage.setItem('token', JSON.stringify(token))
       window.location.replace("/");
     })
     .catch(err => {
@@ -44,7 +45,7 @@ class Login extends React.Component {
   // 로그인 버튼 클릭
   onClickLogin = () => {
     const data = {
-      "login_id": this.state.id,
+      "id": this.state.id,
       "password": this.state.password
     }
     this.fetchLogin(data)

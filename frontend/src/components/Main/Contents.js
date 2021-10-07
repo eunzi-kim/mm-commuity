@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import ko from 'date-fns/locale/ko';
 
 import "./css/Contents.css";
+import axios from "axios";
 
 class Contents extends React.Component {
   state = {
@@ -18,6 +19,22 @@ class Contents extends React.Component {
     selectedDate: new Date(),
     AllContents: [],
     Content: [],
+    ChkTeam: '',
+  }
+
+  // api
+  fetchPost = async (today_date) => {
+    const url = `/api/posts/${today_date}`
+
+    await axios.get(url)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
+    // setState로 state 관리!!
   }
 
   componentDidMount() {
@@ -148,6 +165,10 @@ class Contents extends React.Component {
       "ChkChannel": this.state.Channel[v]
     })
 
+    this.setState({
+      ChkTeam: v
+    })
+
     // 버튼 취소
     if (document.querySelector(".group-chk")) {
       document.querySelector(".group-chk").classList.remove("group-chk")
@@ -168,7 +189,7 @@ class Contents extends React.Component {
     }
     // 버튼 체크
     e.target.classList.add("c-channel-chk")
-    console.log(e.target.innerText)
+    console.log(this.state.ChkTeam, e.target.innerText)
   }
 
 
@@ -240,11 +261,16 @@ class Contents extends React.Component {
     if (document.querySelector(".c-channel-chk")) {
       document.querySelector(".c-channel-chk").classList.remove("c-channel-chk")
     }
+
+    if (document.querySelector(".nav-up")) {      
+      document.querySelector(".sub-nav").classList.add("nav-none")
+    } 
     
     if (this.state.AllContents !== this.state.Content) {
       var all_contents = this.state.AllContents
       this.setState({
-        Content: all_contents
+        Content: all_contents,
+        ChkTeam: ""
       })
     }
   }

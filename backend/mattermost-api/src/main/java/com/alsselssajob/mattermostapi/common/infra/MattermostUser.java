@@ -61,6 +61,7 @@ public class MattermostUser {
 
         return (nickname.contains(MattermostUserRole.PROFESSOR.role())
                 || nickname.contains(MattermostUserRole.CONSULTANT.role())
+                || nickname.contains(MattermostUserRole.COACH.role())
                 || nickname.contains(MattermostUserRole.EDU_PRO.role()));
     }
 

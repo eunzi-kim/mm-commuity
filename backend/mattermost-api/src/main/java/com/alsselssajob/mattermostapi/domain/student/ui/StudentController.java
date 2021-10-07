@@ -9,19 +9,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.annotation.PostConstruct;
 import java.util.logging.Level;
 
-@CrossOrigin(originPatterns = "*")
 @EnableScheduling
 @Component
 @RequiredArgsConstructor
 public class StudentController {
 
     private final static String EVERY_ZERO_AM_FIVE_MINUTE_CRON_EXPRESSION = "0 5 0 * * *";
-    private final static String EVERY_MINUTE_CRON_EXPRESSION_FOR_TEST = "0/30 * * * * *";
+    private final static String CRON_EXPRESSION_FOR_TEST = "* 0/1 * * * *";
 
     private final StudentService studentService;
     private MattermostClient client;

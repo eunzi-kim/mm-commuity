@@ -9,20 +9,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.logging.Level;
 
-@CrossOrigin(originPatterns = "*")
 @EnableScheduling
 @Component
 @RequiredArgsConstructor
 public class SsafycialController {
 
     private final static String EVERY_TWO_WEEKS_AT_ONE_AM_CRON_EXPRESSION = "0 10 0 1/14 * ?";
-    private final static String EVERY_FOURTY_FIVE_SECS_CRON_EXPRESSION_FOR_TEST = "0/30 * * * * *";
+    private final static String CRON_EXPRESSION_FOR_TEST = "0/50 * * * * *";
 
     private final SsafycialService ssafycialService;
     private MattermostClient client;
@@ -35,9 +33,6 @@ public class SsafycialController {
 
     @Value("${user.password}")
     private String password;
-
-    @Value("${presscorps.team.id}")
-    private String pressCorpsTeamId;
 
     @Value("${ssafycial.channel.id}")
     private String ssafycialChannelId;
@@ -63,7 +58,6 @@ public class SsafycialController {
                 .user(user)
                 .build();
 
-        ssafycialService.saveSsafycials(user,
-                mattermostUser.getSsafycialsForLastTwoWeeks(pressCorpsTeamId, ssafycialChannelId));
+        ssafycialService.saveSsafycials(client, mattermostUser.getSsafycialsForLastTwoWeeks(ssafycialChannelId));
     }
 }

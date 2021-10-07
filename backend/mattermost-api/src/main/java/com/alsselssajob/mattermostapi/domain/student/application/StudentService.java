@@ -54,17 +54,11 @@ public class StudentService {
                             .orElse(Student.builder()
                                     .userId(userId)
                                     .image(getProfileImage(mattermostUser, userId))
+                                    .username(getUserName(mattermostUser, userId))
                                     .build());
                     student.updatePostAndReactedCount(postsGroup.size(), reactedCount);
                     students.add(student);
                 });
-    }
-
-    private String getProfileImage(MattermostUser mattermostUser, String userId) {
-        return IMAGE_ENCODING_FORMAT.concat(Base64.getEncoder()
-                .encodeToString(mattermostUser.client()
-                        .getProfileImage(userId)
-                        .readEntity()));
     }
 
     private void setReactedCounts(final List<Student> students, final List<Post> posts,
@@ -83,6 +77,7 @@ public class StudentService {
                             .orElse(Student.builder()
                                     .userId(userId)
                                     .image(getProfileImage(mattermostUser, userId))
+                                    .username(getUserName(mattermostUser, userId))
                                     .build());
 
                     if (students.contains(student)) {
@@ -93,5 +88,19 @@ public class StudentService {
                         students.add(student);
                     }
                 });
+    }
+
+    private String getProfileImage(final MattermostUser mattermostUser, final String userId) {
+        return IMAGE_ENCODING_FORMAT.concat(Base64.getEncoder()
+                .encodeToString(mattermostUser.client()
+                        .getProfileImage(userId)
+                        .readEntity()));
+    }
+
+    private String getUserName(final MattermostUser mattermostUser, final String userId) {
+        return mattermostUser.client()
+                .getUser(userId)
+                .readEntity()
+                .getNickname();
     }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-// import axios from "axios";
+import axios from "axios";
 import { Button, Dropdown, DropdownButton } from "react-bootstrap";
 import { GiHamburgerMenu } from 'react-icons/gi';
 
@@ -12,16 +12,19 @@ import { Link } from "react-router-dom";
 class EduPro extends React.Component {
     state = {
         nickname: "",
-        username: ""
+        username: "",
+        profileImg: ""
       };
 
-    takeUserInfo = () => {
-    if (JSON.parse(sessionStorage.getItem('userInfo'))) {
+      takeUserInfo = () => {    
         const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
-        this.setState({nickname: userInfo.nickname})
-        this.setState({username: userInfo.username})
-    }
-    }
+        this.setState({
+          nickname: userInfo.nickname,
+          username: userInfo.username,
+          profileImg: userInfo.image
+        })
+    
+      }
 
     componentDidMount() {
         this.takeUserInfo()
@@ -55,9 +58,32 @@ class EduPro extends React.Component {
         // 버튼이 체크돼있을 경우
         e.target.classList.add("btnchk")
     }
+    // 로그아웃
+  fetchLogout = async (data) => {
+    const url = 'http://localhost:8083/api/auth/logout'
+    await axios.post(url, data)
+    .then(res => {
+      if (res.status === 204) {
+        alert("로그아웃")
+        sessionStorage.clear()
+        window.location.replace("/login");
+      }
+    })
+    .catch(err => {
+      alert("로그아웃에 실패하였습니다😭")
+    })
+  }
+
+  // 로그아웃 함수
+  onLogout = () => {
+    const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+    const data = {'userId': userInfo['userId']}
+    this.fetchLogout(data)
+  }
+
 
     render() {
-        const { nickname, username } = this.state;
+        const { nickname, username, profileImg } = this.state;
         const logo = '/image/logo_1.png'
 
         return (
@@ -74,13 +100,12 @@ class EduPro extends React.Component {
                     <div className="pro-head-profileall">
                         <div className="pro-main-profile">
                             <div className="mp-image">
-                            이미지
+                                <img src={ profileImg } alt={ username } className="profile-img" />
                             </div>
                             <div className="mp-info">
                                 <div className="mp-nn"><b>{ nickname }</b></div>
                                 <div className="mp-un">@{ username }</div>
-                                <div className="mp-point">150 point</div>
-                            </div>
+                                </div>
                         </div>
                         <div className="pro-main-btns">
                             <Link to="/scrap">
@@ -95,21 +120,21 @@ class EduPro extends React.Component {
                 </div>
 
                 <div className="ep-header-responsive">
-                    <DropdownButton className="hamburger" align="end" variant="secondary" id="dropdown-item-button" title={<GiHamburgerMenu />}>
-                        <Dropdown.ItemText className="dd-image">
-                        <div className="ep-image">
-                            이미지
-                        </div>
-                        <div className="mr-ep">
-                            { nickname }<br />
-                            150 point
-                        </div>
-                        </Dropdown.ItemText>
-                        <Dropdown.ItemText><div className="line"></div></Dropdown.ItemText>
-                        <Dropdown.Item as="button"><Link to="/scrap" className="link">즐겨찾기</Link></Dropdown.Item>
-                        <Dropdown.Item as="button"><Link to="/" className="link">알쓸싸잡</Link></Dropdown.Item>
-                        <Dropdown.Item as="button" onClick={this.onLogout} className="logout-text">로그아웃</Dropdown.Item>
-                    </DropdownButton>
+                <DropdownButton className="hamburger" align="end" variant="secondary" id="dropdown-item-button" title={<GiHamburgerMenu />}>
+            <Dropdown.ItemText className="dd-image">
+              <div className="mp-image">
+                <img src={ profileImg } alt={ username } className="profile-img" />
+              </div>
+              <div className="mr-mp">
+                { nickname }<br />
+                150 point
+              </div>
+            </Dropdown.ItemText>
+            <Dropdown.ItemText><div className="line"></div></Dropdown.ItemText>
+            <Link to="/scrap" className="link"><Dropdown.Item as="button">즐겨찾기</Dropdown.Item></Link>
+            <Link to="/" className="link"><Dropdown.Item as="button">알쓸싸잡</Dropdown.Item></Link>
+            <Dropdown.Item as="button" onClick={this.onLogout} className="logout-text">로그아웃</Dropdown.Item>
+          </DropdownButton>
                     <Link to="/">
                         <div className="ep-logo">
                         <img width="180rem" src={logo} alt="알쓸싸잡" />

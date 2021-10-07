@@ -1,2 +1,0 @@
-com/alsselssajob/auth/AuthApplication.java
- com.alsselssajob.auth.AuthApplication

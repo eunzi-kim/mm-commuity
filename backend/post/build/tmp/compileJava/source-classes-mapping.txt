@@ -1,0 +1,34 @@
+<<<<<<< HEAD
+=======
+com/alsselssajob/domain/post/dto/response/ResponsePost.java
+ com.alsselssajob.domain.post.dto.response.ResponsePost
+ com.alsselssajob.domain.post.dto.response.ResponsePost$ResponsePostBuilder
+com/alsselssajob/domain/PostApplication.java
+ com.alsselssajob.domain.PostApplication
+com/alsselssajob/domain/post/ui/PostController.java
+ com.alsselssajob.domain.post.ui.PostController
+com/alsselssajob/domain/ssafycial/application/SsafycialService.java
+ com.alsselssajob.domain.ssafycial.application.SsafycialService
+com/alsselssajob/domain/ssafycial/dto/response/ResponseSsafycial.java
+ com.alsselssajob.domain.ssafycial.dto.response.ResponseSsafycial
+ com.alsselssajob.domain.ssafycial.dto.response.ResponseSsafycial$ResponseSsafycialBuilder
+com/alsselssajob/domain/post/dto/request/PostRequest.java
+ com.alsselssajob.domain.post.dto.request.PostRequest
+com/alsselssajob/domain/post/application/PostService.java
+ com.alsselssajob.domain.post.application.PostService
+com/alsselssajob/domain/post/domain/HBaseRepository.java
+ com.alsselssajob.domain.post.domain.HBaseRepository
+com/alsselssajob/domain/ssafycial/ui/SsafycialController.java
+ com.alsselssajob.domain.ssafycial.ui.SsafycialController
+com/alsselssajob/domain/post/config/RedisPostConfig.java
+ com.alsselssajob.domain.post.config.RedisPostConfig
+com/alsselssajob/domain/scrap/dto/request/RequestScrap.java
+ com.alsselssajob.domain.scrap.dto.request.RequestScrap
+com/alsselssajob/domain/scrap/application/ScrapService.java
+ com.alsselssajob.domain.scrap.application.ScrapService
+com/alsselssajob/domain/scrap/dto/response/ResponseScrap.java
+ com.alsselssajob.domain.scrap.dto.response.ResponseScrap
+ com.alsselssajob.domain.scrap.dto.response.ResponseScrap$ResponseScrapBuilder
+com/alsselssajob/domain/scrap/ui/ScrapController.java
+ com.alsselssajob.domain.scrap.ui.ScrapController
+>>>>>>> [S05P21C103-194] [BE-ks03102] feat: 스크랩 Service 코드 작성 && DTO 수정

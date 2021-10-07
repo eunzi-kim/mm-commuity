@@ -6,19 +6,19 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class ScoreRequest {
-    @JsonProperty("filter")
-    private String filter;
+    @JsonProperty("type")
+    private String type;
     @JsonProperty("id")
     private String id;
 
     @Builder
-    public ScoreRequest(final String filter, final String id) {
+    public ScoreRequest(final String type, final String id) {
 
-        this.filter = filter;
+        this.type = type;
         this.id = id;
     }
 
-    public String filter() { return filter; }
+    public String type() { return type; }
 
     public String id() {
         return id;

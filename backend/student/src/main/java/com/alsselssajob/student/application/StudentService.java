@@ -5,9 +5,6 @@ import com.alsselssajob.student.domain.StudentRepository;
 import com.alsselssajob.student.dto.request.ScoreRequest;
 import com.alsselssajob.student.dto.response.ScoreResponse;
 import lombok.RequiredArgsConstructor;
-import net.bis5.mattermost.client4.ApiResponse;
-import net.bis5.mattermost.client4.MattermostClient;
-import net.bis5.mattermost.model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -40,9 +37,6 @@ public class StudentService {
 
     @Transactional
     public ScoreResponse bestReaction(final ScoreRequest scoreRequest) {
-
-        //calculate score
-        //DB colulmn에 맞게 고쳐
 
         final List<Student> ranking = studentRepository.findAll(Sort.by(Sort.Direction.DESC, "reactingCount"));
 

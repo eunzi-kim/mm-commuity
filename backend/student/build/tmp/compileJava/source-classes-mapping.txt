@@ -1,0 +1,17 @@
+com/alsselssajob/student/dto/request/ScoreRequest.java
+ com.alsselssajob.student.dto.request.ScoreRequest
+ com.alsselssajob.student.dto.request.ScoreRequest$ScoreRequestBuilder
+com/alsselssajob/student/StudentApplication.java
+ com.alsselssajob.student.StudentApplication
+com/alsselssajob/student/domain/StudentRepository.java
+ com.alsselssajob.student.domain.StudentRepository
+com/alsselssajob/student/dto/response/ScoreResponse.java
+ com.alsselssajob.student.dto.response.ScoreResponse
+ com.alsselssajob.student.dto.response.ScoreResponse$ScoreResponseBuilder
+com/alsselssajob/student/domain/Student.java
+ com.alsselssajob.student.domain.Student
+ com.alsselssajob.student.domain.Student$StudentBuilder
+com/alsselssajob/student/application/StudentService.java
+ com.alsselssajob.student.application.StudentService
+com/alsselssajob/student/ui/StudentController.java
+ com.alsselssajob.student.ui.StudentController

@@ -49,6 +49,9 @@
   width: 70px;
   height: 70px;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .scrap-mp-info {

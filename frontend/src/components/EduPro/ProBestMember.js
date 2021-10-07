@@ -37,20 +37,7 @@ class ProBestMember extends Component {
 
 
   render() {
-    const arr = [5,2,3,4,1]
-    console.log(arr);
-
-    arr.sort();
-    console.log(arr);
-
-
-
-
-
-
-
     const { users_info } = this.state
-    console.log();
     // 조회된 교육생
     const sort_m_lst = users_info
     // .sort((a, b) => a.users["id"] > b.users["id"] ? 1:-1)

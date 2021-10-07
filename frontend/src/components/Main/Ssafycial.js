@@ -14,7 +14,7 @@ class Ssafycial extends React.Component {
   }
 
   fetchSsafycial = async () => {
-    const url = '/api/ssafycials'
+    const url = 'http://j5c103.p.ssafy.io:8081/api/ssafycials'
 
     await axios.get(url)
     .then(res => {

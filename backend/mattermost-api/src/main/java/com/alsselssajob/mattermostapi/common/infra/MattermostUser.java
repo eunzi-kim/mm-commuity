@@ -65,40 +65,6 @@ public class MattermostUser {
                 || nickname.contains(MattermostUserRole.EDU_PRO.role()));
     }
 
-    public Map<String, List<Map<String, List<Post>>>> getAllPostsGroupByChannelGroupByTeam() {
-        final Map<String, List<Map<String, List<Post>>>> postsGroupByChannelGroupByTeam = new HashMap<>();
-
-        final List<Team> teams = getTeamsForUser();
-        for (Team team : teams) {
-            final List<Map<String, List<Post>>> channelsContainingPosts = new ArrayList<>();
-            final List<Channel> channels = getPublicChannelsForTeam(team);
-
-            for (Channel channel : channels) {
-                final Map<String, List<Post>> postsGroupByChannel = new HashMap<>();
-
-                Pager pager = Pager.defaultPager();
-                while(true) {
-                    final Map<String, Post> posts = getPostsPerPage(channel, pager).getPosts();
-
-                    if(Objects.isNull(posts) || posts.isEmpty()) {
-                        break;
-                    }
-
-                    postsGroupByChannel.put(channel.getDisplayName(), new ArrayList<>(posts.values()
-                            .stream()
-                            .filter(this::isPostOfStudent)
-                            .collect(toList())));
-                    channelsContainingPosts.add(postsGroupByChannel);
-
-                    pager = pager.nextPage();
-                }
-            }
-            postsGroupByChannelGroupByTeam.put(team.getDisplayName(), channelsContainingPosts);
-        }
-
-        return postsGroupByChannelGroupByTeam;
-    }
-
     public Map<String, List<Map<String, List<Post>>>> getPostsForTodayGroupByChannelGroupByTeam() {
         final Map<String, List<Map<String, List<Post>>>> postsGroupByChannelGroupByTeam = new HashMap<>();
 
@@ -132,11 +98,6 @@ public class MattermostUser {
 
     private List<Channel> getPublicChannelsForTeam(final Team team) {
         return client.getPublicChannelsForTeam(team.getId()).readEntity();
-    }
-
-    private PostList getPostsPerPage(final Channel channel, final Pager pager) {
-        return client.getPostsForChannel(channel.getId(), pager)
-                .readEntity();
     }
 
     private PostList getPostsForChannelSinceYesterday(final Channel channel) {

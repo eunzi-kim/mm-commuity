@@ -5,6 +5,7 @@ import com.alsselssajob.mattermostapi.common.vo.ColumnFamily;
 import com.alsselssajob.mattermostapi.common.vo.qualifier.SsafycialQualifier;
 import com.alsselssajob.mattermostapi.common.vo.qualifier.UserQualifier;
 import com.alsselssajob.mattermostapi.domain.ssafycial.domain.Ssafycial;
+import com.alsselssajob.mattermostapi.domain.ssafycial.infra.SsafycialUtil;
 import net.bis5.mattermost.client4.MattermostClient;
 import net.bis5.mattermost.model.*;
 import org.apache.hadoop.conf.Configuration;
@@ -29,25 +30,30 @@ public class SsafycialRepository {
         configuration = HBaseConfiguration.create();
     }
 
-    public void saveSsafycials(final User user, final List<Ssafycial> ssafycials) throws IOException {
+    public void saveSsafycials(final MattermostClient client, final List<Post> posts) throws IOException {
         final Connection connection = ConnectionFactory.createConnection(configuration);
         final Admin admin = connection.getAdmin();
 
         createTableIfNotExists(admin);
 
         final Table ssafycialTable = connection.getTable(SSAFYCIAL_TABLE_NAME);
-        ssafycials.stream()
-                .forEach(ssafycial -> {
-                    final Put row = new Put(ssafycial.id().getBytes());
+        posts.stream()
+                .forEach(post -> {
+                    final Put row = new Put(post.getId().getBytes());
 
-                    addSsafycialColumnFamily(ssafycial, row);
-                    addUserColumnFamily(user, row);
+                    final List<Ssafycial> ssafycials = SsafycialUtil.parsePostToSsafycial(post);
+                    ssafycials.stream()
+                            .forEach(ssafycial -> {
+                                addSsafycialColumnFamily(ssafycial, row);
+                                addUserColumnFamily(client.getUser(post.getUserId())
+                                        .readEntity(), row);
 
-                    try {
-                        ssafycialTable.put(row);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                                try {
+                                    ssafycialTable.put(row);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            });
                 });
 
         connection.close();

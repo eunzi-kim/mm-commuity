@@ -4,9 +4,9 @@ com/alsselssajob/student/dto/request/ScoreRequestTest.java
  com.alsselssajob.student.dto.request.ScoreRequestTest
 com/alsselssajob/student/StudentApplicationTests.java
  com.alsselssajob.student.StudentApplicationTests
-com/alsselssajob/student/ui/StudentControllerTest.java
- com.alsselssajob.student.ui.StudentControllerTest
 com/alsselssajob/student/dto/response/ScoreResponseTest.java
  com.alsselssajob.student.dto.response.ScoreResponseTest
 com/alsselssajob/student/application/StudentServiceTest.java
  com.alsselssajob.student.application.StudentServiceTest
+com/alsselssajob/student/ui/StudentControllerTest.java
+ com.alsselssajob.student.ui.StudentControllerTest

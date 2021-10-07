@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.alsselssajob.student.ui.StudentControllerTest" tests="5" skipped="0" failures="5" errors="0" timestamp="2021-10-07T05:20:04" hostname="DESKTOP-KVCQHCD" time="0.018">
+<testsuite name="com.alsselssajob.student.ui.StudentControllerTest" tests="5" skipped="0" failures="5" errors="0" timestamp="2021-10-07T09:34:02" hostname="DESKTOP-KVCQHCD" time="0.011">
   <properties/>
   <testcase name="StudentController 클래스 / bestStudent 테스트" classname="com.alsselssajob.student.ui.StudentControllerTest" time="0.001">
     <failure message="org.mockito.exceptions.misusing.NullInsteadOfMockException: &#10;Argument passed to when() is null!&#10;Example of correct stubbing:&#10;    doThrow(new RuntimeException()).when(mock).someMethod();&#10;Also, if you use @Mock annotation don't miss openMocks()" type="org.mockito.exceptions.misusing.NullInsteadOfMockException">org.mockito.exceptions.misusing.NullInsteadOfMockException: 
@@ -7,7 +7,7 @@ Argument passed to when() is null!
 Example of correct stubbing:
     doThrow(new RuntimeException()).when(mock).someMethod();
 Also, if you use @Mock annotation don't miss openMocks()
-	at com.alsselssajob.student.ui.StudentControllerTest.bestStudent_api_test(StudentControllerTest.java:145)
+	at com.alsselssajob.student.ui.StudentControllerTest.bestStudent_api_test(StudentControllerTest.java:146)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -100,13 +100,13 @@ Also, if you use @Mock annotation don't miss openMocks()
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </failure>
   </testcase>
-  <testcase name="StudentController 클래스 / bestReaction 테스트" classname="com.alsselssajob.student.ui.StudentControllerTest" time="0.004">
+  <testcase name="StudentController 클래스 / bestReaction 테스트" classname="com.alsselssajob.student.ui.StudentControllerTest" time="0.001">
     <failure message="org.mockito.exceptions.misusing.NullInsteadOfMockException: &#10;Argument passed to when() is null!&#10;Example of correct stubbing:&#10;    doThrow(new RuntimeException()).when(mock).someMethod();&#10;Also, if you use @Mock annotation don't miss openMocks()" type="org.mockito.exceptions.misusing.NullInsteadOfMockException">org.mockito.exceptions.misusing.NullInsteadOfMockException: 
 Argument passed to when() is null!
 Example of correct stubbing:
     doThrow(new RuntimeException()).when(mock).someMethod();
 Also, if you use @Mock annotation don't miss openMocks()
-	at com.alsselssajob.student.ui.StudentControllerTest.bestReaction_api_test(StudentControllerTest.java:71)
+	at com.alsselssajob.student.ui.StudentControllerTest.bestReaction_api_test(StudentControllerTest.java:72)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -199,13 +199,13 @@ Also, if you use @Mock annotation don't miss openMocks()
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </failure>
   </testcase>
-  <testcase name="StudentController 클래스 / bestUploaderApi 테스트" classname="com.alsselssajob.student.ui.StudentControllerTest" time="0.003">
+  <testcase name="StudentController 클래스 / bestUploaderApi 테스트" classname="com.alsselssajob.student.ui.StudentControllerTest" time="0.001">
     <failure message="org.mockito.exceptions.misusing.NullInsteadOfMockException: &#10;Argument passed to when() is null!&#10;Example of correct stubbing:&#10;    doThrow(new RuntimeException()).when(mock).someMethod();&#10;Also, if you use @Mock annotation don't miss openMocks()" type="org.mockito.exceptions.misusing.NullInsteadOfMockException">org.mockito.exceptions.misusing.NullInsteadOfMockException: 
 Argument passed to when() is null!
 Example of correct stubbing:
     doThrow(new RuntimeException()).when(mock).someMethod();
 Also, if you use @Mock annotation don't miss openMocks()
-	at com.alsselssajob.student.ui.StudentControllerTest.bestUploader_api_test(StudentControllerTest.java:46)
+	at com.alsselssajob.student.ui.StudentControllerTest.bestUploader_api_test(StudentControllerTest.java:47)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -304,7 +304,7 @@ Argument passed to when() is null!
 Example of correct stubbing:
     doThrow(new RuntimeException()).when(mock).someMethod();
 Also, if you use @Mock annotation don't miss openMocks()
-	at com.alsselssajob.student.ui.StudentControllerTest.bestStudents_api_test(StudentControllerTest.java:120)
+	at com.alsselssajob.student.ui.StudentControllerTest.bestStudents_api_test(StudentControllerTest.java:121)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -397,13 +397,13 @@ Also, if you use @Mock annotation don't miss openMocks()
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </failure>
   </testcase>
-  <testcase name="StudentController 클래스 / mostReaction 테스트" classname="com.alsselssajob.student.ui.StudentControllerTest" time="0.003">
+  <testcase name="StudentController 클래스 / mostReaction 테스트" classname="com.alsselssajob.student.ui.StudentControllerTest" time="0.001">
     <failure message="org.mockito.exceptions.misusing.NullInsteadOfMockException: &#10;Argument passed to when() is null!&#10;Example of correct stubbing:&#10;    doThrow(new RuntimeException()).when(mock).someMethod();&#10;Also, if you use @Mock annotation don't miss openMocks()" type="org.mockito.exceptions.misusing.NullInsteadOfMockException">org.mockito.exceptions.misusing.NullInsteadOfMockException: 
 Argument passed to when() is null!
 Example of correct stubbing:
     doThrow(new RuntimeException()).when(mock).someMethod();
 Also, if you use @Mock annotation don't miss openMocks()
-	at com.alsselssajob.student.ui.StudentControllerTest.mostReaction_api_test(StudentControllerTest.java:95)
+	at com.alsselssajob.student.ui.StudentControllerTest.mostReaction_api_test(StudentControllerTest.java:96)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

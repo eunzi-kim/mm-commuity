@@ -19,82 +19,105 @@ import java.util.logging.Level;
 public class StudentService {
     private final StudentRepository studentRepository;
 
-    @Value("${mattermost.url}")
-    private String mattermostUrl;
-
     @Transactional
-    public ScoreResponse bestUploader(final ScoreRequest scoreRequest) {
+    public List<ScoreResponse> bestUploader() {
 
         //calculate score
         //DB colulmn에 맞게 고쳐
-
         final List<Student> ranking = studentRepository.findAll(Sort.by(Sort.Direction.DESC, "postCount"));
-
-        return ScoreResponse.builder()
-                .list(ranking)
-                .build();
+        System.out.println(ranking.get(0));
+        final List<ScoreResponse> result = new ArrayList<ScoreResponse>();
+        for(Student s : ranking) {
+            result.add(ScoreResponse.builder()
+                    .userId(s.userId())
+                    .username(s.username())
+                    .image(s.image())
+                    .postCount(s.postCount())
+                    .reactedCount(s.reactedCount())
+                    .reactingCount(s.reactingCount())
+                    .point(s.point())
+                    .build());
+        }
+        return result;
     }
 
     @Transactional
-    public ScoreResponse bestReaction(final ScoreRequest scoreRequest) {
+    public List<ScoreResponse> bestReaction() {
 
         final List<Student> ranking = studentRepository.findAll(Sort.by(Sort.Direction.DESC, "reactingCount"));
 
-        return ScoreResponse.builder()
-                .list(ranking)
-                .build();
+        final List<ScoreResponse> result = new ArrayList<ScoreResponse>();
+        for(Student s : ranking) {
+            result.add(ScoreResponse.builder()
+                    .userId(s.userId())
+                    .username(s.username())
+                    .image(s.image())
+                    .postCount(s.postCount())
+                    .reactedCount(s.reactedCount())
+                    .reactingCount(s.reactingCount())
+                    .point(s.point())
+                    .build());
+        }
+
+        return result;
     }
 
     @Transactional
-    public ScoreResponse mostReaction(final ScoreRequest scoreRequest) {
-
-        //calculate score
-        //DB colulmn에 맞게 고쳐
-//        final Student student = Student.builder()
-//                .userId()
-//                .point()
-//                .type()
-//                .build();
+    public List<ScoreResponse> mostReaction() {
 
         final List<Student> ranking = studentRepository.findAll(Sort.by(Sort.Direction.DESC, "reactedCount"));
 
-        return ScoreResponse.builder()
-                .list(ranking)
-                .build();
+        final List<ScoreResponse> result = new ArrayList<ScoreResponse>();
+        for(Student s : ranking) {
+            result.add(ScoreResponse.builder()
+                    .userId(s.userId())
+                    .username(s.username())
+                    .image(s.image())
+                    .postCount(s.postCount())
+                    .reactedCount(s.reactedCount())
+                    .reactingCount(s.reactingCount())
+                    .point(s.point())
+                    .build());
+        }
+        return result;
     }
 
     @Transactional
-    public ScoreResponse bestStudents(final ScoreRequest scoreRequest) {
+    public List<ScoreResponse> bestStudents() {
 
         final List<Student> ranking = studentRepository.findAll(Sort.by(Sort.Direction.DESC, "point"));
 
-        return ScoreResponse.builder()
-                .list(ranking)
-                .build();
+        final List<ScoreResponse> result = new ArrayList<ScoreResponse>();
+        for(Student s : ranking) {
+            result.add(ScoreResponse.builder()
+                    .userId(s.userId())
+                    .username(s.username())
+                    .image(s.image())
+                    .postCount(s.postCount())
+                    .reactedCount(s.reactedCount())
+                    .reactingCount(s.reactingCount())
+                    .point(s.point())
+                    .build());
+        }
+
+        return result;
     }
 
     @Transactional
     public ScoreResponse bestStudent(final ScoreRequest scoreRequest) {
 
-//        final MattermostClient client = MattermostClient.builder()
-//                .url(mattermostUrl)
-//                .longLevel(Level.INFO)
-//                .ignoreUnknownProperties()
-//                .build();
-
-        //calculate score
-        //DB colulmn에 맞게 고쳐
-//        final Student student = Student.builder()
-//                .userId()
-//                .point()
-//                .type()
-//                .build();
-
-        final Optional<Student> ranking = studentRepository.findById(scoreRequest.id());
+        final Student r = studentRepository.findById(scoreRequest.id()).get();
 
         return ScoreResponse.builder()
-                .list(new ArrayList<Student>())
+                .userId(r.userId())
+                .username(r.username())
+                .image(r.image())
+                .postCount(r.postCount())
+                .reactedCount(r.reactedCount())
+                .reactingCount(r.reactingCount())
+                .point(r.point())
                 .build();
+
     }
 
 }

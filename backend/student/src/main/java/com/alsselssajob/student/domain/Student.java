@@ -1,5 +1,6 @@
 package com.alsselssajob.student.domain;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
@@ -14,10 +15,13 @@ public class Student {
     @Id
     @Column(name = "id", length = 30)
     private String userId;
+
     @Column(name = "image")
     private String image;
+
     @Column(name="username")
     private String username;
+
     @Column(name="postCount")
     private int postCount;
     @Column(name="reactingCount")

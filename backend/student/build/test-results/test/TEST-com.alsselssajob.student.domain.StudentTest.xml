@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.alsselssajob.student.domain.StudentTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-10-07T05:20:04" hostname="DESKTOP-KVCQHCD" time="0.159">
+<testsuite name="com.alsselssajob.student.domain.StudentTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-10-07T09:34:02" hostname="DESKTOP-KVCQHCD" time="0.08">
   <properties/>
-  <testcase name="Token 클래스 / Getters 테스트" classname="com.alsselssajob.student.domain.StudentTest" time="0.156"/>
+  <testcase name="Token 클래스 / Getters 테스트" classname="com.alsselssajob.student.domain.StudentTest" time="0.077"/>
   <testcase name="Student 클래스 / Construct 테스트" classname="com.alsselssajob.student.domain.StudentTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.alsselssajob.student.dto.response.ScoreResponseTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-10-07T05:20:04" hostname="DESKTOP-KVCQHCD" time="0.022">
+<testsuite name="com.alsselssajob.student.dto.response.ScoreResponseTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-10-07T09:34:02" hostname="DESKTOP-KVCQHCD" time="0.011">
   <properties/>
-  <testcase name="LoginResponse 클래스 / Getters 테스트" classname="com.alsselssajob.student.dto.response.ScoreResponseTest" time="0.02"/>
+  <testcase name="LoginResponse 클래스 / Getters 테스트" classname="com.alsselssajob.student.dto.response.ScoreResponseTest" time="0.01"/>
   <testcase name="ScoreResponse 클래스 / Construct 테스트" classname="com.alsselssajob.student.dto.response.ScoreResponseTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

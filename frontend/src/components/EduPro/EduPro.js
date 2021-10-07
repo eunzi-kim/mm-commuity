@@ -7,14 +7,73 @@ import "./css/EduPro.css";
 import ProBestMember from "./ProBestMember";
 import { Link } from "react-router-dom";
 
+function compare(prev, post) {
+    const prevpost_n = prev.post_n
+    const postpost_n = post.post_n
 
+    if (prevpost_n > postpost_n )return -1;
+    else if(postpost_n > prevpost_n)return 1;
+    return 0;
+}
+function compare2(prev, post) {
+    const prevpost_n = prev.emoji
+    const postpost_n = post.emoji
+
+    if (prevpost_n > postpost_n )return -1;
+    else if(postpost_n > prevpost_n)return 1;
+    return 0;
+}
+function compare3(prev, post) {
+    const prevpost_n = prev.comment
+    const postpost_n = post.comment
+
+    if (prevpost_n > postpost_n )return -1;
+    else if(postpost_n > prevpost_n)return 1;
+    return 0;
+}
 
 class EduPro extends React.Component {
     state = {
+        users_info: [],
         nickname: "",
         username: "",
         profileImg: ""
-      };
+    }
+    // 교육생정보 api 호출
+    fetchStudents = async (student_list) => {
+        const url = `http://j5c103.p.ssafy.io:8082/api/edu-pro/best-students`
+        
+        
+        await axios.get(url)
+        .then(res => {
+            const all_students = []
+            console.log(res) // 확인 해주기 잘들어오면 _> .data 확인
+            const student_list = res.data
+
+            for (let i=0; i<student_list.length; i++){
+                const student_info = {
+                    "id":student_list[i]["userId"],
+                    "image":student_list[i]["image"],
+                    "username":student_list[i]["username"],
+                    "postCount":student_list[i]["postCount"],
+                    "reactingCount":student_list[i]["reactingCount"],
+                    "reactedCount":student_list[i]["reactedCount"],
+                    "point":student_list[i]["point"],
+                }
+                all_students.push(student_info)
+            }
+            console.log(all_students) // 확인 해주기
+            this.setState({
+                users_info : all_students
+            })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    
+        // setState로 state 관리!!
+      }
+    
 
       takeUserInfo = () => {    
         const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
@@ -28,7 +87,9 @@ class EduPro extends React.Component {
 
     componentDidMount() {
         this.takeUserInfo()
+        this.fetchStudents()
         
+
         // 다크모드
         if (localStorage.getItem('darkmode')) {
             document.querySelector('.pro-container').classList.add('dark-pro-container')
@@ -36,31 +97,50 @@ class EduPro extends React.Component {
         }
     }
 
+
+
+    // 게시글 순서
     onClickPost = (e) => {
         // 버튼이 이동되거나 취소될경우
         if (document.querySelector(".btnchk")) {
             document.querySelector(".btnchk").classList.remove("btnchk")
+            this.setState({
+                users_info : this.state.users_info.sort(compare)
+            })
         }
+
         // 버튼이 체크돼있을 경우
         e.target.classList.add("btnchk")
     }
+    // 이모지 순
     onClickEmo = (e) => {
         if (document.querySelector(".btnchk")) {
             document.querySelector(".btnchk").classList.remove("btnchk")
+            this.setState({
+                users_info : this.state.users_info.sort(compare2)
+            })
         }
         // 버튼이 체크돼있을 경우
         e.target.classList.add("btnchk")
     }
+    // 댓글 순
     onClickComm = (e) => {
         if (document.querySelector(".btnchk")) {
             document.querySelector(".btnchk").classList.remove("btnchk")
+            this.setState({
+                users_info : this.state.users_info.sort(compare3)
+            })
         }
         // 버튼이 체크돼있을 경우
         e.target.classList.add("btnchk")
     }
+
+
+
+
     // 로그아웃
   fetchLogout = async (data) => {
-    const url = 'https://j5c103.p.ssafy.io/api/auth/logout'
+    const url = 'http://j5c103.p.ssafy.io:8083/api/auth/logout'
     await axios.post(url, data)
     .then(res => {
       if (res.status === 204) {
@@ -153,7 +233,7 @@ class EduPro extends React.Component {
                     <div className="pro-body-body">
                         <div className="pro-body-bodylist">
                             
-                            <div><ProBestMember /></div>
+                            <div><ProBestMember sortmember={ this.state.users_info } /></div>
                             
                         </div>
                     </div>

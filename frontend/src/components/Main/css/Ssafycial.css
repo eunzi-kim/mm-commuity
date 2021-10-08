@@ -25,6 +25,9 @@
 
 .s-body {
   width: 90%;
+  height: 25vh;
+  margin: -0.9rem;
+  overflow-y: hidden;
 }
 
 .a-title {
@@ -38,7 +41,7 @@
 }
 
 .a-title p {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .s-plus {

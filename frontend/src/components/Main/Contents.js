@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import DatePicker, { registerLocale } from "react-datepicker";
 import $ from "jquery";
 import { Link } from "react-router-dom";
-import ReactMarkdown from 'react-markdown'
+import ReactMarkdown from 'react-markdown';
 
 import "react-datepicker/dist/react-datepicker.css";
 import ko from 'date-fns/locale/ko';
@@ -11,7 +11,15 @@ import ko from 'date-fns/locale/ko';
 import "./css/Contents.css";
 import axios from "axios";
 
-// import example from "./../../2021-10-5.json";
+import res927 from "./../../2021-9-27.json";
+import res928 from "./../../2021-9-28.json";
+import res929 from "./../../2021-9-29.json";
+import res930 from "./../../2021-9-30.json";
+import res101 from "./../../2021-10-1.json";
+import res104 from "./../../2021-10-4.json";
+import res105 from "./../../2021-10-5.json";
+import res106 from "./../../2021-10-6.json";
+import res107 from "./../../2021-10-7.json";
 
 class Contents extends React.Component {
   state = {
@@ -34,11 +42,11 @@ class Contents extends React.Component {
       "userId": userInfo.userId,
 	    "token": token
     }
-    console.log(data)
+    // console.log(data)
 
     await axios.post(url, data)
     .then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       const group = []
       const channel = {}
       const all_contents = []
@@ -82,12 +90,51 @@ class Contents extends React.Component {
     })
   }  
 
+  dateContent(res) {
+    console.log()
+    const group = []
+    const channel = {}
+    const all_contents = []
+    const contents = []
+
+    for (let i=0; i<res.length; i++) {
+      if (!group.includes(res[i]['teamName'])) {
+        group.push(res[i]['teamName'])
+      }
+
+      if (channel[res[i]['teamName']] && !(channel[res[i]['teamName']].includes(res[i]['channelName']))) {
+        channel[res[i]['teamName']].push(res[i]['channelName'])
+      }
+      else if (!channel[res[i]['teamName']]) {
+        channel[res[i]['teamName']] = [res[i]['channelName']]
+      }
+
+      const content_info = {
+        "id": res[i]["postId"],
+        "group": res[i]["teamName"], 
+        "channel": res[i]["channelName"], 
+        "username": res[i]["username"], 
+        "nickname": res[i]["nickname"], 
+        "profileImg": res[i]["profileImg"], 
+        "content": res[i]["message"]
+      }
+      all_contents.push(content_info)
+      contents.push(content_info)
+    }
+      
+    this.setState({
+      Group: group,
+      Channel: channel,
+      AllContents : all_contents,
+      Content: contents
+    })
+  }
+
   componentDidMount() {
     // 서버에서 api 받아오기!!
-    const now = this.state.selectedDate
-    const today_date = String(now.getFullYear())+"-"+String(now.getMonth()+1)+"-"+String(now.getDate())
-    this.fetchPost(today_date)
-
+    // const now = this.state.selectedDate
+    // const today_date = String(now.getMonth()+1)+String(now.getDate())
+    this.dateContent(res107)
     
     // 스크롤바 밑으로
     $(document).ready(function () {
@@ -181,6 +228,31 @@ class Contents extends React.Component {
       this.setState({
         "selectedDate": date
       })
+    }
+
+    if (month === 10) {
+      if (day === 7) {
+        this.dateContent(res107)
+      } else if (day === 6) {
+        this.dateContent(res106)
+      } else if (day === 5) {
+        this.dateContent(res105)
+      } else if (day === 4) {
+        this.dateContent(res104)
+      } else if (day === 1) {
+        this.dateContent(res101)
+      }
+    }
+    else if (month === 9) {
+      if (day === 30) {
+        this.dateContent(res930)
+      } else if (day === 29) {
+        this.dateContent(res929)
+      } else if (day === 28) {
+        this.dateContent(res928)
+      } else if (day === 27) {
+        this.dateContent(res927)
+      }
     }
   }
 

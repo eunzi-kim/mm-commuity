@@ -4,6 +4,8 @@ import React from "react";
 import "./css/Ssafycial.css"
 import SsafycialDetail from "./SsafycialDetail";
 
+import res from "./../../ssafycials.json";
+
 class Ssafycial extends React.Component {
   state = {
     article: []
@@ -29,7 +31,10 @@ class Ssafycial extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchSsafycial()
+    // this.fetchSsafycial()
+    this.setState({
+      article: res
+    })
   }
   
   render() {
@@ -38,7 +43,7 @@ class Ssafycial extends React.Component {
     // 각 기사들
     const articles = article.slice(0,4).map((item, idx) => 
       <div className="a-title" key={idx}>
-        <p onClick={() => window.open(item['link'], '_blank')}>{ item['title'] } ({ item['reporter'] } 기자)</p>
+        <p onClick={() => window.open(item['link'], '_blank')}>{ item['title'] } ({ item['nickname'] } 기자)</p>
       </div>
     )
 

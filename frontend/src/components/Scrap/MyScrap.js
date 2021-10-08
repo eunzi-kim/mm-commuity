@@ -17,7 +17,7 @@ class MyScrap extends React.Component {
   fetchScraps = async ( scrap_list ) => {
     const url = "http://j5c103.p.ssafy.io:8081/api/posts/scrap"
 
-    await axios.post(url, data)
+    await axios.post(url, scrap_list)
     .then(res => {
       const all_scraps = []
 

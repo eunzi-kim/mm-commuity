@@ -4,6 +4,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import "./css/BestMember.css"
+import axios from "axios";
 
 class BestMember extends Component {
   state = {
@@ -18,20 +19,58 @@ class BestMember extends Component {
     bestUploader3: [],
   }
 
+  fetchMostReaction = async () => {
+    const url = 'http://j5c103.p.ssafy.io:8082/api/students/most-reaction'
+    await axios.get(url)
+    .then(res => {
+      console.log("mr", res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+  fetchBestUploader = async () => {
+    const url = 'http://j5c103.p.ssafy.io:8082/api/students/best-uploader'
+    await axios.get(url)
+    .then(res => {
+      console.log("bu", res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+  fetchBestReaction = async () => {
+    const url = 'http://j5c103.p.ssafy.io:8082/api/students/best-reaction'
+    await axios.get(url)
+    .then(res => {
+      console.log("br", res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+
   componentDidMount() {
-    // 베스트멤버 api 받기
+    // this.fetchBestReaction()
+    // this.fetchBestUploader()
+    // this.fetchMostReaction()
+
     // 예시
     this.setState({
-      best1: ["MM이름으로오기", "sjd0051", "300point"],
-      best2: ["성규는 못말려", "tjdrbapfhd", "200point"],
-      best3:  ["금지은지동지", "xxnxi", "150point"],
-      bestUploader1: ["우수업로더1", "sjd0051", "53"],
-      bestUploader2: ["우수업로더2", "tjdrbapfhd", "12"],
-      bestUploader3:  ["우수업로더3", "xxnxi", "7"],
-      bestReaction1: ["황성안[광주_1반_C103] 팀원", "sjd0051", "52"],
-      bestReaction2: ["김성규[광주_1반_C103] 팀장", "tjdrbapfhd", "10"],
-      bestReaction3:  ["이태성[광주_2반_C204] 팀장", "lts", "4"],
+      best1: ["김태현[광주_1반_C106]팀원", "kimth1113", "56"],
+      best2: ["구미_6반_윤상일", "sangilyoon.dev", "44"],
+      best3:  ["서울_2반_정현정", "jung55120", "25"],
+      bestUploader1: ["신준희[대전_3반_B306]팀원", "jhshin0028", "34"],
+      bestUploader2: ["박소현[광주_1반_C103]팀원", "mymysuzy0627", "22"],
+      bestUploader3:  ["김성규[광주_1반_C103]팀장", "kskyu610", "10"],
+      bestReaction1: ["오미정[광주_1반_C203]팀원", "ks03102", "64"],
+      bestReaction2: ["김우재[광주_2반_C201]팀원", "kwj1270", "55"],
+      bestReaction3:  ["이화정[대전_3반_B301]팀원", "honeylee999", "43"],
     })
+    
   }
   
   render() {
@@ -70,46 +109,37 @@ class BestMember extends Component {
               <div className="bm-content">
                 <div className="bm-medal"><img src={gold} alt="1" /></div>
                 <div className="bm-profile">
-                  <div className="bm-image">
-                    이미지
-                  </div>
                   <div className="bm-info">
                     <div className="bm-nn"><b>{ best1[0] }</b></div>
                     <div className="bm-un">@{ best1[1] }</div>
                   </div>
                 </div>
                 <div>
-                  <div className="bm-point">{ best1[2] }</div>
+                  <div className="bm-point">{ best1[2] }개</div>
                 </div>
               </div>
               <div className="bm-content">
                 <div className="bm-medal"><img src={silver} alt="2" /></div>
                 <div className="bm-profile">
-                  <div className="bm-image">
-                    이미지
-                  </div>
                   <div className="bm-info">
                     <div className="bm-nn"><b>{ best2[0] }</b></div>
                     <div className="bm-un">@{ best2[1] }</div>
                   </div>
                 </div>
                 <div>
-                  <div className="bm-point">{ best2[2] }</div>
+                  <div className="bm-point">{ best2[2] }개</div>
                 </div>
               </div>
               <div className="bm-content">
                 <div className="bm-medal"><img src={bronze} alt="3" /></div>
                 <div className="bm-profile">
-                  <div className="bm-image">
-                    이미지
-                  </div>
                   <div className="bm-info">
                     <div className="bm-nn"><b>{ best3[0] }</b></div>
                     <div className="bm-un">@{ best3[1] }</div>
                   </div>
                 </div>
                 <div>
-                  <div className="bm-point">{ best3[2] }</div>
+                  <div className="bm-point">{ best3[2] }개</div>
                 </div>
               </div>
             </div>
@@ -119,9 +149,6 @@ class BestMember extends Component {
               <div className="bm-content">
                 <div className="bm-medal"><img src={gold} alt="1" /></div>
                 <div className="bm-profile">
-                  <div className="bm-image">
-                    이미지
-                  </div>
                   <div className="bm-info">
                     <div className="bm-nn"><b>{ bestUploader1[0] }</b></div>
                     <div className="bm-un">@{ bestUploader1[1] }</div>
@@ -134,9 +161,6 @@ class BestMember extends Component {
               <div className="bm-content">
                 <div className="bm-medal"><img src={silver} alt="2" /></div>
                 <div className="bm-profile">
-                  <div className="bm-image">
-                    이미지
-                  </div>
                   <div className="bm-info">
                     <div className="bm-nn"><b>{ bestUploader2[0] }</b></div>
                     <div className="bm-un">@{ bestUploader2[1] }</div>
@@ -149,9 +173,6 @@ class BestMember extends Component {
               <div className="bm-content">
                 <div className="bm-medal"><img src={bronze} alt="3" /></div>
                 <div className="bm-profile">
-                  <div className="bm-image">
-                    이미지
-                  </div>
                   <div className="bm-info">
                     <div className="bm-nn"><b>{ bestUploader3[0] }</b></div>
                     <div className="bm-un">@{ bestUploader3[1] }</div>
@@ -168,9 +189,6 @@ class BestMember extends Component {
               <div className="bm-content">
                 <div className="bm-medal"><img src={gold} alt="1" /></div>
                 <div className="bm-profile">
-                  <div className="bm-image">
-                    이미지
-                  </div>
                   <div className="bm-info">
                     <div className="bm-nn"><b>{ bestReaction1[0] }</b></div>
                     <div className="bm-un">@{ bestReaction1[1] }</div>
@@ -183,9 +201,6 @@ class BestMember extends Component {
               <div className="bm-content">
                 <div className="bm-medal"><img src={silver} alt="2" /></div>
                 <div className="bm-profile">
-                  <div className="bm-image">
-                    이미지
-                  </div>
                   <div className="bm-info">
                     <div className="bm-nn"><b>{ bestReaction2[0] }</b></div>
                     <div className="bm-un">@{ bestReaction2[1] }</div>
@@ -198,9 +213,6 @@ class BestMember extends Component {
               <div className="bm-content">
                 <div className="bm-medal"><img src={bronze} alt="3" /></div>
                 <div className="bm-profile">
-                  <div className="bm-image">
-                    이미지
-                  </div>
                   <div className="bm-info">
                     <div className="bm-nn"><b>{ bestReaction3[0] }</b></div>
                     <div className="bm-un">@{ bestReaction3[1] }</div>

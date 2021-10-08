@@ -1,0 +1,140 @@
+.pro-container {
+    height: 100vh;
+    font-family: 'IM_Hyemin-Bold';
+}
+
+.headtag {
+    margin: 0 5rem 0 2rem;
+}
+
+.pro-body-container h2 {
+    font-weight: bold;
+    margin: 0;
+    color: #A1BEE5;
+}
+
+.pro-head {
+    height: 20%;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.pro-head-left {
+    margin: 2rem 0;
+}
+
+.pro-head-right {
+    width: 30vw;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 프로 사용자 프로필  */
+.pro-head-profileall {
+    display: flex;
+}
+
+.pro-main-profile {
+    display: flex;
+    align-items: center;
+    margin-right: 100px;
+    
+}
+
+.pro-logo {
+    margin: 2rem 0;
+
+}
+
+.pro-body-head {
+    display: flex;
+    width: 80vw;
+    height: 10vh;
+    margin-left: 50px;
+}
+
+.pro-body-body {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pro-main-btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+
+.category-btn {
+    /* 버튼 크기, 속성 */
+    width: 100px;
+    height: 35px;
+    margin-left: 3ch;
+    background-color: #A1BEE5;
+    /* 폰트 관련 */
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-weight:bolder;
+    /* 버튼 디자인 및 주변 */
+    border-radius: 9px;
+    border-width: 0px;
+    padding: 0.2rem 1rem;  
+}
+
+.btnchk {
+    background-color: rgb(14, 66, 137);
+}
+.category-btn:hover {
+    cursor: pointer;
+    background-color: rgb(14, 66, 137);
+}
+
+.pro-body-bodylist {
+    height: 50vh;
+    width: 90%;
+    overflow-y: auto;
+}
+
+.pro-body-bodylist::-webkit-scrollbar {
+    width: auto;
+    border-radius: 9px;
+}
+
+.pro-body-bodylist::-webkit-scrollbar-thumb {
+    background-color: lightgray;
+    border-radius: 9px;
+}
+
+.ep-header-responsive {
+    display: none;
+}
+
+
+/* 다크모드 */
+.dark-pro-container {
+    background-color: #242424;
+    color: rgb(161, 190, 229);
+}
+
+
+/* 반응형 */
+@media (max-width: 992px) {
+    .pro-head {
+        display: none;
+    }
+
+    .ep-header-responsive {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 0;
+    }
+}

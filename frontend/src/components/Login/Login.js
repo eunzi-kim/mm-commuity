@@ -8,6 +8,7 @@ class Login extends React.Component {
     alert: false, 
     id: "",
     password: "",
+    darkmode: "",
   };
 
   // state 직접 변경 불가능
@@ -20,19 +21,21 @@ class Login extends React.Component {
 
   // 로그인 실행 함수
   fetchLogin = async ( data ) => {
-    const url = "/api/v4/users/login"
+    // const url = "http://j5c103.p.ssafy.io:8083/api/auth/login"
+    const url = "http://localhost:8083/api/auth/login"
 
     await axios.post(url, data)
     .then(res => {
-      // console.log(res.data)
       const userInfo = {
-        "id": res.data.id,
-        "username": res.data.username,
-        "nickname": res.data.nickname,
-        "email": res.data.nickname        
+        "userId": res.data.userId,
+        "username": res.data.userName,
+        "nickname": res.data.nickName,
+        "image": res.data.image       
       }
+      const token = res.data.token
 
       sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
+      sessionStorage.setItem('token', JSON.stringify(token))
       window.location.replace("/");
     })
     .catch(err => {
@@ -43,7 +46,7 @@ class Login extends React.Component {
   // 로그인 버튼 클릭
   onClickLogin = () => {
     const data = {
-      "login_id": this.state.id,
+      "id": this.state.id,
       "password": this.state.password
     }
     this.fetchLogin(data)
@@ -64,6 +67,18 @@ class Login extends React.Component {
         this.onClickLogin()
       }
     })
+
+    // 다크모드 확인
+    if (localStorage.getItem('darkmode')) {
+      document.querySelector(".login-container").classList.add("dark-login-bg")
+      document.querySelector(".login-left").classList.add("dark-left-bg")
+      document.querySelector(".login-right").classList.add("dark-right-bg")
+      document.querySelector(".login-id-box").classList.add("dark-login-box")
+      document.querySelector(".login-password-box").classList.add("dark-login-box")
+      document.querySelector(".btn-primary").classList.add("btn-secondary")
+      document.querySelector(".signin-btn").classList.add("dark-login-btn")
+      document.querySelector(".login-left-footer").classList.add("dark-login-left-footer")
+    }
   }
 
   render() {
@@ -89,12 +104,12 @@ class Login extends React.Component {
             <Form className="login-form">
               <Form.Group className="mb-4 login-id" controlId="formBasicEmail">
                 <Form.Label>전자우편 또는 사용자 이름</Form.Label>
-                <Form.Control className="login-box" type="email" onChange={this.onChangeId} placeholder="Enter email or username" />
+                <Form.Control className="login-id-box" type="email" onChange={this.onChangeId} placeholder="Enter email or username" />
               </Form.Group>
 
               <Form.Group className="mb-5 login-password" controlId="formBasicPassword">
                 <Form.Label>패스워드</Form.Label>
-                <Form.Control className="login-box" type="password" onChange={this.onChangePassword} placeholder="Password" />
+                <Form.Control className="login-password-box" type="password" onChange={this.onChangePassword} placeholder="Password" />
               </Form.Group>
 
               <div className={this.alertClassName()}>

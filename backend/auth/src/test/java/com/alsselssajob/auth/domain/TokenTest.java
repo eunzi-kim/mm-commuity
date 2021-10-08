@@ -26,6 +26,7 @@ class TokenTest {
     @DisplayName("Token 클래스 / Construct 테스트")
     @Test
     void construct_test() {
+
         assertAll(
                 () -> assertThat(token).isNotNull(),
                 () -> assertThat(token).isExactlyInstanceOf(Token.class)
@@ -36,12 +37,22 @@ class TokenTest {
     @DisplayName("Token 클래스 / Getters 테스트")
     @Test
     void getters_test() {
+
         assertAll(
                 () -> assertThat(token.userId()).isEqualTo("asdfadfglgsdlfkj234sdf"),
                 () -> assertThat(token.token()).isEqualTo("saoggerng57kgsfhg"),
                 () -> assertThat(token.isActive()).isTrue()
         );
 
+    }
+
+    @DisplayName("Token 클래스 / logout 테스트")
+    @Test
+    void logout_test() {
+
+        token.switchIsActiveToFalse();
+        assertThat(token.isActive()).isFalse();
 
     }
+
 }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 // VO : 특정 비즈니스 값을 담는 객체.
 // 유효성 검증.
 // DB에 있는 것들.
@@ -32,6 +33,7 @@ public class Token {
     //즉, 객체 생성 시 값 세팅
     @Builder
     public Token(final String userId, final String token, final Boolean isActive) {
+
         this.userId = userId;
         this.token = token;
         this.isActive = isActive;
@@ -49,5 +51,14 @@ public class Token {
     public Boolean isActive() {
         return isActive;
     }
+
+    //isActive를 false로바꿔주는 메서드
+    public void switchIsActiveToFalse() {
+        this.isActive = false;
+    }
+
 }
+
+
+
 

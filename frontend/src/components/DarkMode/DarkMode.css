@@ -1,0 +1,56 @@
+.darkmode-container {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 10;
+}
+
+.darkmode-none {
+  display: none;
+}
+
+.darkmode-container button {
+  border: none;
+  background-color: transparent;
+}
+
+.dark-mode:hover {
+  cursor: pointer;
+}
+
+.light-mode:hover {
+  cursor: pointer;
+}
+
+/* 프로(에듀프로) */
+.dark-pro-container {
+  background-color: #242424;
+  color: rgb(161, 190, 229);
+}
+
+/* 스크랩(즐겨찾기) */
+.dark-scrap-main {
+  background-color: #242424;
+  color: rgb(161, 190, 229);
+}
+
+.dark-search-input {
+  background-color: #242424;
+  color: #bbb;
+}
+
+.dark-MyScrap-container {
+  background-color: #242424;
+  color: rgb(161, 190, 229);
+}
+
+/* 스크랩(즐겨찾기) 마이 스크랩*/
+
+@media (max-width: 992px) {
+  .darkmode-container {    
+    left: 2rem;
+    top: 2rem;
+    width: 2rem;
+    height: 2rem;
+  }
+}

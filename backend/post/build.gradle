@@ -9,9 +9,7 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
+    compile.exclude group: "org.slf4j", module: "slf4j-log4j12"
 }
 
 repositories {
@@ -19,13 +17,22 @@ repositories {
 }
 
 dependencies {
+    implementation group: 'jakarta.xml.bind', name: 'jakarta.xml.bind-api', version: '2.3.3'
+    implementation group: 'jakarta.activation', name: 'jakarta.activation-api', version: '1.2.1'
+    implementation group: 'com.sun.activation', name: 'jakarta.activation', version: '1.2.1'
+    implementation 'net.bis5.mattermost4j:mattermost4j-core:0.22.1'
+
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.data:spring-data-hadoop:2.5.0.RELEASE'
+    implementation 'org.apache.hbase:hbase-client:2.3.6'
+    implementation 'org.apache.hbase:hbase:2.3.6'
+    implementation 'org.glassfish.jersey.test-framework:jersey-test-framework-core:2.25.1'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation group: 'org.springframework.data', name: 'spring-data-redis', version: '2.5.4'
 }
 
 test {

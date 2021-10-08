@@ -1,0 +1,28 @@
+.not-found {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'HSYuji-Regular';
+}
+
+.not-found h1 {
+  font-weight: bold;
+}
+
+.not-found-img {
+  width: 30vw;
+  margin-bottom: 1rem;
+}
+
+.dark-not-found {
+  background-color: #242424;
+  color: #bbb;
+}
+
+@font-face {
+  font-family: 'HSYuji-Regular';
+  src: url('/src/font/HSyuji.ttf');
+}

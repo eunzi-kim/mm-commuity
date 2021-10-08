@@ -1,0 +1,105 @@
+.bm-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.bm-header {
+  width: 100%;
+}
+
+.bm-header hr {
+  margin: 0.5rem 0;
+}
+
+.bm-header h3 {
+  font-weight: bold;
+  color: #A1BEE5;
+  margin: 0;
+}
+
+.bm-slider {
+  width: 95%;
+}
+
+.bm-body {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.slick-prev::before,
+.slick-next::before {
+  color: #A1BEE5;
+}
+
+.bm-title {
+  margin-top: 0.5rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.bm-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+  padding: 0 0.5rem;
+}
+
+.bm-medal {
+  font-size: 1.5rem;
+}
+
+.bm-medal img {
+  width: 1.3rem;
+}
+
+.bm-profile {
+  display: flex;
+  align-items: center;
+}
+
+.bm-image {
+  background-color: darkgray;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.bm-info {
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.bm-nn,
+.bm-un {
+  font-size: 0.8rem;
+}
+
+.bm-point {
+  margin: 0rem;
+  font-size: 0.95rem;
+}
+
+/* 반응형 */
+@media (max-width: 992px) {
+  .bm-container {
+    margin: 1rem 0;
+    width: 47.5vw;
+  }
+
+  .bm-header {
+    width: 90%;
+  }
+
+  .bm-slider {
+    width: 85%;
+  }
+}
